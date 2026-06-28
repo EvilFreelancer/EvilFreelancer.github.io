@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Harness - стрим | Павел Рыков</title>
+  <link rel="stylesheet" href="assets/reveal.css">
+  <style>
+    :root {
+      --bg:      #0e0e12;
+      --bg2:     #1a1a22;
+      --bg3:     #252530;
+      --accent:  #9333ea;
+      --accent2: #a855f7;
+      --text:    #f0f0f5;
+      --muted:   #b0b0bd;
+      --dim:     #8a8a98;
+      --green:   #22c55e;
+      --amber:   #f59e0b;
+      --blue:    #3b82f6;
+    }
+
+    .reveal-viewport { background: var(--bg); }
+    .reveal {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: var(--text);
+      font-size: 36px;
+    }
+    .reveal .slides { text-align: left; }
+    .reveal .slides section { padding: 30px 0; text-align: left; }
+    .reveal h1, .reveal h2, .reveal h3 {
+      color: var(--text); text-transform: none; letter-spacing: -0.02em;
+      margin: 0 0 30px; line-height: 1.15;
+    }
+    .reveal h1  { font-size: 96px; font-weight: 800; }
+    .reveal h2  { font-size: 72px; font-weight: 700; }
+    .reveal h3  { font-size: 40px; font-weight: 700; }
+    .reveal p   { margin: 12px 0; line-height: 1.4; }
+    .reveal ul  { list-style: none; padding: 0; margin: 0; }
+    .reveal img { margin: 0; }
+    .reveal strong { color: var(--text); }
+
+    .accent-line {
+      display: inline-block; border-bottom: 6px solid var(--accent);
+      padding-bottom: 16px; margin-bottom: 50px !important;
+    }
+    .center-h2 { display:block; text-align:center; width:fit-content; margin:0 auto 44px; }
+
+    .badge {
+      display: inline-block; background: var(--bg3);
+      border: 2px solid rgba(147,51,234,0.6); color: var(--accent2);
+      border-radius: 8px; padding: 8px 20px; font-size: 26px;
+      font-family: 'JetBrains Mono', 'Courier New', monospace;
+      vertical-align: middle; margin: 0 6px; font-weight: 600;
+    }
+
+    /* ── Block tag ── */
+    .block-tag {
+      font-family: 'JetBrains Mono','Courier New',monospace;
+      font-size: 24px; letter-spacing: .22em; text-transform: uppercase;
+      color: var(--accent2); margin-bottom: 26px;
+      display: flex; align-items: center; gap: 14px;
+    }
+    .block-tag::before { content:""; width:18px; height:18px; background:var(--accent); border-radius:4px; }
+
+    /* ── Big statement ── */
+    .statement { font-size: 62px; font-weight: 800; line-height: 1.14; letter-spacing: -0.02em; }
+    .statement .em { color: var(--accent2); }
+
+    /* ── Negatives ── */
+    .neg-row { display:flex; gap:22px; margin-top:42px; }
+    .neg { flex:1; background:var(--bg2); border:1px solid rgba(147,51,234,.22); border-radius:14px; padding:26px 28px; }
+    .neg b { display:block; color:var(--text); font-size:30px; margin-bottom:8px; }
+    .neg span { color:var(--muted); font-size:24px; line-height:1.4; }
+
+    /* ── Feature / cards ── */
+    .feature-grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+    .grid-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
+    .card { background:var(--bg2); border:1px solid rgba(147,51,234,.25); border-radius:14px; padding:28px 32px; }
+    .card .ctitle { color:var(--accent2); font-weight:700; font-size:32px; margin-bottom:14px; }
+    .card .cdesc  { color:var(--muted); font-size:24px; line-height:1.5; }
+
+    /* ── Highlight ── */
+    .hl {
+      background: linear-gradient(135deg, rgba(147,51,234,0.18), rgba(124,58,237,0.05));
+      border: 2px solid rgba(147,51,234,0.5); border-radius:16px;
+      padding:26px 40px; margin:20px 0; font-size:34px; font-weight:600; text-align:center;
+    }
+
+    /* ── Arrow list ── */
+    .alist li { display:flex; gap:16px; padding:11px 0; font-size:28px; color:var(--text); line-height:1.4; }
+    .alist li::before { content:"→"; color:var(--accent2); flex-shrink:0; font-weight:700; }
+    .alist.sm li { font-size:25px; padding:8px 0; }
+
+    /* ── Two-col ── */
+    .two-col { display:grid; grid-template-columns:1fr 1fr; gap:44px; align-items:start; }
+
+    /* ── Timeline ── */
+    .timeline { display:flex; margin-top:54px; }
+    .tl { flex:1; position:relative; padding:0 14px; }
+    .tl::before { content:""; position:absolute; top:23px; left:0; right:0; height:4px; background:var(--bg3); }
+    .tl:first-child::before { left:50%; }
+    .tl:last-child::before { right:50%; }
+    .tl .dot { position:relative; width:50px; height:50px; border-radius:50%; background:var(--bg);
+      border:4px solid var(--accent); margin:0 auto 24px; display:flex; align-items:center; justify-content:center;
+      color:var(--accent2); font-weight:700; font-size:22px; font-family:monospace; }
+    .tl .tlt { font-size:30px; font-weight:700; text-align:center; margin-bottom:12px; }
+    .tl .tld { font-size:22px; color:var(--muted); text-align:center; line-height:1.4; }
+
+    /* ── Stats ── */
+    .stat-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:10px; }
+    .stat { background:var(--bg2); border:1px solid rgba(147,51,234,.25); border-radius:16px; padding:36px 28px; text-align:center; }
+    .stat .num { font-size:76px; font-weight:800; color:var(--accent2); line-height:1; letter-spacing:-.02em; }
+    .stat .lbl { font-size:24px; color:var(--muted); margin-top:18px; line-height:1.42; }
+
+    /* ── Anatomy grid ── */
+    .anat { display:grid; grid-template-columns:repeat(3,1fr); grid-auto-rows:1fr; gap:18px; }
+    .anat .ap { background:var(--bg2); border:1px solid rgba(147,51,234,.22); border-radius:14px; padding:22px 24px; }
+    .anat .ap b { display:block; color:var(--accent2); font-size:27px; margin-bottom:8px; }
+    .anat .ap span { color:var(--muted); font-size:21px; line-height:1.38; }
+    .anat .core { background:var(--accent); border:none; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; }
+    .anat .core b { color:#fff; font-size:34px; margin:0; }
+    .anat .core span { color:rgba(255,255,255,.9); font-size:22px; margin-top:8px; }
+
+    /* ── Thin / thick ── */
+    .tt { display:flex; flex-direction:column; gap:28px; margin-top:36px; }
+    .tt-row { display:flex; align-items:center; gap:28px; }
+    .tt-name { width:300px; font-size:30px; font-weight:700; flex-shrink:0; }
+    .tt-bar { flex:1; display:flex; height:66px; border-radius:12px; overflow:hidden; }
+    .tt-model   { background:var(--blue);   display:flex; align-items:center; justify-content:center; color:#fff; font-weight:700; font-size:23px; }
+    .tt-harness { background:var(--accent);  display:flex; align-items:center; justify-content:center; color:#fff; font-weight:700; font-size:23px; }
+
+    /* ── Quote ── */
+    .quote-big { font-size:58px; font-weight:700; line-height:1.28; letter-spacing:-.02em; text-align:center; max-width:1520px; margin:0 auto; }
+    .quote-big .q { color:var(--accent2); }
+    .quote-sub { font-size:30px; color:var(--muted); text-align:center; margin-top:44px; }
+
+    /* ── Divider ── */
+    .divider { display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:28px; }
+    .divider h1 { font-size:112px; margin:0; }
+    .divider .dsub { font-size:34px; color:var(--muted); max-width:1300px; line-height:1.4; }
+
+    /* ── Caveat ── */
+    .caveat { background:linear-gradient(135deg,rgba(245,158,11,.14),rgba(245,158,11,.04));
+      border:2px solid rgba(245,158,11,.5); border-radius:16px; padding:28px 40px;
+      font-size:29px; color:var(--text); line-height:1.5; }
+    .caveat b { color:var(--amber); }
+
+    /* ── Screenshot ── */
+    .ss { border-radius:14px; overflow:hidden; border:2px solid rgba(147,51,234,0.45);
+      box-shadow:0 0 0 1px rgba(255,255,255,0.04),0 0 60px rgba(147,51,234,0.25),0 20px 60px rgba(0,0,0,0.7); }
+    .ss img { width:100%; display:block; }
+    .ss-cap { font-size:26px; color:var(--dim); text-align:center; margin-top:20px; }
+
+    /* ── SVG ── */
+    .svg-wrap { display:flex; justify-content:center; margin-top:6px; }
+    .svg-wrap svg { max-width:100%; height:auto; }
+    .svg-cap { font-size:26px; color:var(--dim); text-align:center; margin-top:26px; }
+
+    /* ── QR ── */
+    .qr-row { display:flex; gap:90px; justify-content:center; align-items:center; margin-top:20px; }
+    .qr-item { display:flex; flex-direction:column; align-items:center; gap:16px; }
+    .qr-frame { background:#fff; border-radius:18px; padding:18px; }
+    .qr-frame img { width:300px; height:300px; display:block; }
+    .qr-lbl  { color:var(--text); font-size:30px; font-weight:700; }
+    .qr-link { color:var(--accent2); font-size:23px; font-family:'JetBrains Mono',monospace; }
+    .qr-divider { width:2px; background:rgba(147,51,234,0.25); align-self:stretch; margin:20px 0; }
+
+    /* ── 8 levels legend ── */
+    .levels { display:grid; grid-template-columns:repeat(4,1fr); gap:16px 26px; margin:30px auto 0; max-width:1560px; }
+    .lvl { display:flex; align-items:center; gap:12px; font-size:24px; color:var(--muted); line-height:1.25; }
+    .lvl b { font-family:'JetBrains Mono',monospace; color:var(--accent2); font-weight:700; min-width:22px; flex-shrink:0; }
+    .lvl.on { color:var(--text); font-weight:700; }
+    .lvl.on b { background:var(--accent); color:#fff; border-radius:6px; padding:1px 9px; min-width:0; text-align:center; }
+
+    /* ── Reveal overrides ── */
+    .reveal .progress        { background: var(--bg3); height:6px; }
+    .reveal .progress span   { background: var(--accent); }
+    .reveal .controls        { color: var(--accent); }
+    .reveal .controls button { color: var(--accent); }
+    .reveal .slide-number    { background:transparent; color:var(--dim); font-size:18px; left:12px; right:auto; bottom:12px; }
+  </style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+<!-- ═══ ТИТУЛ ═══ -->
+<section data-background-color="#0e0e12">
+  <div class="divider" style="gap:36px;">
+    <div style="font-size:140px;font-weight:800;letter-spacing:-0.03em;">harness</div>
+    <div style="width:140px;height:6px;background:var(--accent);border-radius:3px;"></div>
+    <div style="font-size:48px;color:var(--muted);font-weight:400;">Обвязка вокруг модели, без которой агент никуда не едет</div>
+    <div style="margin-top:14px;">
+      <div style="font-size:42px;font-weight:600;">Павел Рыков</div>
+      <div style="font-size:30px;color:var(--muted);margin-top:10px;">aka <span style="color:var(--accent2);font-weight:700;">Pavel Zloi</span> | on-premise агенты, свой harness</div>
+    </div>
+    <div style="display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:18px;">
+      <span class="badge">история</span>
+      <span class="badge">теория</span>
+      <span class="badge">coddy вживую</span>
+      <span class="badge">футурология</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ БЛОК 0 - Маршрут ═══ -->
+<section data-background-color="#0e0e12">
+  <div class="block-tag">Блок 0 | Разогрев</div>
+  <h2 class="accent-line">Маршрут на сегодня</h2>
+  <ul class="alist">
+    <li>Что такое harness и при чём тут агенты</li>
+    <li>Откуда взялся термин</li>
+    <li>Какие бывают виды</li>
+    <li>Из чего собран внутри</li>
+    <li>Harness вживую - на примере моего Coddy</li>
+    <li>Уроки и грабли, что унести с собой</li>
+    <li>Футурология - harness мечты</li>
+  </ul>
+  <p style="margin-top:34px;color:var(--dim);font-size:26px;">Без маркетингового тумана, идём по делу. Всё ложится и на Claude Code, Codex, Cursor, Aider.</p>
+</section>
+
+<!-- ═══ БЛОК 1 - модель умеет одно ═══ -->
+<section data-background-color="#0e0e12">
+  <div class="block-tag">Блок 1 | Что такое harness</div>
+  <div class="statement">Языковая модель умеет ровно одно:<br><span class="em">продолжать текст.</span></div>
+  <div class="neg-row">
+    <div class="neg"><b>Не открывает файлы</b><span>сама по себе у неё нет рук</span></div>
+    <div class="neg"><b>Не запускает команды</b><span>нет доступа к shell и системе</span></div>
+    <div class="neg"><b>Не помнит прошлый ход</b><span>каждый вызов - с чистого листа</span></div>
+  </div>
+  <p style="margin-top:40px;font-size:30px;color:var(--muted);">Всё это вокруг неё кто-то должен навесить.</p>
+</section>
+
+<!-- ═══ БЛОК 1 - ReAct loop ═══ -->
+<section data-background-color="#0e0e12">
+  <div class="block-tag">Блок 1 | Что такое harness</div>
+  <h2 class="center-h2">Агент - это модель в цикле</h2>
+  <div class="svg-wrap">
+    <svg viewBox="0 0 980 600" xmlns="http://www.w3.org/2000/svg" style="width:880px;">
+      <defs>
+        <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#a855f7"/></marker>
+        <marker id="ahd" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8a8a98"/></marker>
+      </defs>
+      <path d="M 612,116 Q 905,190 818,300" fill="none" stroke="#9333ea" stroke-width="4" marker-end="url(#ah)"/>
+      <path d="M 686,372 Q 490,470 296,372" fill="none" stroke="#9333ea" stroke-width="4" marker-end="url(#ah)"/>
+      <path d="M 162,300 Q 70,180 366,112" fill="none" stroke="#9333ea" stroke-width="4" marker-end="url(#ah)"/>
+      <rect x="370" y="24" width="240" height="92" rx="16" fill="#1a1a22" stroke="#a855f7" stroke-width="3"/>
+      <text x="490" y="80" text-anchor="middle" fill="#f0f0f5" font-size="36" font-weight="700" font-family="system-ui">THINK</text>
+      <rect x="690" y="314" width="240" height="92" rx="16" fill="#1a1a22" stroke="#a855f7" stroke-width="3"/>
+      <text x="810" y="370" text-anchor="middle" fill="#f0f0f5" font-size="36" font-weight="700" font-family="system-ui">ACT</text>
+      <rect x="50" y="314" width="240" height="92" rx="16" fill="#1a1a22" stroke="#a855f7" stroke-width="3"/>
+      <text x="170" y="370" text-anchor="middle" fill="#f0f0f5" font-size="32" font-weight="700" font-family="system-ui">OBSERVE</text>
+      <text x="490" y="252" text-anchor="middle" fill="#8a8a98" font-size="30" font-family="monospace" letter-spacing="8">ЦИКЛ</text>
+      <path d="M 810,408 Q 700,512 552,522" fill="none" stroke="#8a8a98" stroke-width="3" stroke-dasharray="9 8" marker-end="url(#ahd)"/>
+      <rect x="150" y="520" width="500" height="62" rx="31" fill="#252530" stroke="#3a3a46" stroke-width="2"/>
+      <text x="400" y="559" text-anchor="middle" fill="#b0b0bd" font-size="26" font-family="system-ui">Stop | лимит ходов | задача закрыта</text>
+    </svg>
+  </div>
+  <p class="svg-cap">Классический паттерн - ReAct (Reasoning + Action): думает, выбирает инструмент, получает результат, снова думает.</p>
+</section>
+
+<!-- ═══ БЛОК 1 - почему цикл ═══ -->
+<section data-background-color="#0e0e12">
+  <div class="block-tag">Блок 1 | Что такое harness</div>
+  <h2 class="accent-line">Почему цикл, а не один проход</h2>
+  <div class="hl" style="font-size:64px;font-weight:800;">0.99 <span style="color:var(--accent2);">^ 10</span> ≈ 0.90</div>
+  <p style="margin-top:30px;font-size:32px;color:var(--text);">
+    <strong style="color:var(--accent2);">Закон Лессера</strong> (Lusser's law): надёжность последовательной цепочки равна произведению надёжностей звеньев.
+  </p>
+  <p style="margin-top:16px;font-size:30px;color:var(--muted);line-height:1.5;">
+    Десять шагов по 99% дают на выходе около 90%. Система слабее слабого звена и с каждым шагом проседает сильнее. Без цикла, проверок и повторов модель на длинной задаче рассыпается.
+  </p>
+</section>
+
+<!-- ═══ БЛОК 1 - определение + метафоры ═══ -->
+<section data-background-color="#0e0e12">
+  <div class="block-tag">Блок 1 | Что такое harness</div>
+  <h2 class="accent-line">Harness - вся обвязка вокруг модели</h2>
+  <div class="two-col">
+    <ul class="alist">
+      <li>держит цикл</li>
+      <li>список инструментов</li>
+      <li>права доступа</li>
+      <li>историю сессии</li>
+      <li>связь с провайдером</li>
+    </ul>
+    <div>
+      <div class="card" style="margin-bottom:22px;">
+        <div class="ctitle">Двигатель и машина</div>
+        <div class="cdesc">Модель - двигатель. Harness - всё остальное в машине, без чего двигатель крутится вхолостую.</div>
+      </div>
+      <div class="card">
+        <div class="ctitle">Процессор и ОС</div>
+        <div class="cdesc">Голая LLM - процессор без памяти, диска и ввода-вывода. Harness - операционная система вокруг него.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ БЛОК 1 - цитата ═══ -->
+<section data-background-color="#0e0e12">
+  <div class="block-tag">Блок 1 | Что такое harness</div>
+  <div class="quote-big">Модель меняешь <span class="q">одной строкой в конфиге</span>, а harness остаётся тот же.</div>
+  <div class="quote-sub">Ценность не в конкретной модели, а в обвязке. <span style="color:var(--accent2);">Если ты не модель - ты harness</span> © LangChain</div>
+</section>
+
+<!-- ═══ БЛОК 2 - таймлайн ═══ -->
+<section data-background-color="#0e0e12">
+  <div class="block-tag">Блок 2 | Откуда взялся термин</div>
+  <h2 class="accent-line">Слово появилось не вчера</h2>
+  <div class="timeline">
+    <div class="tl"><div class="dot">1</div><div class="tlt">Test harness</div><div class="tld">тестовый стенд вокруг кода. Термину десятки лет</div></div>
+    <div class="tl"><div class="dot">2</div><div class="tlt">Evaluation harness</div><div class="tld">lm-evaluation-harness, OpenAI Evals - прогон модели по задачам</div></div>
+    <div class="tl"><div class="dot">3</div><div class="tlt">Agent harness</div><div class="tld">OpenAI: SWE-bench, системные карты o1 и GPT-5 - обвязка ≠ модель</div></div>
+    <div class="tl"><div class="dot">4</div><div class="tlt">2026 - дисциплина</div><div class="tld">Anatomy of an Agent Harness: agent = model + harness</div></div>
+  </div>
+</section>
+
+<!-- ═══ БЛОК 2 - TerminalBench ═══ -->
+<section data-background-color="#0e0e12">
+  <div class="block-tag">Блок 2 | Откуда взялся термин</div>
+  <h2 class="center-h2">Цена harness в чистом виде</h2>
+  <div class="svg-wrap">
+    <svg viewBox="0 0 900 500" xmlns="http://www.w3.org/2000/svg" style="width:720px;">
+      <defs>
+        <linearGradient id="afterg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#a855f7"/><stop offset="1" stop-color="#7c3aed"/></linearGradient>
+      </defs>
+      <text x="74" y="120" fill="#8a8a98" font-size="22" font-family="system-ui">выше</text>
+      <text x="74" y="418" fill="#8a8a98" font-size="22" font-family="system-ui">ниже</text>
+      <line x1="130" y1="96" x2="130" y2="420" stroke="#252530" stroke-width="3"/>
+      <rect x="210" y="362" width="150" height="58" rx="8" fill="#252530" stroke="#3a3a46" stroke-width="2"/>
+      <text x="285" y="345" text-anchor="middle" fill="#8a8a98" font-size="24" font-family="system-ui">за 30-м местом</text>
+      <text x="285" y="456" text-anchor="middle" fill="#b0b0bd" font-size="27" font-weight="700" font-family="system-ui">до</text>
+      <rect x="560" y="99" width="150" height="321" rx="8" fill="url(#afterg)" stroke="#a855f7" stroke-width="2"/>
+      <text x="635" y="82" text-anchor="middle" fill="#a855f7" font-size="28" font-weight="800" font-family="system-ui">5-е место</text>
+      <text x="635" y="456" text-anchor="middle" fill="#f0f0f5" font-size="27" font-weight="700" font-family="system-ui">после</text>
+      <line x1="440" y1="360" x2="440" y2="140" stroke="#22c55e" stroke-width="6"/>
+      <polygon points="440,104 422,140 458,140" fill="#22c55e"/>
+      <text x="470" y="252" fill="#22c55e" font-size="40" font-weight="800" font-family="system-ui">+25</text>
+    </svg>
+  </div>
+  <p class="svg-cap">TerminalBench 2.0: команда LangChain поднялась на +25 позиций, поменяв только обвязку. Модель не трогали.</p>
+</section>
+
+<!-- ═══ БЛОК 2 - лесенка ═══ -->
+<section data-background-color="#0e0e12">
+  <div class="block-tag">Блок 2 | Откуда взялся термин</div>
+  <h2 class="center-h2">8 уровней агентной инженерии<br/>(по мнению Bassim Eledath)</h2>
+  <div class="svg-wrap">
+    <svg viewBox="0 0 1000 470" xmlns="http://www.w3.org/2000/svg" style="width:780px;">
+      <!-- steps -->
+      <rect x="40"  y="338" width="100" height="82"  rx="8" fill="#1a1a22" stroke="#3a3a46" stroke-width="2"/><text x="90"  y="398" text-anchor="middle" fill="#8a8a98" font-size="30" font-weight="700">1</text>
+      <rect x="156" y="296" width="100" height="124" rx="8" fill="#1a1a22" stroke="#3a3a46" stroke-width="2"/><text x="206" y="398" text-anchor="middle" fill="#8a8a98" font-size="30" font-weight="700">2</text>
+      <rect x="272" y="254" width="100" height="166" rx="8" fill="#1a1a22" stroke="#3a3a46" stroke-width="2"/><text x="322" y="398" text-anchor="middle" fill="#8a8a98" font-size="30" font-weight="700">3</text>
+      <rect x="388" y="212" width="100" height="208" rx="8" fill="#1a1a22" stroke="#3a3a46" stroke-width="2"/><text x="438" y="398" text-anchor="middle" fill="#8a8a98" font-size="30" font-weight="700">4</text>
+      <rect x="504" y="170" width="100" height="250" rx="8" fill="#1a1a22" stroke="#3a3a46" stroke-width="2"/><text x="554" y="398" text-anchor="middle" fill="#b0b0bd" font-size="30" font-weight="700">5</text>
+      <rect x="620" y="128" width="100" height="292" rx="8" fill="#9333ea" stroke="#a855f7" stroke-width="3"/><text x="670" y="398" text-anchor="middle" fill="#fff" font-size="30" font-weight="800">6</text>
+      <text transform="rotate(-90 670 250)" x="670" y="250" text-anchor="middle" fill="#fff" font-size="30" font-weight="800" font-family="system-ui">harness</text>
+      <rect x="736" y="86"  width="100" height="334" rx="8" fill="#1a1a22" stroke="#3a3a46" stroke-width="2"/><text x="786" y="398" text-anchor="middle" fill="#b0b0bd" font-size="30" font-weight="700">7</text>
+      <rect x="852" y="44"  width="100" height="376" rx="8" fill="#1a1a22" stroke="#3a3a46" stroke-width="2"/><text x="902" y="398" text-anchor="middle" fill="#8a8a98" font-size="30" font-weight="700">8</text>
+    </svg>
+  </div>
+  <div class="levels">
+    <div class="lvl"><b>1</b> Tab Complete</div>
+    <div class="lvl"><b>2</b> Agent IDE</div>
+    <div class="lvl"><b>3</b> Context Engineering</div>
+    <div class="lvl"><b>4</b> Compounding Engineering</div>
+    <div class="lvl"><b>5</b> MCP и Skills</div>
+    <div class="lvl on"><b>6</b> Harness Engineering</div>
+    <div class="lvl"><b>7</b> Background Agents</div>
+    <div class="lvl"><b>8</b> Автономные агентные команды</div>
+  </div>
+</section>
+
+<!-- ═══ БЛОК 3 - оси 1 ═══ -->
+<section data-background-color="#0e0e12">
+  <div class="block-tag">Блок 3 | Виды harness</div>
+  <h2 class="accent-line">harness'ы режут по осям</h2>
+  <div class="feature-grid">
+    <div class="card"><div class="ctitle">Где живёт интерфейс</div><div class="cdesc">IDE-встройки (Cursor, Copilot, Zed) | CLI (Claude Code, Codex, Aider) | браузер и веб-UI | серверные боты</div></div>
+    <div class="card"><div class="ctitle">Транспорт</div><div class="cdesc">ACP - JSON-RPC поверх stdio, редактор ↔ агент | HTTP, часто OpenAI-совместимый, агент как бэкенд</div></div>
+    <div class="card"><div class="ctitle">Размещение</div><div class="cdesc">Облачные managed - ключи и код во внешнем контуре | self-hosted и on-premise - всё на вашей машине</div></div>
+    <div class="card"><div class="ctitle">Рантайм</div><div class="cdesc">Node (Claude Code) | Python (большинство фреймворков) | один статический бинарник (Coddy на Go)</div></div>
+  </div>
+</section>
+
+<!-- ═══ БЛОК 3 - оси 2 + вывод ═══ -->
+<section data-background-color="#0e0e12">
+  <div class="block-tag">Блок 3 | Виды harness</div>
+  <h2 class="accent-line">...и ещё по осям</h2>
+  <div class="grid-3">
+    <div class="card"><div class="ctitle">Устройство цикла</div><div class="cdesc">простой ReAct | более длинные петли в стиле Ralph</div></div>
+    <div class="card"><div class="ctitle">Число агентов</div><div class="cdesc">одиночный | мультиагент с изолированными окнами: Fork, Teammate, Worktree</div></div>
+    <div class="card"><div class="ctitle">Архитектура</div><div class="cdesc">монолит | протокольный каркас, где контракт отделён от реализации</div></div>
+  </div>
+  <div class="hl" style="margin-top:34px;font-size:28px;text-align:left;">
+    Чистых типов почти не бывает: <strong style="color:var(--accent2);">Cursor</strong> - IDE + облако,
+    <strong style="color:var(--accent2);">Claude Code</strong> - CLI на Node,
+    <strong style="color:var(--accent2);">Coddy</strong> - один бинарник, сразу ACP и HTTP.
+  </div>
+</section>
+
+<!-- ═══ БЛОК 4 - анатомия ═══ -->
+<section data-background-color="#0e0e12">
+  <div class="block-tag">Блок 4 | Анатомия</div>
+  <h2 class="accent-line">Снимаем кожух</h2>
+  <div class="anat">
+    <div class="ap"><b>Системный промпт</b><span>роль и поведение агента</span></div>
+    <div class="ap"><b>Инструменты</b><span>файлы, shell, веб + внешние через MCP</span></div>
+    <div class="ap"><b>Цикл и стоп-условия</b><span>сколько ходов, когда Stop, как ловит ошибки</span></div>
+    <div class="ap"><b>Права и песочница</b><span>что можно трогать | plan / agent | Docker → microVM → gVisor</span></div>
+    <div class="ap core"><b>МОДЕЛЬ</b><span>сменная деталь</span></div>
+    <div class="ap"><b>Состояние и сессии</b><span>история ходов, чтобы помнил, что делал</span></div>
+    <div class="ap"><b>Контекст и память</b><span>что в окне сейчас, а что в долгой памяти</span></div>
+    <div class="ap"><b>Наблюдаемость</b><span>виден каждый вызов, можно откатить</span></div>
+    <div class="ap" style="background:transparent;border-style:dashed;"><b style="color:var(--dim);">Срез у всех свой</b><span>у Youngju Kim - 7 компонентов. Просто другой разрез</span></div>
+  </div>
+</section>
+
+<!-- ═══ БЛОК 4 - цифры ═══ -->
+<section data-background-color="#0e0e12">
+  <div class="block-tag">Блок 4 | Анатомия</div>
+  <h2 class="accent-line">Почему части важны - в цифрах</h2>
+  <div class="stat-grid">
+    <div class="stat"><div class="num">−30%+</div><div class="lbl">context rot: нужное в середине окна - качество проседает</div></div>
+    <div class="stat"><div class="num">−80%</div><div class="lbl">в Vercel выкинули тулзы - и стало лучше. Скоупь инструменты</div></div>
+    <div class="stat"><div class="num">×2-3</div><div class="lbl">цикл верификации поднимает качество в два-три раза</div></div>
+  </div>
+  <p style="margin-top:40px;font-size:28px;color:var(--muted);text-align:center;">Чтобы части не висели в воздухе - подкрепляем цифрами.</p>
+</section>
+
+<!-- ═══ БЛОК 4 - толщина + мысль ═══ -->
+<section data-background-color="#0e0e12">
+  <div class="block-tag">Блок 4 | Анатомия</div>
+  <h2 class="accent-line">Толщина harness</h2>
+  <div class="tt">
+    <div class="tt-row"><div class="tt-name">Тонкий</div><div class="tt-bar"><div class="tt-model" style="flex:8;">логика в модели</div><div class="tt-harness" style="flex:2;">harness</div></div></div>
+    <div class="tt-row"><div class="tt-name">Толстый</div><div class="tt-bar"><div class="tt-model" style="flex:3;">модель</div><div class="tt-harness" style="flex:7;">логика снаружи, в harness</div></div></div>
+  </div>
+  <p style="margin-top:30px;font-size:28px;color:var(--muted);">Леса убирают, когда здание готово: чем сильнее модель, тем тоньше harness. Но в ноль он не уходит.</p>
+  <div class="hl" style="margin-top:26px;">Модель - сменная деталь. Всё остальное и есть harness.</div>
+</section>
+
+<!-- ═══ БЛОК 5 - DEMO divider ═══ -->
+<section data-background-color="#0e0e12">
+  <div class="divider">
+    <div class="block-tag" style="justify-content:center;">Блок 5 | Harness вживую</div>
+    <h1>Смотрим на живой harness</h1>
+    <div style="width:140px;height:6px;background:var(--accent);border-radius:3px;"></div>
+    <div class="dsub">Подопытный - мой <span style="color:var(--accent2);font-weight:700;">Coddy</span>. Всё то же есть в Claude Code и Cursor, просто кнопки лежат в других местах.</div>
+  </div>
+</section>
+
+<!-- ═══ БЛОК 5 - что показываю ═══ -->
+<section data-background-color="#0e0e12">
+  <div class="block-tag">Блок 5 | Harness вживую</div>
+  <h2 class="accent-line">Что показываю</h2>
+  <div class="two-col">
+    <ul class="alist sm">
+      <li>Цикл и таймлайн вызовов: имя, аргументы, результат, время</li>
+      <li>Streaming, прерывание посреди ответа, восстановление сессии</li>
+      <li>Repair-loop: падающая задача чинится сама за пару попыток</li>
+      <li>Инструменты: файлы, shell, SSH на удалённый хост, веб-поиск</li>
+    </ul>
+    <ul class="alist sm">
+      <li>Режимы plan и agent - чем план безопаснее для разведки</li>
+      <li>Rules из .cursor и .claude подхватываются без правок</li>
+      <li>Skills как slash-команды: положил SKILL.md - команда в UI</li>
+      <li>Одна сессия в браузере и в редакторе через ACP</li>
+      <li>Тот же harness как OpenAI-бэкенд - обычным curl</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ═══ БЛОК 5 - скриншот чат ═══ -->
+<section data-background-color="#0e0e12">
+  <div class="block-tag">Блок 5 | Harness вживую</div>
+  <div class="ss" style="max-width:1500px;margin:0 auto;">
+    <img src="assets/screenshot-fullhd-chat.png" alt="Чат с таймлайном вызовов">
+  </div>
+  <p class="ss-cap">Каждый вызов - имя, аргументы, результат. Тот самый цикл из блока 1, только вживую. Никакого чёрного ящика.</p>
+</section>
+
+<!-- ═══ БЛОК 6 - грабли 1 ═══ -->
+<section data-background-color="#0e0e12">
+  <div class="block-tag">Блок 6 | Уроки и грабли</div>
+  <div class="hl" style="font-size:38px;">Обвязка важнее модели на длинной дистанции</div>
+  <div class="grid-3" style="margin-top:30px;">
+    <div class="card"><div class="ctitle">Protocol-first побеждает</div><div class="cdesc">Контракт с первого дня - новые поверхности цепляются почти бесплатно.</div></div>
+    <div class="card"><div class="ctitle">Совместимость = юзеры</div><div class="cdesc">Читаешь чужие rules, даёшь OpenAI-API - человеку не надо переучиваться.</div></div>
+    <div class="card"><div class="ctitle">Общее состояние = дисциплина</div><div class="cdesc">Утечка деталей транспорта в общий слой ломает остальных. Слой состояния - самый консервативный.</div></div>
+  </div>
+  <p style="margin-top:28px;font-size:26px;color:var(--dim);">Зрелая обвязка вокруг средней модели бьёт сырую обвязку вокруг топовой.</p>
+</section>
+
+<!-- ═══ БЛОК 6 - грабли 2 ═══ -->
+<section data-background-color="#0e0e12">
+  <div class="block-tag">Блок 6 | Уроки и грабли</div>
+  <h2 class="accent-line">...и ещё грабли</h2>
+  <div class="grid-3">
+    <div class="card"><div class="ctitle">Обвязка копится храповиком</div><div class="cdesc">Каждая пойманная ошибка - новое правило в репозитории. Надёжность растёт сама.</div></div>
+    <div class="card"><div class="ctitle">Потолок предсказуемости</div><div class="cdesc">Harness вывозит повторяемое, но не новое. В незнакомом сначала пройди руками сам.</div></div>
+    <div class="card"><div class="ctitle">Инструкции коротко, проверки строго</div><div class="cdesc">CLAUDE.md ~100-150 строк. Линтеры с подробными сообщениями - учителя для агента.</div></div>
+  </div>
+</section>
+
+<!-- ═══ БЛОК 7 - что унести ═══ -->
+<section data-background-color="#0e0e12">
+  <div class="block-tag">Блок 7 | Что унести с собой</div>
+  <h2 class="accent-line">Не смотри со стороны - пощупай руками</h2>
+  <div class="grid-3">
+    <div class="card"><div class="ctitle">Готовое из коробки</div><div class="cdesc">Claude Code, Codex, Cursor или Aider - и смотри на цикл и вызовы глазами.</div></div>
+    <div class="card"><div class="ctitle">Self-hosted в бинарник</div><div class="cdesc">Без рантайма - мой Coddy, ставится одной командой.</div></div>
+    <div class="card"><div class="ctitle">В любом случае</div><div class="cdesc">Дай простую задачу, подсунь свои rules, посмотри таймлайн. Там вся суть.</div></div>
+  </div>
+  <p style="margin-top:34px;font-size:28px;color:var(--muted);">Минимум для старта: провайдер, модель, ключ - и агент уже отвечает. Глубже - каталог 80+ статей на Хабре.</p>
+</section>
+
+<!-- ═══ БЛОК 8 - divider ═══ -->
+<section data-background-color="#0e0e12">
+  <div class="divider">
+    <div class="block-tag" style="justify-content:center;">Блок 8 | Футурология</div>
+    <h1>harness мечты</h1>
+    <div style="width:140px;height:6px;background:var(--accent);border-radius:3px;"></div>
+    <div class="dsub">Без обещаний и дорожных карт. Просто разгон - каким хочется видеть harness через пару лет.</div>
+  </div>
+</section>
+
+<!-- ═══ БЛОК 8 - устройства ═══ -->
+<section data-background-color="#0e0e12">
+  <div class="block-tag">Блок 8 | Футурология</div>
+  <h2 class="center-h2">Одна сессия - любое устройство</h2>
+  <div class="svg-wrap">
+    <svg viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg" style="width:840px;">
+      <path d="M 470,182 L 205,322" stroke="#9333ea" stroke-width="3" fill="none" opacity=".65"/>
+      <path d="M 500,210 L 502,318" stroke="#9333ea" stroke-width="3" fill="none" opacity=".65"/>
+      <path d="M 530,182 L 800,326" stroke="#9333ea" stroke-width="3" fill="none" opacity=".65"/>
+      <!-- server -->
+      <rect x="410" y="32" width="180" height="150" rx="14" fill="#1a1a22" stroke="#a855f7" stroke-width="3"/>
+      <line x1="410" y1="82" x2="590" y2="82" stroke="#3a3a46" stroke-width="2"/>
+      <line x1="410" y1="132" x2="590" y2="132" stroke="#3a3a46" stroke-width="2"/>
+      <circle cx="440" cy="57" r="6" fill="#22c55e"/><circle cx="440" cy="107" r="6" fill="#a855f7"/><circle cx="440" cy="157" r="6" fill="#3b82f6"/>
+      <text x="500" y="216" text-anchor="middle" fill="#f0f0f5" font-size="28" font-weight="700" font-family="system-ui">сессия на сервере</text>
+      <!-- laptop -->
+      <rect x="120" y="322" width="160" height="96" rx="8" fill="#1a1a22" stroke="#a855f7" stroke-width="3"/>
+      <path d="M100,432 L300,432 L282,418 L118,418 Z" fill="#252530" stroke="#a855f7" stroke-width="3"/>
+      <text x="200" y="476" text-anchor="middle" fill="#b0b0bd" font-size="24" font-family="system-ui">ноутбук</text>
+      <!-- phone -->
+      <rect x="458" y="320" width="86" height="138" rx="14" fill="#1a1a22" stroke="#a855f7" stroke-width="3"/>
+      <circle cx="501" cy="446" r="5" fill="#a855f7"/>
+      <text x="501" y="486" text-anchor="middle" fill="#b0b0bd" font-size="24" font-family="system-ui">телефон</text>
+      <!-- tablet -->
+      <rect x="738" y="328" width="150" height="112" rx="12" fill="#1a1a22" stroke="#a855f7" stroke-width="3"/>
+      <circle cx="813" cy="430" r="4" fill="#a855f7"/>
+      <text x="813" y="476" text-anchor="middle" fill="#b0b0bd" font-size="24" font-family="system-ui">планшет</text>
+    </svg>
+  </div>
+  <p class="svg-cap">Запустил с компа → по дороге смотришь с телефона → вечером продолжил за столом. Устройство меняешь, сессия одна.</p>
+</section>
+
+<!-- ═══ БЛОК 8 - люди + честная ремарка ═══ -->
+<section data-background-color="#0e0e12">
+  <div class="block-tag">Блок 8 | Футурология</div>
+  <h2 class="center-h2">Несколько человек в одной сессии</h2>
+  <div class="svg-wrap">
+    <svg viewBox="0 0 1000 360" xmlns="http://www.w3.org/2000/svg" style="width:760px;">
+      <defs><marker id="ah2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#a855f7"/></marker></defs>
+      <g fill="#a855f7"><circle cx="90" cy="60" r="26"/><path d="M40,140 A50,50 0 0 1 140,140 Z"/></g>
+      <g fill="#a855f7"><circle cx="90" cy="190" r="26"/><path d="M40,270 A50,50 0 0 1 140,270 Z"/></g>
+      <g fill="#a855f7"><circle cx="220" cy="125" r="26"/><path d="M170,205 A50,50 0 0 1 270,205 Z"/></g>
+      <path d="M 150,90 L 430,160" stroke="#9333ea" stroke-width="3" fill="none" marker-end="url(#ah2)"/>
+      <path d="M 280,165 L 430,178" stroke="#9333ea" stroke-width="3" fill="none" marker-end="url(#ah2)"/>
+      <path d="M 150,250 L 430,196" stroke="#9333ea" stroke-width="3" fill="none" marker-end="url(#ah2)"/>
+      <rect x="440" y="120" width="250" height="120" rx="16" fill="#9333ea"/>
+      <text x="565" y="170" text-anchor="middle" fill="#fff" font-size="30" font-weight="800" font-family="system-ui">одна сессия</text>
+      <text x="565" y="208" text-anchor="middle" fill="rgba(255,255,255,.85)" font-size="24" font-family="system-ui">общее состояние</text>
+      <path d="M 690,180 L 790,180" stroke="#8a8a98" stroke-width="3" fill="none" marker-end="url(#ah2)"/>
+      <rect x="800" y="130" width="150" height="100" rx="14" fill="#1a1a22" stroke="#a855f7" stroke-width="3"/>
+      <text x="875" y="188" text-anchor="middle" fill="#a855f7" font-size="28" font-weight="700" font-family="system-ui">агент</text>
+    </svg>
+  </div>
+  <p class="svg-cap">Как Google Docs, только для агента: оба видят один цикл, оба могут вмешаться.</p>
+  <div class="caveat" style="margin-top:24px;">
+    <b>Честно:</b> пока лучше VNC внутри туннеля до дома не выходит - это костыль, а не свойство harness.
+    Чтобы заработало: общее состояние на N подключений | права на участника, а не на машину | protocol-first с первого дня.
+  </div>
+</section>
+
+<!-- ═══ БЛОК 8 - цитата ═══ -->
+<section data-background-color="#0e0e12">
+  <div class="block-tag">Блок 8 | Футурология</div>
+  <div class="quote-big">Сегодня сессия живёт в <span class="q">двух окнах на одной машине</span>. Хочется - на любом устройстве и сразу для нескольких людей.</div>
+  <div class="quote-sub">А железо под рукой - просто стекло, через которое в неё смотришь.</div>
+</section>
+
+<!-- ═══ БЛОК 9 - вопросы + ссылки ═══ -->
+<section data-background-color="#0e0e12">
+  <div class="block-tag" style="justify-content:center;">Блок 9 | Вопросы</div>
+  <h2 class="center-h2" style="margin-bottom:30px;">Вопросы</h2>
+  <div style="display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-bottom:46px;">
+    <span class="badge">чем harness ≠ чат-бот</span>
+    <span class="badge">локальные модели через Ollama</span>
+    <span class="badge">безопасность shell</span>
+    <span class="badge">тянет ли слабое железо</span>
+    <span class="badge">не проще ли своё</span>
+  </div>
+  <div class="qr-row">
+    <div class="qr-item">
+      <div class="qr-frame"><img src="assets/qr-github.png" alt="QR GitHub"></div>
+      <div class="qr-lbl">Coddy Agent</div>
+      <div class="qr-link">github.com/coddy-project/coddy-agent</div>
+    </div>
+    <div class="qr-divider"></div>
+    <div class="qr-item">
+      <div class="qr-frame"><img src="assets/qr-telegram.png" alt="QR Telegram"></div>
+      <div class="qr-lbl">Pavel Zloi</div>
+      <div class="qr-link">t.me/evilfreelancer</div>
+    </div>
+  </div>
+  <p style="margin-top:40px;text-align:center;font-size:32px;color:var(--text);">Спасибо!</p>
+</section>
+
+</div><!-- /slides -->
+</div><!-- /reveal -->
+
+<script src="assets/reveal.js"></script>
+<script>
+  Reveal.initialize({
+    hash: true,
+    transition: 'fade',
+    transitionSpeed: 'fast',
+    controls: true,
+    progress: true,
+    slideNumber: 'c/t',
+    width: 1920,
+    height: 1080,
+    margin: 0.04,
+    minScale: 0.2,
+    maxScale: 2.0,
+    center: true,
+  });
+</script>
+</body>
+</html>
