@@ -61,7 +61,7 @@
       color: var(--accent2); margin-bottom: 26px;
       display: flex; align-items: center; gap: 14px;
     }
-    .block-tag::before { content:""; width:18px; height:18px; background:var(--accent); border-radius:4px; }
+    .block-tag::before { content:""; width:18px; height:18px; background:var(--accent); border-radius:4px; flex-shrink:0; position:relative; top:-2px; }
 
     /* ── Big statement ── */
     .statement { font-size: 62px; font-weight: 800; line-height: 1.14; letter-spacing: -0.02em; }
@@ -79,6 +79,15 @@
     .card { background:var(--bg2); border:1px solid rgba(147,51,234,.25); border-radius:14px; padding:28px 32px; }
     .card .ctitle { color:var(--accent2); font-weight:700; font-size:32px; margin-bottom:14px; }
     .card .cdesc  { color:var(--muted); font-size:24px; line-height:1.5; }
+
+    /* ── Classification grid ── */
+    .clsf { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+    .clsf .card { padding:24px 28px; }
+    .clsf .card .ctitle { font-size:28px; margin-bottom:14px; }
+    .clsf .card .cdesc  { font-size:22px; line-height:1.4; }
+    .clsf .card .cdesc ul { list-style:none; margin:0; padding:0; }
+    .clsf .card .cdesc li { position:relative; padding-left:22px; margin:7px 0; }
+    .clsf .card .cdesc li::before { content:"•"; position:absolute; left:2px; color:var(--accent2); font-weight:700; }
 
     /* ── Highlight ── */
     .hl {
@@ -121,6 +130,11 @@
     .anat .core { background:var(--accent); border:none; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; }
     .anat .core b { color:#fff; font-size:34px; margin:0; }
     .anat .core span { color:rgba(255,255,255,.9); font-size:22px; margin-top:8px; }
+    .anat .ap ul { list-style:none; margin:6px 0 0; padding:0; }
+    .anat .ap li { position:relative; padding-left:18px; color:var(--muted); font-size:21px; line-height:1.34; margin:4px 0; }
+    .anat .ap li::before { content:"•"; position:absolute; left:0; color:var(--accent2); font-weight:700; }
+    .anat .ap.swap { background:rgba(147,51,234,.12); border:1px solid rgba(168,85,247,.7); }
+    .anat .ap.swap b { color:var(--accent2); }
 
     /* ── Thin / thick ── */
     .tt { display:flex; flex-direction:column; gap:28px; margin-top:36px; }
@@ -204,16 +218,6 @@
   </div>
 </section>
 
-<!-- ═══ СПОЙЛЕР - формула агента ═══ -->
-<section data-background-color="#0e0e12">
-  <div class="divider" style="gap:44px;">
-    <div style="font-family:'JetBrains Mono','Courier New',monospace;font-size:28px;letter-spacing:.24em;text-transform:uppercase;color:var(--accent2);">Спойлер</div>
-    <div style="font-size:112px;font-weight:800;letter-spacing:-0.03em;line-height:1.05;">
-      Агент <span style="color:var(--dim);font-weight:600;">=</span> LLM <span style="color:var(--accent2);">+</span> Harness
-    </div>
-  </div>
-</section>
-
 <!-- ═══ БЛОК 0 - Маршрут ═══ -->
 <section data-background-color="#0e0e12">
   <div class="block-tag">Блок 0 | Разогрев</div>
@@ -227,19 +231,27 @@
     <li>Уроки и грабли, что унести с собой</li>
     <li>Футурология - harness мечты</li>
   </ul>
-  <p style="margin-top:34px;color:var(--dim);font-size:26px;">Без маркетингового тумана, идём по делу. Всё ложится и на Claude Code, Codex, Cursor, Aider.</p>
+</section>
+
+<!-- ═══ СПОЙЛЕР - формула агента ═══ -->
+<section data-background-color="#0e0e12">
+  <div class="divider" style="gap:44px;">
+    <div style="font-family:'JetBrains Mono','Courier New',monospace;font-size:28px;letter-spacing:.24em;text-transform:uppercase;color:var(--accent2);">Спойлер</div>
+    <div style="font-size:112px;font-weight:800;letter-spacing:-0.03em;line-height:1.05;">
+      Агент <span style="color:var(--dim);font-weight:600;">=</span> LLM <span style="color:var(--accent2);">+</span> Harness
+    </div>
+  </div>
 </section>
 
 <!-- ═══ БЛОК 1 - модель умеет одно ═══ -->
 <section data-background-color="#0e0e12">
   <div class="block-tag">Блок 1 | Что такое harness</div>
-  <div class="statement">Языковая модель умеет ровно одно:<br><span class="em">продолжать текст.</span></div>
+  <div class="statement">Языковая модель умеет только: <span class="em">продолжать текст.</span></div>
   <div class="neg-row">
-    <div class="neg"><b>Не открывает файлы</b><span>сама по себе у неё нет рук</span></div>
+    <div class="neg"><b>Не открывает файлы</b><span>сама по себе, у неё нет рук</span></div>
     <div class="neg"><b>Не запускает команды</b><span>нет доступа к shell и системе</span></div>
-    <div class="neg"><b>Не помнит прошлый ход</b><span>каждый вызов - с чистого листа</span></div>
+    <div class="neg"><b>Не помнит прошлый ход</b><span>и с чистого листа, мы всё начнём сначала</span></div>
   </div>
-  <p style="margin-top:40px;font-size:30px;color:var(--muted);">Всё это вокруг неё кто-то должен навесить.</p>
 </section>
 
 <!-- ═══ БЛОК 1 - ReAct loop ═══ -->
@@ -279,7 +291,7 @@
     <strong style="color:var(--accent2);">Закон Лессера</strong> (Lusser's law): надёжность последовательной цепочки равна произведению надёжностей звеньев.
   </p>
   <p style="margin-top:16px;font-size:30px;color:var(--muted);line-height:1.5;">
-    Десять шагов по 99% дают на выходе около 90%. Система слабее слабого звена и с каждым шагом проседает сильнее. Без цикла, проверок и повторов модель на длинной задаче рассыпается.
+    Десять шагов по 99% дают на выходе около 90%. Система слабее слабого звена и с каждым шагом проседает сильнее. Без цикла, самопроверок и повторов модель на длинной задаче рассыпается.
   </p>
 </section>
 
@@ -383,29 +395,42 @@
   </div>
 </section>
 
-<!-- ═══ БЛОК 3 - оси 1 ═══ -->
+<!-- ═══ БЛОК 3 - классификация ═══ -->
 <section data-background-color="#0e0e12">
   <div class="block-tag">Блок 3 | Виды harness</div>
-  <h2 class="accent-line">harness'ы режут по осям</h2>
-  <div class="feature-grid">
-    <div class="card"><div class="ctitle">Где живёт интерфейс</div><div class="cdesc">IDE-встройки (Cursor, Copilot, Zed) | CLI (Claude Code, Codex, Aider) | браузер и веб-UI | серверные боты</div></div>
-    <div class="card"><div class="ctitle">Транспорт</div><div class="cdesc">ACP - JSON-RPC поверх stdio, редактор ↔ агент | HTTP, часто OpenAI-совместимый, агент как бэкенд</div></div>
-    <div class="card"><div class="ctitle">Размещение</div><div class="cdesc">Облачные managed - ключи и код во внешнем контуре | self-hosted и on-premise - всё на вашей машине</div></div>
-    <div class="card"><div class="ctitle">Рантайм</div><div class="cdesc">Node (Claude Code) | Python (большинство фреймворков) | один статический бинарник (Coddy на Go)</div></div>
+  <h2 class="accent-line">Классификация harness'ов</h2>
+  <div class="clsf">
+    <div class="card"><div class="ctitle">По типу интерфейса</div><div class="cdesc"><ul>
+      <li>IDE-встройки (Cursor, Copilot, Zed)</li>
+      <li>CLI (Claude Code, Codex, Aider)</li>
+      <li>браузер и веб-UI</li>
+      <li>серверные боты</li>
+    </ul></div></div>
+    <div class="card"><div class="ctitle">По транспорту</div><div class="cdesc"><ul>
+      <li>ACP - JSON-RPC поверх stdio (редактор ↔ агент)</li>
+      <li>HTTP - часто OpenAI-совместимый (агент как бэкенд)</li>
+    </ul></div></div>
+    <div class="card"><div class="ctitle">По размещению</div><div class="cdesc"><ul>
+      <li>облачные managed (ключи и код во внешнем контуре)</li>
+      <li>self-hosted / on-premise (всё на вашей машине)</li>
+    </ul></div></div>
+    <div class="card"><div class="ctitle">По рантайму</div><div class="cdesc"><ul>
+      <li>Node (Claude Code)</li>
+      <li>Python (большинство фреймворков)</li>
+      <li>один бинарник (Coddy на Go)</li>
+    </ul></div></div>
+    <div class="card"><div class="ctitle">По циклу</div><div class="cdesc"><ul>
+      <li>простой ReAct</li>
+      <li>длинные петли в стиле Ralph</li>
+    </ul></div></div>
+    <div class="card"><div class="ctitle">По числу агентов</div><div class="cdesc"><ul>
+      <li>одиночный (один цикл, один контекст)</li>
+      <li>мультиагент: Fork, Teammate, Worktree</li>
+    </ul></div></div>
   </div>
-</section>
-
-<!-- ═══ БЛОК 3 - оси 2 + вывод ═══ -->
-<section data-background-color="#0e0e12">
-  <div class="block-tag">Блок 3 | Виды harness</div>
-  <h2 class="accent-line">...и ещё по осям</h2>
-  <div class="grid-3">
-    <div class="card"><div class="ctitle">Устройство цикла</div><div class="cdesc">простой ReAct | более длинные петли в стиле Ralph</div></div>
-    <div class="card"><div class="ctitle">Число агентов</div><div class="cdesc">одиночный | мультиагент с изолированными окнами: Fork, Teammate, Worktree</div></div>
-    <div class="card"><div class="ctitle">Архитектура</div><div class="cdesc">монолит | протокольный каркас, где контракт отделён от реализации</div></div>
-  </div>
-  <div class="hl" style="margin-top:34px;font-size:28px;text-align:left;">
-    Чистых типов почти не бывает: <strong style="color:var(--accent2);">Cursor</strong> - IDE + облако,
+  <div class="hl" style="margin-top:30px;font-size:28px;text-align:left;">
+    Чистых типов нет - реальный harness миксует оси:
+    <strong style="color:var(--accent2);">Cursor</strong> - IDE + облако,
     <strong style="color:var(--accent2);">Claude Code</strong> - CLI на Node,
     <strong style="color:var(--accent2);">Coddy</strong> - один бинарник, сразу ACP и HTTP.
   </div>
@@ -419,12 +444,16 @@
     <div class="ap"><b>Системный промпт</b><span>роль и поведение агента</span></div>
     <div class="ap"><b>Инструменты</b><span>файлы, shell, веб + внешние через MCP</span></div>
     <div class="ap"><b>Цикл и стоп-условия</b><span>сколько ходов, когда Stop, как ловит ошибки</span></div>
-    <div class="ap"><b>Права и песочница</b><span>что можно трогать | plan / agent | Docker → microVM → gVisor</span></div>
+    <div class="ap"><b>Права и песочница</b><ul>
+      <li>что можно трогать</li>
+      <li>режимы plan / agent</li>
+      <li>песочница: Docker → microVM → gVisor</li>
+    </ul></div>
     <div class="ap core"><b>МОДЕЛЬ</b><span>сменная деталь</span></div>
     <div class="ap"><b>Состояние и сессии</b><span>история ходов, чтобы помнил, что делал</span></div>
     <div class="ap"><b>Контекст и память</b><span>что в окне сейчас, а что в долгой памяти</span></div>
     <div class="ap"><b>Наблюдаемость</b><span>виден каждый вызов, можно откатить</span></div>
-    <div class="ap" style="background:transparent;border-style:dashed;"><b style="color:var(--dim);">Срез у всех свой</b><span>у Youngju Kim - 7 компонентов. Просто другой разрез</span></div>
+    <div class="ap swap"><b>Skills + MCP</b><span>тоже сменная деталь: навыки и внешние тулзы докидываются на ходу</span></div>
   </div>
 </section>
 
@@ -437,7 +466,6 @@
     <div class="stat"><div class="num">−80%</div><div class="lbl">в Vercel выкинули тулзы - и стало лучше. Скоупь инструменты</div></div>
     <div class="stat"><div class="num">×2-3</div><div class="lbl">цикл верификации поднимает качество в два-три раза</div></div>
   </div>
-  <p style="margin-top:40px;font-size:28px;color:var(--muted);text-align:center;">Чтобы части не висели в воздухе - подкрепляем цифрами.</p>
 </section>
 
 <!-- ═══ БЛОК 4 - толщина + мысль ═══ -->
@@ -509,9 +537,9 @@
   <div class="block-tag">Блок 6 | Уроки и грабли</div>
   <h2 class="accent-line">...и ещё грабли</h2>
   <div class="grid-3">
-    <div class="card"><div class="ctitle">Обвязка копится храповиком</div><div class="cdesc">Каждая пойманная ошибка - новое правило в репозитории. Надёжность растёт сама.</div></div>
+    <div class="card"><div class="ctitle">Обвязка растёт как снежный ком</div><div class="cdesc">Каждая пойманная ошибка - новое правило в репозитории. Ком катится сам: чем дольше работаешь, тем надёжнее.</div></div>
     <div class="card"><div class="ctitle">Потолок предсказуемости</div><div class="cdesc">Harness вывозит повторяемое, но не новое. В незнакомом сначала пройди руками сам.</div></div>
-    <div class="card"><div class="ctitle">Инструкции коротко, проверки строго</div><div class="cdesc">CLAUDE.md ~100-150 строк. Линтеры с подробными сообщениями - учителя для агента.</div></div>
+    <div class="card"><div class="ctitle">Инструкции коротко, проверки строго</div><div class="cdesc">AGENTS.md ~100-150 строк. Линтеры с подробными сообщениями - учителя для агента.</div></div>
   </div>
 </section>
 
@@ -535,6 +563,31 @@
     <div style="width:140px;height:6px;background:var(--accent);border-radius:3px;"></div>
     <div class="dsub">Без обещаний и дорожных карт. Просто разгон - каким хочется видеть harness через пару лет.</div>
   </div>
+</section>
+
+<!-- ═══ БЛОК 8 - агенты (общий формат сессий) ═══ -->
+<section data-background-color="#0e0e12">
+  <div class="block-tag">Блок 8 | Футурология</div>
+  <h2 class="center-h2">Одна сессия - любой агент</h2>
+  <div class="svg-wrap">
+    <svg viewBox="0 0 1000 410" xmlns="http://www.w3.org/2000/svg" style="width:860px;">
+      <path d="M 450,180 L 210,300" stroke="#9333ea" stroke-width="3" fill="none" opacity=".65"/>
+      <path d="M 500,180 L 500,300" stroke="#9333ea" stroke-width="3" fill="none" opacity=".65"/>
+      <path d="M 550,180 L 790,300" stroke="#9333ea" stroke-width="3" fill="none" opacity=".65"/>
+      <!-- единый формат -->
+      <rect x="320" y="40" width="360" height="140" rx="16" fill="#9333ea"/>
+      <text x="500" y="100" text-anchor="middle" fill="#fff" font-size="30" font-weight="800" font-family="system-ui">единый формат</text>
+      <text x="500" y="138" text-anchor="middle" fill="rgba(255,255,255,.88)" font-size="26" font-family="system-ui">хранения сессий</text>
+      <!-- агенты -->
+      <rect x="100" y="300" width="220" height="92" rx="14" fill="#1a1a22" stroke="#a855f7" stroke-width="3"/>
+      <text x="210" y="356" text-anchor="middle" fill="#f0f0f5" font-size="26" font-weight="700" font-family="system-ui">Claude Code</text>
+      <rect x="390" y="300" width="220" height="92" rx="14" fill="#1a1a22" stroke="#a855f7" stroke-width="3"/>
+      <text x="500" y="356" text-anchor="middle" fill="#f0f0f5" font-size="26" font-weight="700" font-family="system-ui">Codex</text>
+      <rect x="680" y="300" width="220" height="92" rx="14" fill="#1a1a22" stroke="#a855f7" stroke-width="3"/>
+      <text x="790" y="356" text-anchor="middle" fill="#f0f0f5" font-size="26" font-weight="700" font-family="system-ui">Coddy</text>
+    </svg>
+  </div>
+  <p class="svg-cap">Начал в Claude Code → продолжил в Codex → закончил в Coddy.<br/>Общий формат сессий - и любой агент дочитывает чужую историю и генерит дальше.</p>
 </section>
 
 <!-- ═══ БЛОК 8 - устройства ═══ -->
@@ -567,6 +620,7 @@
     </svg>
   </div>
   <p class="svg-cap">Запустил с компа → по дороге смотришь с телефона → вечером продолжил за столом. Устройство меняешь, сессия одна.</p>
+  <p style="text-align:center;margin-top:16px;color:var(--dim);font-size:22px;">* VNC внутри туннеля до дома - пока что самое простое решение</p>
 </section>
 
 <!-- ═══ БЛОК 8 - люди + честная ремарка ═══ -->
@@ -576,12 +630,14 @@
   <div class="svg-wrap">
     <svg viewBox="0 0 1000 360" xmlns="http://www.w3.org/2000/svg" style="width:760px;">
       <defs><marker id="ah2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#a855f7"/></marker></defs>
-      <g fill="#a855f7"><circle cx="90" cy="60" r="26"/><path d="M40,140 A50,50 0 0 1 140,140 Z"/></g>
-      <g fill="#a855f7"><circle cx="90" cy="190" r="26"/><path d="M40,270 A50,50 0 0 1 140,270 Z"/></g>
-      <g fill="#a855f7"><circle cx="220" cy="125" r="26"/><path d="M170,205 A50,50 0 0 1 270,205 Z"/></g>
-      <path d="M 150,90 L 430,160" stroke="#9333ea" stroke-width="3" fill="none" marker-end="url(#ah2)"/>
-      <path d="M 280,165 L 430,178" stroke="#9333ea" stroke-width="3" fill="none" marker-end="url(#ah2)"/>
-      <path d="M 150,250 L 430,196" stroke="#9333ea" stroke-width="3" fill="none" marker-end="url(#ah2)"/>
+      <!-- люди: иконки-юзеры в ровную колонку -->
+      <g fill="#a855f7" transform="translate(57,22) scale(3.2)"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></g>
+      <g fill="#a855f7" transform="translate(57,142) scale(3.2)"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></g>
+      <g fill="#a855f7" transform="translate(57,262) scale(3.2)"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></g>
+      <!-- стрелки люди → сессия -->
+      <path d="M 128,60 L 432,152" stroke="#9333ea" stroke-width="3" fill="none" marker-end="url(#ah2)"/>
+      <path d="M 128,180 L 432,180" stroke="#9333ea" stroke-width="3" fill="none" marker-end="url(#ah2)"/>
+      <path d="M 128,300 L 432,208" stroke="#9333ea" stroke-width="3" fill="none" marker-end="url(#ah2)"/>
       <rect x="440" y="120" width="250" height="120" rx="16" fill="#9333ea"/>
       <text x="565" y="170" text-anchor="middle" fill="#fff" font-size="30" font-weight="800" font-family="system-ui">одна сессия</text>
       <text x="565" y="208" text-anchor="middle" fill="rgba(255,255,255,.85)" font-size="24" font-family="system-ui">общее состояние</text>
@@ -590,45 +646,41 @@
       <text x="875" y="188" text-anchor="middle" fill="#a855f7" font-size="28" font-weight="700" font-family="system-ui">агент</text>
     </svg>
   </div>
-  <p class="svg-cap">Как Google Docs, только для агента: оба видят один цикл, оба могут вмешаться.</p>
-  <div class="caveat" style="margin-top:24px;">
-    <b>Честно:</b> пока лучше VNC внутри туннеля до дома не выходит - это костыль, а не свойство harness.
-    Чтобы заработало: общее состояние на N подключений | права на участника, а не на машину | protocol-first с первого дня.
-  </div>
+  <p class="svg-cap">Как Google Docs, только для агента: каждый видит один цикл, каждый может вмешаться.</p>
 </section>
 
-<!-- ═══ БЛОК 8 - цитата ═══ -->
+<!-- ═══ БЛОК 8 - рой агентов ═══ -->
 <section data-background-color="#0e0e12">
   <div class="block-tag">Блок 8 | Футурология</div>
-  <div class="quote-big">Сегодня сессия живёт в <span class="q">двух окнах на одной машине</span>. Хочется - на любом устройстве и сразу для нескольких людей.</div>
-  <div class="quote-sub">А железо под рукой - просто стекло, через которое в неё смотришь.</div>
+  <h2 class="accent-line">Рой агентов из коробки</h2>
+  <div class="hl" style="text-align:left;font-size:30px;">Агент сам решает: хватит одной синхронной сессии - или поднять рой и раскидать задачу по параллельным агентам.</div>
+  <div class="feature-grid" style="margin-top:26px;">
+    <div class="card"><div class="ctitle">Простая задача</div><div class="cdesc">одна сессия, один контекст - синхронно, как сейчас. Лишних агентов не плодим.</div></div>
+    <div class="card"><div class="ctitle">Большая задача</div><div class="cdesc">harness сам форкается в рой: несколько агентов параллельно, у каждого своё окно, потом сводят результат.</div></div>
+  </div>
+  <p class="svg-cap" style="margin-top:26px;">Не ты заранее выбираешь число агентов - harness решает это на лету под задачу.</p>
 </section>
 
 <!-- ═══ БЛОК 9 - вопросы + ссылки ═══ -->
 <section data-background-color="#0e0e12">
-  <div class="block-tag" style="justify-content:center;">Блок 9 | Вопросы</div>
-  <h2 class="center-h2" style="margin-bottom:30px;">Вопросы</h2>
-  <div style="display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-bottom:46px;">
-    <span class="badge">чем harness ≠ чат-бот</span>
-    <span class="badge">локальные модели через Ollama</span>
-    <span class="badge">безопасность shell</span>
-    <span class="badge">тянет ли слабое железо</span>
-    <span class="badge">не проще ли своё</span>
-  </div>
+  <h2 style="text-align:center;margin-bottom:60px;">Спасибо! Вопросы?</h2>
   <div class="qr-row">
     <div class="qr-item">
       <div class="qr-frame"><img src="assets/qr-github.png" alt="QR GitHub"></div>
       <div class="qr-lbl">Coddy Agent</div>
-      <div class="qr-link">github.com/coddy-project/coddy-agent</div>
+      <a href="https://github.com/coddy-project/coddy-agent"><div class="qr-link">github.com/coddy-project/coddy-agent</div></a>
     </div>
     <div class="qr-divider"></div>
     <div class="qr-item">
       <div class="qr-frame"><img src="assets/qr-telegram.png" alt="QR Telegram"></div>
-      <div class="qr-lbl">Pavel Zloi</div>
-      <div class="qr-link">t.me/evilfreelancer</div>
+      <div class="qr-lbl">Telegram · Pavel Zloi</div>
+      <a href="https://t.me/evilfreelancer"><div class="qr-link">t.me/evilfreelancer</div></a>
     </div>
   </div>
-  <p style="margin-top:40px;text-align:center;font-size:32px;color:var(--text);">Спасибо!</p>
+  <div style="margin-top:56px;text-align:center;">
+    <div style="font-size:32px;color:var(--text);">⭐&nbsp; Звёзды и PR приветствуются</div>
+    <div style="font-size:22px;color:var(--dim);margin-top:12px;">Подписывайтесь на телегу — там разборы по harness</div>
+  </div>
 </section>
 
 </div><!-- /slides -->
