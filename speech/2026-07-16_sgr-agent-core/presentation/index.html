@@ -132,23 +132,27 @@
   .panel .step{color:var(--accent);font-family:"SF Mono",Menlo,Consolas,monospace}
 
   footer{position:fixed;bottom:18px;left:8vw;right:8vw;display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:14px;letter-spacing:.02em}
-  .bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .3s ease;z-index:10}
+  .bar{position:fixed;bottom:0;left:0;height:4px;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .3s ease;z-index:30}
+  .bartrack{position:fixed;bottom:0;left:0;right:0;height:4px;background:var(--line);z-index:29}
   .hint{opacity:.55}
   code{font-family:"SF Mono",Menlo,Consolas,monospace;background:var(--bg2);border:1px solid var(--line);border-radius:6px;padding:.08em .4em;font-size:.9em;color:var(--accent)}
 
   /* navigation controls */
-  .controls{position:fixed;bottom:14px;right:20px;display:flex;align-items:center;gap:10px;z-index:20}
-  .controls .pageno{font-family:"SF Mono",Menlo,Consolas,monospace;color:var(--muted);font-size:14px;letter-spacing:.02em}
-  .controls .pageno b{color:var(--accent);font-weight:700}
+  .pageno{position:fixed;left:14px;bottom:12px;z-index:20;font-family:"SF Mono",Menlo,Consolas,monospace;color:var(--muted);font-size:13px;letter-spacing:.03em}
+  .pageno b{color:var(--accent);font-weight:700}
+  .controls{position:fixed;right:16px;bottom:12px;display:flex;align-items:center;gap:8px;z-index:20}
   .navbtn{
-    width:34px;height:34px;border-radius:50%;
-    border:1px solid var(--line);background:var(--card);color:var(--accent);
-    display:flex;align-items:center;justify-content:center;cursor:pointer;
-    font-size:16px;line-height:1;transition:all .15s ease;user-select:none;padding:0;
+    width:0;height:0;background:none;border:none;cursor:pointer;padding:14px;position:relative;
+    opacity:.75;transition:opacity .15s ease;
   }
-  .navbtn:hover{border-color:var(--accent);background:var(--bg2)}
-  .navbtn:disabled{opacity:.3;cursor:default;border-color:var(--line);background:var(--card)}
-  .navbtn.help{font-size:14px;font-weight:700}
+  .navbtn::before{
+    content:"";position:absolute;top:50%;left:50%;width:11px;height:11px;
+    border-right:2px solid var(--accent2);border-bottom:2px solid var(--accent2);
+  }
+  .navbtn#btnPrev::before{transform:translate(-30%,-50%) rotate(135deg)}
+  .navbtn#btnNext::before{transform:translate(-70%,-50%) rotate(-45deg)}
+  .navbtn:hover{opacity:1}
+  .navbtn:disabled{opacity:.2;cursor:default}
 
   /* overview grid */
   .overview{position:fixed;inset:0;background:rgba(9,13,22,.96);z-index:40;display:none;padding:5vh 5vw;overflow-y:auto}
@@ -186,6 +190,7 @@
 </style>
 </head>
 <body>
+<div class="bartrack"></div>
 <div class="bar" id="bar"></div>
 <div id="deck">
 
@@ -460,17 +465,11 @@ sgracp -c config.yaml     <span class="c"># агент по протоколу A
 
 </div>
 
-<footer>
-  <span class="hint">SGR Agent Core &nbsp;·&nbsp; ? помощь · g переход · o обзор · f фулскрин</span>
-  <span></span>
-</footer>
+<div class="pageno"><b id="cur">1</b> / <span id="tot">16</span></div>
 
 <div class="controls">
-  <span class="pageno"><b id="cur">1</b> / <span id="tot">16</span></span>
-  <button class="navbtn help" id="btnHelp" title="Помощь (?)" aria-label="Помощь">?</button>
-  <button class="navbtn" id="btnOv" title="Обзор слайдов (o)" aria-label="Обзор">&#9633;</button>
-  <button class="navbtn" id="btnPrev" title="Назад (стрелка влево)" aria-label="Назад">&#8249;</button>
-  <button class="navbtn" id="btnNext" title="Вперёд (стрелка вправо)" aria-label="Вперёд">&#8250;</button>
+  <button class="navbtn" id="btnPrev" title="Назад (стрелка влево)" aria-label="Назад"></button>
+  <button class="navbtn" id="btnNext" title="Вперёд (стрелка вправо)" aria-label="Вперёд"></button>
 </div>
 
 <div class="overview" id="overview">
@@ -553,8 +552,6 @@ sgracp -c config.yaml     <span class="c"># агент по протоколу A
 
   btnPrev.addEventListener('click',e=>{e.stopPropagation();prev()});
   btnNext.addEventListener('click',e=>{e.stopPropagation();next()});
-  document.getElementById('btnOv').addEventListener('click',e=>{e.stopPropagation();toggleOverview()});
-  document.getElementById('btnHelp').addEventListener('click',e=>{e.stopPropagation();toggleHelp()});
 
   jumpInput.addEventListener('keydown',e=>{
     e.stopPropagation();
