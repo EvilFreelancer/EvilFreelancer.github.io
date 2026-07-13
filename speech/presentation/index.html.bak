@@ -240,7 +240,7 @@
           <div class="qr-frame"><img src="assets/qr-telegram.png" alt="Telegram QR"></div>
           <div>
             <a href="https://t.me/evilfreelancer"><div class="clink">t.me/evilfreelancer</div></a>
-            <div class="clbl">канал Pavel Zloi - наведите камеру</div>
+            <div class="clbl">канал Pavel Zloi — наведите камеру</div>
           </div>
         </div>
       </div>
@@ -256,68 +256,68 @@
   <div class="two-col">
     <ul class="alist sm">
       <li>Два сценария: общий агент или у каждого свой</li>
-      <li>Главный инструмент - общие правила в git</li>
+      <li>Главный инструмент — общие правила в git</li>
       <li>Тесты как общий язык приёмки</li>
       <li>Изоляция работы: git worktrees</li>
     </ul>
     <ul class="alist sm">
-      <li>Узкое место - верификация</li>
+      <li>Узкое место — верификация</li>
       <li>Чем агент пользуется: Tool, MCP, CLI, Skills</li>
       <li>Сабагенты и оркестрация встроенными средствами</li>
-      <li>Роль человека - тимлид над агентами</li>
+      <li>Роль человека — тимлид над агентами</li>
     </ul>
   </div>
 </section>
 
-<!-- ═══ Спойлер - главная мысль ═══ -->
+<!-- ═══ Спойлер — главная мысль ═══ -->
 <section data-background-color="#0f1420">
   <div class="divider" style="gap:44px;">
     <div style="font-family:'JetBrains Mono','Courier New',monospace;font-size:28px;letter-spacing:.24em;text-transform:uppercase;color:var(--accent2);">Спойлер</div>
     <div style="font-size:76px;font-weight:800;letter-spacing:-0.02em;line-height:1.14;max-width:1560px;">
-      Узкое место - уже не в том, чтобы агент <span style="color:var(--dim);font-weight:600;">быстро писал код.</span><br/>
+      Узкое место — уже не в том, чтобы агент <span style="color:var(--dim);font-weight:600;">быстро писал код.</span><br/>
       А в том, чтобы вся команда работала <span style="color:var(--accent2);">по единым правилам.</span>
     </div>
   </div>
 </section>
 
-<!-- ═══ БЛОК 1 - divider ═══ -->
+<!-- ═══ БЛОК 1 — divider ═══ -->
 <section data-background-color="#0f1420">
   <div class="divider">
     <div class="block-tag" style="justify-content:center;">Блок 1 | Развилка</div>
     <h1>Два сценария</h1>
     <div style="width:140px;height:6px;background:var(--accent);border-radius:3px;"></div>
-    <div class="dsub">Команда сначала решает не "какой агент лучше", а "один на всех или у каждого свой". От этого зависит почти всё остальное.</div>
+    <div class="dsub">Команда сначала решает не «какой агент лучше», а «один на всех или у каждого свой». От этого зависит почти всё остальное.</div>
   </div>
 </section>
 
-<!-- ═══ БЛОК 1 - две модели ═══ -->
+<!-- ═══ БЛОК 1 — две модели ═══ -->
 <section data-background-color="#0f1420">
   <div class="block-tag">Блок 1 | Развилка</div>
   <h2 class="accent-line">Модель A и Модель B</h2>
   <div class="feature-grid">
     <div class="card a">
       <div class="ctitle">A · У каждого свой</div>
-      <div class="cdesc">Кто-то в Cursor, кто-то в Claude Code, кто-то в Codex. Больше свободы и скорости - но правила проекта живут в нескольких форматах, и их надо держать в согласии.</div>
+      <div class="cdesc">Кто-то в Cursor, кто-то в Claude Code, кто-то в Codex. Больше свободы и скорости — но правила проекта живут в нескольких форматах, и их надо держать в согласии.</div>
     </div>
     <div class="card b">
       <div class="ctitle">B · Один общий</div>
-      <div class="cdesc">Вся команда на одном агенте. Один формат правил, один контекст, поведение одинаковое у всех. Минус - все завязаны на один инструмент.</div>
+      <div class="cdesc">Вся команда на одном агенте. Один формат правил, один контекст, поведение одинаковое у всех. Минус — все завязаны на один инструмент.</div>
     </div>
   </div>
-  <div class="hl" style="margin-top:30px;font-size:30px;">Разница принципиальная - и почти вся она касается правил.</div>
+  <div class="hl" style="margin-top:30px;font-size:30px;">Разница принципиальная — и почти вся она касается правил.</div>
 </section>
 
-<!-- ═══ БЛОК 1 - гибрид ═══ -->
+<!-- ═══ БЛОК 1 — гибрид ═══ -->
 <section data-background-color="#0f1420">
   <div class="block-tag">Блок 1 | Развилка</div>
-  <div class="statement">На практике чаще всего - <span class="em">гибрид.</span></div>
+  <div class="statement">На практике чаще всего — <span class="em">гибрид.</span></div>
   <p style="margin-top:36px;font-size:32px;color:var(--muted);line-height:1.5;">
-    Большая часть команды работает на одном общем агенте, меньшинство - на своём инструменте.
-    Значит, правила под общего агента ведём как основные - но о синхронизации с остальными забывать нельзя.
+    Большая часть команды работает на одном общем агенте, меньшинство — на своём инструменте.
+    Значит, правила под общего агента ведём как основные — но о синхронизации с остальными забывать нельзя.
   </p>
 </section>
 
-<!-- ═══ БЛОК 2 - divider ═══ -->
+<!-- ═══ БЛОК 2 — divider ═══ -->
 <section data-background-color="#0f1420">
   <div class="divider">
     <div class="block-tag" style="justify-content:center;">Блок 2 | Правила</div>
@@ -327,40 +327,40 @@
   </div>
 </section>
 
-<!-- ═══ БЛОК 2 - уровни правил ═══ -->
+<!-- ═══ БЛОК 2 — уровни правил ═══ -->
 <section data-background-color="#0f1420">
   <div class="block-tag">Блок 2 | Правила</div>
   <h2 class="accent-line">Уровни правил</h2>
   <div class="anat" style="grid-template-columns:repeat(3,1fr);">
-    <div class="ap"><b>AGENTS.md (+ CLAUDE.md)</b><span>верхнеуровневые договорённости для всех агентов сразу. CLAUDE.md - симлинк на AGENTS.md, источник истины один</span></div>
+    <div class="ap"><b>AGENTS.md (+ CLAUDE.md)</b><span>верхнеуровневые договорённости для всех агентов сразу. CLAUDE.md — симлинк на AGENTS.md, источник истины один</span></div>
     <div class="ap"><b>Project rules</b><span>набор небольших тематических правил: тесты, стиль, база. Привязаны к путям и типам файлов</span></div>
     <div class="ap"><b>DESIGN.md</b><span>проектный контракт: устройство системы, компоненты, поведение, архитектурные решения</span></div>
   </div>
   <div class="hl" style="margin-top:30px;font-size:28px;text-align:left;">
-    Принцип: если соглашение важно - оно <strong style="color:var(--accent2);">живёт в репозитории</strong>, а не передаётся новичку на словах.
+    Принцип: если соглашение важно — оно <strong style="color:var(--accent2);">живёт в репозитории</strong>, а не передаётся новичку на словах.
   </div>
 </section>
 
-<!-- ═══ БЛОК 2 - расхождение моделей ═══ -->
+<!-- ═══ БЛОК 2 — расхождение моделей ═══ -->
 <section data-background-color="#0f1420">
   <div class="block-tag">Блок 2 | Правила</div>
   <h2 class="accent-line">Где модели расходятся сильнее всего</h2>
   <div class="feature-grid">
     <div class="card b">
       <div class="ctitle">B · Один общий</div>
-      <div class="cdesc">Формат правил один. Написал правило, положил в папку - оно сразу действует на всю команду. Дёшево и просто.</div>
+      <div class="cdesc">Формат правил один. Написал правило, положил в папку — оно сразу действует на всю команду. Дёшево и просто.</div>
     </div>
     <div class="card a">
       <div class="ctitle">A · У каждого свой</div>
-      <div class="cdesc"><code>.cursor/rules/*.mdc</code>, <code>.claude/rules/*.md</code>, у других - своё. Файлы разные и друг о друге не знают. Через неделю агенты работают по разным версиям.</div>
+      <div class="cdesc"><code>.cursor/rules/*.mdc</code>, <code>.claude/rules/*.md</code>, у других — своё. Файлы разные и друг о друге не знают. Через неделю агенты работают по разным версиям.</div>
     </div>
   </div>
 </section>
 
-<!-- ═══ БЛОК 2 - Rules Sync ═══ -->
+<!-- ═══ БЛОК 2 — Rules Sync ═══ -->
 <section data-background-color="#0f1420">
   <div class="block-tag">Блок 2 | Правила</div>
-  <h2 class="center-h2">Решение - осознанная синхронизация</h2>
+  <h2 class="center-h2">Решение — осознанная синхронизация</h2>
   <div class="svg-wrap">
     <svg viewBox="0 0 1080 360" xmlns="http://www.w3.org/2000/svg" style="width:960px;">
       <defs>
@@ -389,7 +389,7 @@
   <p class="svg-cap">CLAUDE.md держим симлинком на AGENTS.md, источник истины один.<br/>Правило пишется один раз, при изменении переносится в остальные форматы, всё коммитится вместе.<br/><strong style="color:var(--accent2);">Rules Sync</strong>, обязательный пункт чек-листа. Синхронизация не выполнена, задача не закрыта.</p>
 </section>
 
-<!-- ═══ БЛОК 2 - Spec-Driven ═══ -->
+<!-- ═══ БЛОК 2 — Spec-Driven ═══ -->
 <section data-background-color="#0f1420">
   <div class="block-tag">Блок 2 | Правила</div>
   <h2 class="accent-line">Строже: Spec-Driven Development</h2>
@@ -399,39 +399,39 @@
     <div class="tl"><div class="dot">3</div><div class="tlt">tasks</div><div class="tld">разбивка на задачи с путями файлов и зависимостями</div></div>
   </div>
   <p style="margin-top:44px;font-size:28px;color:var(--muted);line-height:1.5;">
-    GitHub <strong style="color:var(--accent2);">spec-kit</strong>: спека в Markdown - источник истины, понятный десяткам разных агентов.
-    Контекст-файл по умолчанию - тот же AGENTS.md. Спека становится общим языком для всей команды.
+    GitHub <strong style="color:var(--accent2);">spec-kit</strong>: спека в Markdown — источник истины, понятный десяткам разных агентов.
+    Контекст-файл по умолчанию — тот же AGENTS.md. Спека становится общим языком для всей команды.
   </p>
 </section>
 
-<!-- ═══ БЛОК 3 - divider ═══ -->
+<!-- ═══ БЛОК 3 — divider ═══ -->
 <section data-background-color="#0f1420">
   <div class="divider">
     <div class="block-tag" style="justify-content:center;">Блок 3 | Приёмка</div>
     <h1>Тесты как общий язык</h1>
     <div style="width:140px;height:6px;background:var(--accent);border-radius:3px;"></div>
-    <div class="dsub">"Готово" - это когда тесты зелёные, а не когда "на глаз нормально".</div>
+    <div class="dsub">«Готово» — это когда тесты зелёные, а не когда «на глаз нормально».</div>
   </div>
 </section>
 
-<!-- ═══ БЛОК 3 - BDD ═══ -->
+<!-- ═══ БЛОК 3 — BDD ═══ -->
 <section data-background-color="#0f1420">
   <div class="block-tag">Блок 3 | Приёмка</div>
-  <h2 class="accent-line">BDD - объективная граница "готово"</h2>
+  <h2 class="accent-line">BDD — объективная граница «готово»</h2>
   <div class="grid-3">
-    <div class="card"><div class="ctitle">Given</div><div class="cdesc">исходное состояние - что есть на старте</div></div>
-    <div class="card"><div class="ctitle">When</div><div class="cdesc">действие - что выполняется</div></div>
-    <div class="card"><div class="ctitle">Then</div><div class="cdesc">ожидаемый результат - что должно получиться</div></div>
+    <div class="card"><div class="ctitle">Given</div><div class="cdesc">исходное состояние — что есть на старте</div></div>
+    <div class="card"><div class="ctitle">When</div><div class="cdesc">действие — что выполняется</div></div>
+    <div class="card"><div class="ctitle">Then</div><div class="cdesc">ожидаемый результат — что должно получиться</div></div>
   </div>
   <p style="margin-top:34px;font-size:29px;color:var(--muted);line-height:1.5;">
-    Сценарий - одновременно ТЗ и проверка. Один и тот же сценарий человек и любой агент читают одинаково: Cursor, Claude Code, Codex - разночтений нет.
+    Сценарий — одновременно ТЗ и проверка. Один и тот же сценарий человек и любой агент читают одинаково: Cursor, Claude Code, Codex — разночтений нет.
   </p>
 </section>
 
-<!-- ═══ БЛОК 3 - TDD цикл ═══ -->
+<!-- ═══ БЛОК 3 — TDD цикл ═══ -->
 <section data-background-color="#0f1420">
   <div class="block-tag">Блок 3 | Приёмка</div>
-  <h2 class="center-h2">Поверх BDD - петля TDD</h2>
+  <h2 class="center-h2">Поверх BDD — петля TDD</h2>
   <div class="svg-wrap">
     <svg viewBox="0 0 980 560" xmlns="http://www.w3.org/2000/svg" style="width:820px;">
       <defs><marker id="ah3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#5cc8ff"/></marker></defs>
@@ -453,37 +453,37 @@
   </div>
 </section>
 
-<!-- ═══ БЛОК 3 - порядок в правилах ═══ -->
+<!-- ═══ БЛОК 3 — порядок в правилах ═══ -->
 <section data-background-color="#0f1420">
   <div class="block-tag">Блок 3 | Приёмка</div>
   <h2 class="accent-line">Порядок фиксируем в правилах</h2>
   <ul class="alist sm">
     <li>Новая фича или фикс начинаются с падающего теста, а не с кода</li>
-    <li>Минимальная реализация - ровно чтобы тест прошёл</li>
+    <li>Минимальная реализация — ровно чтобы тест прошёл</li>
     <li>Полный прогон тестов командой вроде <code>make test</code></li>
-    <li>Затронут API - обновляем контракт и документацию</li>
+    <li>Затронут API — обновляем контракт и документацию</li>
     <li>Линтер</li>
     <li>Синхронизация правил (Rules Sync)</li>
   </ul>
   <div class="caveat" style="margin-top:30px;font-size:26px;">
-    <b>Хук на событие.</b> PostToolUse и аналоги запускают линтер и тесты после каждой правки - обратная связь мгновенная, проверка не забывается. "Продолжай, пока тесты не станут зелёными" - готовое условие завершения.
+    <b>Хук на событие.</b> PostToolUse и аналоги запускают линтер и тесты после каждой правки — обратная связь мгновенная, проверка не забывается. «Продолжай, пока тесты не станут зелёными» — готовое условие завершения.
   </div>
 </section>
 
-<!-- ═══ БЛОК 4 - divider ═══ -->
+<!-- ═══ БЛОК 4 — divider ═══ -->
 <section data-background-color="#0f1420">
   <div class="divider">
     <div class="block-tag" style="justify-content:center;">Блок 4 | Изоляция</div>
     <h1>git worktrees</h1>
     <div style="width:140px;height:6px;background:var(--accent);border-radius:3px;"></div>
-    <div class="dsub">Дай каждому свой рабочий каталог - чтобы правки физически не накладывались.</div>
+    <div class="dsub">Дай каждому свой рабочий каталог — чтобы правки физически не накладывались.</div>
   </div>
 </section>
 
-<!-- ═══ БЛОК 4 - схема worktree ═══ -->
+<!-- ═══ БЛОК 4 — схема worktree ═══ -->
 <section data-background-color="#0f1420">
   <div class="block-tag">Блок 4 | Изоляция</div>
-  <h2 class="center-h2">Одна история git - разные папки</h2>
+  <h2 class="center-h2">Одна история git — разные папки</h2>
   <div class="svg-wrap">
     <svg viewBox="0 0 1000 400" xmlns="http://www.w3.org/2000/svg" style="width:900px;">
       <defs><marker id="ah4" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#5a6b8c"/></marker></defs>
@@ -504,45 +504,45 @@
       <text x="500" y="352" text-anchor="middle" fill="rgba(255,255,255,.85)" font-size="21" font-family="system-ui">история и объекты</text>
     </svg>
   </div>
-  <p class="svg-cap"><code>git worktree add ../feature-x feature-x</code> - файлы на диске не пересекаются, сведение через ветки и PR. Лучше веток в одной папке: параллельно, а не по очереди.</p>
+  <p class="svg-cap"><code>git worktree add ../feature-x feature-x</code> — файлы на диске не пересекаются, сведение через ветки и PR. Лучше веток в одной папке: параллельно, а не по очереди.</p>
 </section>
 
-<!-- ═══ БЛОК 4 - грабли ═══ -->
+<!-- ═══ БЛОК 4 — грабли ═══ -->
 <section data-background-color="#0f1420">
   <div class="block-tag">Блок 4 | Изоляция</div>
   <h2 class="accent-line">Подводный камень</h2>
   <div class="caveat" style="font-size:32px;">
-    <b>Worktree разделяют историю git, но не зависимости.</b> <code>node_modules</code> и виртуальное окружение Python в каждой папке свои - их придётся ставить заново. Иначе агент в новой папке запустит тесты и не найдёт пакетов.
+    <b>Worktree разделяют историю git, но не зависимости.</b> <code>node_modules</code> и виртуальное окружение Python в каждой папке свои — их придётся ставить заново. Иначе агент в новой папке запустит тесты и не найдёт пакетов.
   </div>
   <p style="margin-top:34px;font-size:28px;color:var(--muted);line-height:1.5;">
     Применимо и в одиночку: два-три worktree под себя, в каждом свой агент над своей задачей.
-    Инструменты вроде Conductor, Vibe Kanban, Claude Squad, фоновых агентов Cursor - под капотом те же worktree.
+    Инструменты вроде Conductor, Vibe Kanban, Claude Squad, фоновых агентов Cursor — под капотом те же worktree.
   </p>
 </section>
 
-<!-- ═══ БЛОК 5 - divider/цитата ═══ -->
+<!-- ═══ БЛОК 5 — divider/цитата ═══ -->
 <section data-background-color="#0f1420">
   <div class="block-tag" style="justify-content:center;">Блок 5 | Узкое место</div>
   <div class="quote-big" style="margin-top:40px;">Verification is the bottleneck, <span class="q">not generation.</span></div>
   <div class="quote-sub">Узкое место сместилось с написания кода на его проверку и сведение.</div>
 </section>
 
-<!-- ═══ БЛОК 5 - цифры ═══ -->
+<!-- ═══ БЛОК 5 — цифры ═══ -->
 <section data-background-color="#0f1420">
   <div class="block-tag">Блок 5 | Узкое место</div>
   <h2 class="accent-line">Что происходит на масштабе</h2>
   <div class="stat-grid">
     <div class="stat"><div class="num">&gt;</div><div class="lbl">агенты подают PR быстрее, чем люди успевают их смотреть</div></div>
-    <div class="stat"><div class="num">10k+</div><div class="lbl">прогонов AI-ревью - рутина уходит с людей, очередь разгружается</div></div>
+    <div class="stat"><div class="num">10k+</div><div class="lbl">прогонов AI-ревью — рутина уходит с людей, очередь разгружается</div></div>
     <div class="stat"><div class="num">мин.</div><div class="lbl">медианное время проверки падает до минут</div></div>
   </div>
   <p style="margin-top:34px;font-size:29px;color:var(--muted);line-height:1.5;">
-    Даже так финальное суждение и интеграция остаются за человеком - машина только разбирает завал.
+    Даже так финальное суждение и интеграция остаются за человеком — машина только разбирает завал.
     Процесс строим вокруг приёмки и сведения, а не вокруг скорости набора.
   </p>
 </section>
 
-<!-- ═══ БЛОК 6 - divider ═══ -->
+<!-- ═══ БЛОК 6 — divider ═══ -->
 <section data-background-color="#0f1420">
   <div class="divider">
     <div class="block-tag" style="justify-content:center;">Блок 6 | Возможности</div>
@@ -552,33 +552,33 @@
   </div>
 </section>
 
-<!-- ═══ БЛОК 6 - 4 механизма ═══ -->
+<!-- ═══ БЛОК 6 — 4 механизма ═══ -->
 <section data-background-color="#0f1420">
   <div class="block-tag">Блок 6 | Возможности</div>
   <h2 class="accent-line">Tool · MCP · CLI · Skills</h2>
   <div class="grid-4">
     <div class="card"><div class="ctitle">Tool</div><div class="cdesc">встроенная процедура: файлы, поиск, запуск команд. Есть по умолчанию</div></div>
-    <div class="card"><div class="ctitle">MCP</div><div class="cdesc">подключаемый сервер к внешней системе: базы, трекеры, облака. Сюда же - доступы и ключи</div></div>
+    <div class="card"><div class="ctitle">MCP</div><div class="cdesc">подключаемый сервер к внешней системе: базы, трекеры, облака. Сюда же — доступы и ключи</div></div>
     <div class="card"><div class="ctitle">CLI</div><div class="cdesc"><code>sed</code>, <code>grep</code>, <code>gh</code>, <code>npm</code>… автоматизация в рантайме проекта</div></div>
-    <div class="card"><div class="ctitle">Skills</div><div class="cdesc">внешняя память: инструкции и скрипты. Проблема встретилась раз - оформлена скилом</div></div>
+    <div class="card"><div class="ctitle">Skills</div><div class="cdesc">внешняя память: инструкции и скрипты. Проблема встретилась раз — оформлена скилом</div></div>
   </div>
   <div class="hl" style="margin-top:30px;font-size:26px;text-align:left;">
-    <strong style="color:var(--accent2);">Правило выбора:</strong> частая базовая задача - Tool · внешняя система и доступы - MCP · автоматизация в рантайме - CLI · "запомни и повторяй" - Skill.
+    <strong style="color:var(--accent2);">Правило выбора:</strong> частая базовая задача — Tool · внешняя система и доступы — MCP · автоматизация в рантайме — CLI · «запомни и повторяй» — Skill.
   </div>
 </section>
 
-<!-- ═══ БЛОК 6 - часть контракта ═══ -->
+<!-- ═══ БЛОК 6 — часть контракта ═══ -->
 <section data-background-color="#0f1420">
   <div class="block-tag">Блок 6 | Возможности</div>
-  <div class="statement">Расширения агента - тоже часть <span class="em">контракта команды.</span></div>
+  <div class="statement">Расширения агента — тоже часть <span class="em">контракта команды.</span></div>
   <p style="margin-top:36px;font-size:30px;color:var(--muted);line-height:1.5;">
-    У одного подключён MCP к трекеру, у другого нет - их агенты ведут себя по-разному на одной задаче.
+    У одного подключён MCP к трекеру, у другого нет — их агенты ведут себя по-разному на одной задаче.
     Список MCP-серверов, набор скилов и соглашения по CLI хранятся в репозитории и описаны в тех же правилах.
-    Формат Skills и AGENTS.md общий - переносится легко.
+    Формат Skills и AGENTS.md общий — переносится легко.
   </p>
 </section>
 
-<!-- ═══ БЛОК 7 - divider ═══ -->
+<!-- ═══ БЛОК 7 — divider ═══ -->
 <section data-background-color="#0f1420">
   <div class="divider">
     <div class="block-tag" style="justify-content:center;">Блок 7 | Оркестрация</div>
@@ -588,7 +588,7 @@
   </div>
 </section>
 
-<!-- ═══ БЛОК 7 - что такое сабагент ═══ -->
+<!-- ═══ БЛОК 7 — что такое сабагент ═══ -->
 <section data-background-color="#0f1420">
   <div class="block-tag">Блок 7 | Оркестрация</div>
   <h2 class="center-h2">Ведущий агент и сабагенты</h2>
@@ -611,10 +611,10 @@
       <text x="800" y="324" text-anchor="middle" fill="#95a2bd" font-size="20" font-family="system-ui">свежий контекст</text>
     </svg>
   </div>
-  <p class="svg-cap">Отдельный исполнитель под подзадачу: своя память, чёткая цель, границы. О других не знает - изоляция помогает, а не мешает.</p>
+  <p class="svg-cap">Отдельный исполнитель под подзадачу: своя память, чёткая цель, границы. О других не знает — изоляция помогает, а не мешает.</p>
 </section>
 
-<!-- ═══ БЛОК 7 - схемы ═══ -->
+<!-- ═══ БЛОК 7 — схемы ═══ -->
 <section data-background-color="#0f1420">
   <div class="block-tag">Блок 7 | Оркестрация</div>
   <h2 class="accent-line">Три готовые схемы</h2>
@@ -626,44 +626,44 @@
   <div class="hl" style="margin-top:30px;font-size:28px;">На параллель отдаём то, что почти не трогает одни и те же файлы.</div>
 </section>
 
-<!-- ═══ БЛОК 7 - метрики и когда вредит ═══ -->
+<!-- ═══ БЛОК 7 — метрики и когда вредит ═══ -->
 <section data-background-color="#0f1420">
   <div class="block-tag">Блок 7 | Оркестрация</div>
-  <h2 class="accent-line">Сколько агентов - и когда не надо</h2>
+  <h2 class="accent-line">Сколько агентов — и когда не надо</h2>
   <div class="two-col">
     <div>
-      <div class="stat" style="margin-bottom:20px;"><div class="num">3–5</div><div class="lbl">рабочая вилка сабагентов. Дальше выигрыш не растёт, а хаос и расходы - да</div></div>
+      <div class="stat" style="margin-bottom:20px;"><div class="num">3–5</div><div class="lbl">рабочая вилка сабагентов. Дальше выигрыш не растёт, а хаос и расходы — да</div></div>
       <ul class="alist sm">
-        <li>Простой вопрос - один агент</li>
-        <li>Сравнить пару вариантов - 2–4</li>
-        <li>Широкое исследование - больше</li>
+        <li>Простой вопрос — один агент</li>
+        <li>Сравнить пару вариантов — 2–4</li>
+        <li>Широкое исследование — больше</li>
       </ul>
     </div>
     <div class="caveat" style="font-size:26px;">
-      <b>Когда дробление вредит.</b> Всем нужен общий контекст → дублируют работу. Много зависимостей между подзадачами → одно ждёт другого. Код связный по природе - для тесно связанного лучше один сильный агент с парой сабагентов.
+      <b>Когда дробление вредит.</b> Всем нужен общий контекст → дублируют работу. Много зависимостей между подзадачами → одно ждёт другого. Код связный по природе — для тесно связанного лучше один сильный агент с парой сабагентов.
     </div>
   </div>
 </section>
 
-<!-- ═══ БЛОК 8 - divider ═══ -->
+<!-- ═══ БЛОК 8 — divider ═══ -->
 <section data-background-color="#0f1420">
   <div class="divider">
     <div class="block-tag" style="justify-content:center;">Блок 8 | Человек</div>
     <h1>Тимлид над агентами</h1>
     <div style="width:140px;height:6px;background:var(--accent);border-radius:3px;"></div>
-    <div class="dsub">Чем больше агентов вокруг, тем важнее человек. Меняется характер работы: из исполнителя - в постановщика.</div>
+    <div class="dsub">Чем больше агентов вокруг, тем важнее человек. Меняется характер работы: из исполнителя — в постановщика.</div>
   </div>
 </section>
 
-<!-- ═══ БЛОК 8 - четыре правила ═══ -->
+<!-- ═══ БЛОК 8 — четыре правила ═══ -->
 <section data-background-color="#0f1420">
   <div class="block-tag">Блок 8 | Человек</div>
   <h2 class="accent-line">Четыре правила</h2>
   <div class="feature-grid">
-    <div class="card"><div class="ctitle">Суждение не делегируется</div><div class="cdesc">архитектура, ключевые решения, что НЕ строить, финальное ревью - за человеком. Агенты хорошо выполняют, но плохо судят</div></div>
-    <div class="card"><div class="ctitle">Контрольные точки</div><div class="cdesc">после каждого захода - тесты и линтер, только потом следующий шаг. Чекпойнт не даёт ошибке расползтись</div></div>
-    <div class="card"><div class="ctitle">Знания - в репозиторий</div><div class="cdesc">нашли грабли - записали в AGENTS.md или правила. Память команды живёт в git, а не в голове одного</div></div>
-    <div class="card"><div class="ctitle">Сильная спека - рычаг</div><div class="cdesc">чем точнее задача, тем больше выигрыш. Агент усиливает того, кто умеет мыслить</div></div>
+    <div class="card"><div class="ctitle">Суждение не делегируется</div><div class="cdesc">архитектура, ключевые решения, что НЕ строить, финальное ревью — за человеком. Агенты хорошо выполняют, но плохо судят</div></div>
+    <div class="card"><div class="ctitle">Контрольные точки</div><div class="cdesc">после каждого захода — тесты и линтер, только потом следующий шаг. Чекпойнт не даёт ошибке расползтись</div></div>
+    <div class="card"><div class="ctitle">Знания — в репозиторий</div><div class="cdesc">нашли грабли — записали в AGENTS.md или правила. Память команды живёт в git, а не в голове одного</div></div>
+    <div class="card"><div class="ctitle">Сильная спека — рычаг</div><div class="cdesc">чем точнее задача, тем больше выигрыш. Агент усиливает того, кто умеет мыслить</div></div>
   </div>
 </section>
 
@@ -673,11 +673,11 @@
   <h2 class="accent-line">Как выстроить командную работу</h2>
   <ul class="clist">
     <li>Выбрана модель: один общий агент или у каждого свой</li>
-    <li>Правила в git, общее - в AGENTS.md, для модели A настроен Rules Sync</li>
+    <li>Правила в git, общее — в AGENTS.md, для модели A настроен Rules Sync</li>
     <li>Приёмка на BDD-сценариях и зелёных тестах, хук на тесты и линтер после правки</li>
-    <li>Изоляция через git worktrees и ветки, зависимости в каждой папке - заново</li>
-    <li>Расширения согласованы: MCP-серверы, скилы, соглашения по CLI - в репозитории</li>
-    <li>Сабагенты и оркестрация встроенными средствами, оптимум 3–5, на параллель - слабо связанное</li>
+    <li>Изоляция через git worktrees и ветки, зависимости в каждой папке — заново</li>
+    <li>Расширения согласованы: MCP-серверы, скилы, соглашения по CLI — в репозитории</li>
+    <li>Сабагенты и оркестрация встроенными средствами, оптимум 3–5, на параллель — слабо связанное</li>
     <li>Человек ставит задачу, утверждает план, ревьюит, копит знания и держит чекпойнты</li>
   </ul>
 </section>
@@ -687,9 +687,9 @@
   <div class="block-tag">Финал | Выводы</div>
   <h2 class="accent-line">Три вещи, если коротко</h2>
   <div class="grid-3">
-    <div class="card"><div class="ctitle">Развилка</div><div class="cdesc">один общий агент или у каждого свой - от неё зависит, сколько усилий уйдёт на правила</div></div>
+    <div class="card"><div class="ctitle">Развилка</div><div class="cdesc">один общий агент или у каждого свой — от неё зависит, сколько усилий уйдёт на правила</div></div>
     <div class="card"><div class="ctitle">Контракт в git</div><div class="cdesc">всё держится на общем контракте: правила, тесты, согласованные расширения агента</div></div>
-    <div class="card"><div class="ctitle">Проверка &gt; генерации</div><div class="cdesc">узкое место - верификация. Роль человека не уменьшилась, а поднялась до тимлида</div></div>
+    <div class="card"><div class="ctitle">Проверка &gt; генерации</div><div class="cdesc">узкое место — верификация. Роль человека не уменьшилась, а поднялась до тимлида</div></div>
   </div>
 </section>
 

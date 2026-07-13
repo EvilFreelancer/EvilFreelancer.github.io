@@ -135,6 +135,54 @@
   .bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .3s ease;z-index:10}
   .hint{opacity:.55}
   code{font-family:"SF Mono",Menlo,Consolas,monospace;background:var(--bg2);border:1px solid var(--line);border-radius:6px;padding:.08em .4em;font-size:.9em;color:var(--accent)}
+
+  /* navigation controls */
+  .controls{position:fixed;bottom:14px;right:20px;display:flex;align-items:center;gap:10px;z-index:20}
+  .controls .pageno{font-family:"SF Mono",Menlo,Consolas,monospace;color:var(--muted);font-size:14px;letter-spacing:.02em}
+  .controls .pageno b{color:var(--accent);font-weight:700}
+  .navbtn{
+    width:34px;height:34px;border-radius:50%;
+    border:1px solid var(--line);background:var(--card);color:var(--accent);
+    display:flex;align-items:center;justify-content:center;cursor:pointer;
+    font-size:16px;line-height:1;transition:all .15s ease;user-select:none;padding:0;
+  }
+  .navbtn:hover{border-color:var(--accent);background:var(--bg2)}
+  .navbtn:disabled{opacity:.3;cursor:default;border-color:var(--line);background:var(--card)}
+  .navbtn.help{font-size:14px;font-weight:700}
+
+  /* overview grid */
+  .overview{position:fixed;inset:0;background:rgba(9,13,22,.96);z-index:40;display:none;padding:5vh 5vw;overflow-y:auto}
+  .overview.show{display:block}
+  .overview h4{color:var(--muted);font-size:14px;text-transform:uppercase;letter-spacing:.12em;margin-bottom:18px;font-weight:700}
+  .ovgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px}
+  .ovcard{
+    background:var(--card);border:1px solid var(--line);border-radius:10px;
+    padding:14px 15px;cursor:pointer;min-height:96px;transition:all .15s ease;position:relative;
+  }
+  .ovcard:hover{border-color:var(--accent);transform:translateY(-2px)}
+  .ovcard.cur{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent) inset}
+  .ovcard .num{font-family:"SF Mono",Menlo,Consolas,monospace;color:var(--accent2);font-size:12px;font-weight:700}
+  .ovcard .tt{color:var(--fg);font-size:15px;font-weight:650;margin-top:6px;line-height:1.25;letter-spacing:-.01em}
+
+  /* help + jump overlays */
+  .overlay{position:fixed;inset:0;background:rgba(9,13,22,.9);z-index:50;display:none;align-items:center;justify-content:center}
+  .overlay.show{display:flex}
+  .helpbox{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:28px 34px;max-width:440px}
+  .helpbox h3{font-size:22px;font-weight:750;margin-bottom:16px}
+  .helpbox .row{display:flex;justify-content:space-between;gap:24px;padding:7px 0;border-bottom:1px solid var(--line);font-size:16px}
+  .helpbox .row:last-child{border-bottom:0}
+  .helpbox .row .keys{font-family:"SF Mono",Menlo,Consolas,monospace;color:var(--accent)}
+  .helpbox .row .desc{color:var(--muted)}
+  .kbd{display:inline-block;background:var(--bg2);border:1px solid var(--line);border-radius:5px;padding:.1em .45em;font-family:"SF Mono",Menlo,Consolas,monospace;font-size:.85em;color:var(--accent)}
+  .jumpbox{background:var(--card);border:1px solid var(--accent);border-radius:14px;padding:22px 26px;text-align:center}
+  .jumpbox label{display:block;color:var(--muted);font-size:15px;margin-bottom:12px}
+  .jumpbox input{
+    width:120px;background:var(--bg2);border:1px solid var(--line);border-radius:8px;
+    color:var(--fg);font-family:"SF Mono",Menlo,Consolas,monospace;font-size:28px;text-align:center;
+    padding:8px 10px;outline:none;
+  }
+  .jumpbox input:focus{border-color:var(--accent)}
+  .jumpbox .hint2{color:var(--muted);font-size:13px;margin-top:12px}
 </style>
 </head>
 <body>
@@ -413,32 +461,133 @@ sgracp -c config.yaml     <span class="c"># агент по протоколу A
 </div>
 
 <footer>
-  <span class="hint">SGR Agent Core</span>
-  <span><span id="cur">1</span> / <span id="tot">16</span> <span class="hint">- стрелки для навигации</span></span>
+  <span class="hint">SGR Agent Core &nbsp;·&nbsp; ? помощь · g переход · o обзор · f фулскрин</span>
+  <span></span>
 </footer>
+
+<div class="controls">
+  <span class="pageno"><b id="cur">1</b> / <span id="tot">16</span></span>
+  <button class="navbtn help" id="btnHelp" title="Помощь (?)" aria-label="Помощь">?</button>
+  <button class="navbtn" id="btnOv" title="Обзор слайдов (o)" aria-label="Обзор">&#9633;</button>
+  <button class="navbtn" id="btnPrev" title="Назад (стрелка влево)" aria-label="Назад">&#8249;</button>
+  <button class="navbtn" id="btnNext" title="Вперёд (стрелка вправо)" aria-label="Вперёд">&#8250;</button>
+</div>
+
+<div class="overview" id="overview">
+  <h4>Обзор слайдов - клик по слайду или Esc для выхода</h4>
+  <div class="ovgrid" id="ovgrid"></div>
+</div>
+
+<div class="overlay" id="help">
+  <div class="helpbox">
+    <h3>Управление</h3>
+    <div class="row"><span class="keys">&#8592; &#8593; PgUp</span><span class="desc">назад</span></div>
+    <div class="row"><span class="keys">&#8594; &#8595; PgDn Space</span><span class="desc">вперёд</span></div>
+    <div class="row"><span class="keys">g</span><span class="desc">перейти к слайду по номеру</span></div>
+    <div class="row"><span class="keys">o / Esc</span><span class="desc">обзор всех слайдов</span></div>
+    <div class="row"><span class="keys">Home / End</span><span class="desc">первый / последний</span></div>
+    <div class="row"><span class="keys">f</span><span class="desc">полный экран</span></div>
+    <div class="row"><span class="keys">?</span><span class="desc">эта подсказка</span></div>
+  </div>
+</div>
+
+<div class="overlay" id="jump">
+  <div class="jumpbox">
+    <label>Перейти к слайду</label>
+    <input id="jumpInput" type="text" inputmode="numeric" autocomplete="off" placeholder="1-16">
+    <div class="hint2">Enter - перейти · Esc - отмена</div>
+  </div>
+</div>
 
 <script>
   const slides=[...document.querySelectorAll('.slide')];
   let i=0;
   const bar=document.getElementById('bar');
   const cur=document.getElementById('cur');
+  const btnPrev=document.getElementById('btnPrev');
+  const btnNext=document.getElementById('btnNext');
+  const overview=document.getElementById('overview');
+  const ovgrid=document.getElementById('ovgrid');
+  const help=document.getElementById('help');
+  const jump=document.getElementById('jump');
+  const jumpInput=document.getElementById('jumpInput');
   document.getElementById('tot').textContent=slides.length;
-  function show(n){
+
+  // titles for overview, derived from each slide
+  const titles=slides.map(s=>{
+    const h=s.querySelector('h1,h2');
+    return h?h.textContent.trim():'Слайд';
+  });
+
+  function show(n,push){
     i=Math.max(0,Math.min(slides.length-1,n));
     slides.forEach((s,k)=>s.classList.toggle('active',k===i));
     bar.style.width=((i+1)/slides.length*100)+'%';
     cur.textContent=i+1;
+    btnPrev.disabled=(i===0);
+    btnNext.disabled=(i===slides.length-1);
+    document.querySelectorAll('.ovcard').forEach((c,k)=>c.classList.toggle('cur',k===i));
+    if(push!==false){
+      const hash='#/'+(i+1);
+      if(location.hash!==hash) history.replaceState(null,'',hash);
+    }
   }
   function next(){show(i+1)}
   function prev(){show(i-1)}
-  document.addEventListener('keydown',e=>{
-    if(['ArrowRight','ArrowDown','PageDown',' '].includes(e.key)){e.preventDefault();next()}
-    else if(['ArrowLeft','ArrowUp','PageUp'].includes(e.key)){e.preventDefault();prev()}
-    else if(e.key==='Home'){show(0)}
-    else if(e.key==='End'){show(slides.length-1)}
+
+  // build overview grid
+  titles.forEach((t,k)=>{
+    const c=document.createElement('div');
+    c.className='ovcard';
+    c.innerHTML='<div class="num">'+(k+1)+'</div><div class="tt">'+t+'</div>';
+    c.addEventListener('click',()=>{closeAll();show(k)});
+    ovgrid.appendChild(c);
   });
-  document.addEventListener('click',e=>{if(e.clientX>window.innerWidth*0.5)next();else prev()});
-  show(0);
+
+  function toggleOverview(){overview.classList.toggle('show');document.querySelectorAll('.ovcard').forEach((c,k)=>c.classList.toggle('cur',k===i))}
+  function toggleHelp(){help.classList.toggle('show')}
+  function openJump(){jump.classList.add('show');jumpInput.value='';setTimeout(()=>jumpInput.focus(),30)}
+  function closeAll(){overview.classList.remove('show');help.classList.remove('show');jump.classList.remove('show')}
+  function anyOpen(){return overview.classList.contains('show')||help.classList.contains('show')||jump.classList.contains('show')}
+  function fullscreen(){if(!document.fullscreenElement){document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen()}else{document.exitFullscreen&&document.exitFullscreen()}}
+
+  btnPrev.addEventListener('click',e=>{e.stopPropagation();prev()});
+  btnNext.addEventListener('click',e=>{e.stopPropagation();next()});
+  document.getElementById('btnOv').addEventListener('click',e=>{e.stopPropagation();toggleOverview()});
+  document.getElementById('btnHelp').addEventListener('click',e=>{e.stopPropagation();toggleHelp()});
+
+  jumpInput.addEventListener('keydown',e=>{
+    e.stopPropagation();
+    if(e.key==='Enter'){const n=parseInt(jumpInput.value,10);if(!isNaN(n)){closeAll();show(n-1)}else{closeAll()}}
+    else if(e.key==='Escape'){closeAll()}
+  });
+
+  document.addEventListener('keydown',e=>{
+    if(jump.classList.contains('show'))return;
+    const k=e.key;
+    if(k==='Escape'){closeAll();return}
+    if(k==='?'){e.preventDefault();help.classList.contains('show')?closeAll():(closeAll(),toggleHelp());return}
+    if(k==='o'||k==='O'||k==='щ'||k==='Щ'){e.preventDefault();const wasOv=overview.classList.contains('show');closeAll();if(!wasOv)toggleOverview();return}
+    if(k==='g'||k==='G'||k==='п'||k==='П'){e.preventDefault();closeAll();openJump();return}
+    if(k==='f'||k==='F'||k==='а'||k==='А'){e.preventDefault();fullscreen();return}
+    if(anyOpen()){if(k==='Enter'&&overview.classList.contains('show')){closeAll()}return}
+    if(['ArrowRight','ArrowDown','PageDown',' '].includes(k)){e.preventDefault();next()}
+    else if(['ArrowLeft','ArrowUp','PageUp'].includes(k)){e.preventDefault();prev()}
+    else if(k==='Home'){e.preventDefault();show(0)}
+    else if(k==='End'){e.preventDefault();show(slides.length-1)}
+  });
+
+  // click halves to navigate, but not on controls/overlays
+  document.addEventListener('click',e=>{
+    if(anyOpen())return;
+    if(e.target.closest('.controls')||e.target.closest('a'))return;
+    if(e.clientX>window.innerWidth*0.5)next();else prev();
+  });
+
+  // deep-link and back/forward via hash
+  function fromHash(){const m=(location.hash||'').match(/#\/(\d+)/);if(m){show(parseInt(m[1],10)-1,false)}else{show(0,false)}}
+  window.addEventListener('hashchange',fromHash);
+  fromHash();
 </script>
 </body>
 </html>
