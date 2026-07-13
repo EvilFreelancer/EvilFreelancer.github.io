@@ -162,22 +162,23 @@
     .svg-wrap svg { max-width:100%; height:auto; }
     .svg-cap { font-size:26px; color:var(--dim); text-align:center; margin-top:26px; }
 
-    /* ── Speaker ── */
-    .speaker { display:grid; grid-template-columns:420px 1fr; gap:64px; align-items:center; max-width:1500px; margin:0 auto; }
-    .speaker .photo { border-radius:20px; overflow:hidden; border:3px solid rgba(92,200,255,0.5);
-      box-shadow:0 0 0 1px rgba(255,255,255,0.04),0 20px 60px rgba(0,0,0,0.6); }
-    .speaker .photo img { width:100%; height:520px; object-fit:cover; display:block; }
-    .speaker .bio p { font-size:29px; color:var(--muted); line-height:1.5; margin:14px 0; }
-    .speaker .bio .name { font-size:52px; font-weight:800; color:var(--text); margin-bottom:4px; }
-    .speaker .bio .alias { font-size:30px; color:var(--accent2); font-weight:700; margin-bottom:22px; }
-    .speaker .tags { display:flex; flex-wrap:wrap; gap:12px; margin-top:24px; }
-    .speaker .tags span { background:var(--bg2); border:1px solid rgba(92,200,255,.3); border-radius:8px;
-      padding:8px 18px; font-size:22px; color:var(--text); }
-    .contact { display:flex; align-items:center; gap:26px; margin-top:30px; }
-    .contact .qr-frame { background:#fff; border-radius:16px; padding:14px; flex-shrink:0; }
-    .contact .qr-frame img { width:180px; height:180px; display:block; }
-    .contact .clbl { font-size:23px; color:var(--muted); }
-    .contact .clink { font-size:30px; color:var(--accent2); font-family:'JetBrains Mono',monospace; font-weight:700; }
+    /* ── Speaker (Знакомство) ── */
+    .speaker { display:grid; grid-template-columns:1.25fr 0.85fr; gap:64px; align-items:center; max-width:1560px; margin:0 auto; }
+    .speaker .photo { width:100%; max-width:560px; aspect-ratio:1024/640; border-radius:20px;
+      border:1px solid rgba(92,200,255,0.35); justify-self:center;
+      background:#e9ecf2 url('assets/pavel.png') center/cover no-repeat;
+      box-shadow:0 0 0 1px rgba(255,255,255,0.04),0 20px 60px rgba(0,0,0,0.5); }
+    .speaker .bio .name { font-size:56px; font-weight:800; color:var(--text); margin-bottom:22px; line-height:1.1; }
+    .speaker .bio ul { margin:0; }
+    .speaker .bio li { position:relative; padding:9px 0 9px 34px; font-size:26px; color:var(--muted); line-height:1.45; }
+    .speaker .bio li::before { content:""; position:absolute; left:4px; top:20px; width:13px; height:13px;
+      background:var(--accent2); border-radius:3px; transform:rotate(45deg); }
+    .speaker .bio li b { color:var(--text); }
+    .contact { display:flex; align-items:center; gap:22px; margin-top:30px; }
+    .contact .qr-frame { background:#fff; border-radius:16px; padding:13px; flex-shrink:0; }
+    .contact .qr-frame img { width:150px; height:150px; display:block; }
+    .contact .clink { font-size:29px; color:var(--accent2); font-family:'JetBrains Mono',monospace; font-weight:700; }
+    .contact .clbl { font-size:22px; color:var(--muted); margin-top:6px; }
 
     /* ── QR ── */
     .qr-row { display:flex; gap:90px; justify-content:center; align-items:center; margin-top:20px; }
@@ -224,29 +225,26 @@
 
 <!-- ═══ О СПИКЕРЕ ═══ -->
 <section data-background-color="#0f1420">
-  <div style="max-width:1520px;margin:0 auto;width:100%;">
-    <div class="block-tag" style="justify-content:center;margin-bottom:38px;">О спикере</div>
+  <div style="max-width:1560px;margin:0 auto;width:100%;">
+    <div class="block-tag" style="margin-bottom:34px;">Знакомство</div>
     <div class="speaker">
-      <div class="photo"><img src="assets/photo.jpg" alt="Павел Рыков"></div>
       <div class="bio">
-        <div class="name">Павел Рыков</div>
-        <div class="alias">Pavel Zloi · EvilFreelancer</div>
-        <p>Инженер и разработчик, который живёт агентами не в теории, а руками. Автор self-hosted кодового агента Coddy, контрибьютор SGR Agent Core.</p>
-        <p>Автор 80+ статей на Хабре про агентов, harness и self-hosted инференс. Выступает с докладами про устройство агентов, инференс на своём железе и командную работу с агентами.</p>
-        <div class="tags">
-          <span>агенты и harness</span>
-          <span>self-hosted LLM</span>
-          <span>on-prem инференс</span>
-          <span>спикер и автор</span>
-        </div>
+        <div class="name">Всем привет, я Павел Рыков</div>
+        <ul>
+          <li>Известен как <b>Павел Злой</b>, инженер в ML и LLM, агентные системы и self-host</li>
+          <li>Автор self-hosted кодового агента <b>Coddy</b>, контрибьютор SGR Agent Core</li>
+          <li>Пишу на Хабре про агентов, harness и инференс на своём железе, веду телеграм про AI</li>
+          <li>Выступаю с докладами про устройство агентов и командную работу с ними</li>
+        </ul>
         <div class="contact">
-          <div class="qr-frame"><img src="assets/qr-telegram.png" alt="QR Telegram"></div>
+          <div class="qr-frame"><img src="assets/qr-telegram.png" alt="Telegram QR"></div>
           <div>
-            <div class="clbl">Телеграм, там разборы без маркетинга</div>
             <a href="https://t.me/evilfreelancer"><div class="clink">t.me/evilfreelancer</div></a>
+            <div class="clbl">канал Pavel Zloi — наведите камеру</div>
           </div>
         </div>
       </div>
+      <div class="photo" role="img" aria-label="Павел Рыков"></div>
     </div>
   </div>
 </section>
