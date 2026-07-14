@@ -36,139 +36,150 @@
     display:none;
     flex-direction:column;
     justify-content:center;
-    padding:6vh 8vw;
+    padding:5.5vh 8vw;
     animation:fade .35s ease;
   }
   .slide.active{display:flex}
   @keyframes fade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 
   h1{font-size:clamp(32px,4.8vw,60px);line-height:1.08;font-weight:800;letter-spacing:-.02em}
-  h2{font-size:clamp(24px,3.3vw,42px);line-height:1.1;font-weight:750;letter-spacing:-.01em;margin-bottom:.7em}
-  .kicker{color:var(--accent);font-size:clamp(13px,1.4vw,17px);font-weight:700;text-transform:uppercase;letter-spacing:.14em;margin-bottom:1.1em}
-  .sub{color:var(--muted);font-size:clamp(16px,1.9vw,24px);line-height:1.5;margin-top:1em;max-width:30ch}
-  p{font-size:clamp(16px,1.85vw,23px);line-height:1.55;color:var(--fg)}
+  h2{font-size:clamp(23px,3.1vw,40px);line-height:1.12;font-weight:750;letter-spacing:-.01em;margin-bottom:.6em}
+  .kicker{color:var(--accent);font-size:clamp(12px,1.35vw,16px);font-weight:700;text-transform:uppercase;letter-spacing:.14em;margin-bottom:1em}
+  .sub{color:var(--muted);font-size:clamp(15px,1.8vw,23px);line-height:1.5;margin-top:.9em;max-width:30ch}
+  p{font-size:clamp(15px,1.8vw,22px);line-height:1.5;color:var(--fg)}
   .lead{max-width:36ch}
 
-  ul{list-style:none;margin-top:.5em}
+  ul{list-style:none;margin-top:.4em}
   li{
-    font-size:clamp(15px,1.85vw,23px);
-    line-height:1.5;
-    padding:.4em 0 .4em 1.6em;
+    font-size:clamp(14px,1.75vw,22px);
+    line-height:1.45;
+    padding:.34em 0 .34em 1.5em;
     position:relative;
     color:var(--fg);
   }
-  li::before{content:"";position:absolute;left:0;top:.82em;width:.6em;height:.6em;border-radius:2px;background:var(--accent);transform:rotate(45deg)}
+  li::before{content:"";position:absolute;left:0;top:.72em;width:.58em;height:.58em;border-radius:2px;background:var(--accent);transform:rotate(45deg)}
   li b{color:#fff}
   li .m{color:var(--muted)}
+  li code{font-size:.9em}
+  ul.tight li{padding-top:.22em;padding-bottom:.22em}
 
-  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px;margin-top:.4em}
-  .card{
-    background:var(--card);
-    border:1px solid var(--line);
-    border-radius:14px;
-    padding:18px 20px;
-  }
-  .card .n{color:var(--accent2);font-weight:800;font-size:14px;letter-spacing:.06em;font-family:"SF Mono",Menlo,Consolas,monospace}
-  .card h3{font-size:clamp(17px,1.9vw,22px);margin:.35em 0 .3em;font-weight:750}
-  .card p{font-size:clamp(13px,1.45vw,17px);color:var(--muted);line-height:1.45}
+  .cols2{columns:2;column-gap:56px}
+  .cols2 li{break-inside:avoid}
 
-  .flow{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:.6em}
-  .node{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px 17px;font-weight:650;font-size:clamp(13px,1.5vw,19px)}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-top:.4em}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+  .card .n{color:var(--accent2);font-weight:800;font-size:13px;letter-spacing:.06em;font-family:"SF Mono",Menlo,Consolas,monospace}
+  .card h3{font-size:clamp(16px,1.85vw,21px);margin:.3em 0 .28em;font-weight:750}
+  .card p{font-size:clamp(13px,1.4vw,17px);color:var(--muted);line-height:1.4}
+
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:start;margin-top:.3em}
+  .col h3{font-size:clamp(17px,1.95vw,24px);font-weight:750;margin-bottom:.45em;display:flex;align-items:center;gap:.5em}
+  .col .dot{width:11px;height:11px;border-radius:50%;display:inline-block;flex:none}
+
+  .flow{display:flex;align-items:center;gap:11px;flex-wrap:wrap;margin-top:.5em}
+  .node{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 16px;font-weight:650;font-size:clamp(13px,1.5vw,19px)}
   .node.hl{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent) inset}
   .node.act{border-color:var(--accent2);box-shadow:0 0 0 1px var(--accent2) inset}
-  .arrow{color:var(--muted);font-size:22px}
-  .loopback{color:var(--accent2);font-size:clamp(13px,1.5vw,18px);margin-top:.9em}
+  .arrow{color:var(--muted);font-size:20px}
+  .loopback{color:var(--accent2);font-size:clamp(13px,1.5vw,18px);margin-top:.8em}
+
+  .imgwrap{display:flex;justify-content:center;align-items:center;margin-top:.2em}
+  .imgwrap img{max-width:100%;max-height:60vh;border-radius:12px;display:block}
+
+  /* SGR concept diagram */
+  .concept{display:grid;grid-template-columns:.9fr auto 1.35fr;gap:22px;align-items:center;margin-top:1.1em}
+  .ccap{font-weight:700;font-size:clamp(12px,1.45vw,19px);margin-bottom:14px;text-align:center}
+  .bbox{background:#05070c;border:1px solid var(--line);border-radius:14px;height:148px;display:flex;align-items:center;justify-content:center;gap:20px;font-size:34px;font-weight:800;color:#38425c}
+  .cio{margin-top:12px;text-align:center;color:var(--muted);font-size:clamp(11px,1.3vw,16px);font-family:"SF Mono",Menlo,Consolas,monospace}
+  .cvs{font-weight:800;color:var(--muted);font-size:clamp(16px,2vw,26px);text-align:center}
+  .phases{display:flex;gap:9px}
+  .phase{flex:1;border-radius:11px;padding:18px 8px;text-align:center;font-weight:750;font-size:clamp(11px,1.3vw,16px);color:#0b0f18}
+  .phase small{display:block;margin-top:12px;font-weight:600;font-size:.72em;opacity:.85}
+  .phase.p1{background:var(--accent)}.phase.p2{background:var(--ok)}.phase.p3{background:var(--accent2)}.phase.p4{background:#c792ea}
+
+  /* layered components diagram */
+  .layers{display:flex;flex-direction:column;gap:7px;margin-top:.6em}
+  .layer{border:1px solid var(--line);border-radius:12px;padding:13px 18px;background:var(--card)}
+  .layer.dashed{border-style:dashed;background:transparent}
+  .lname{font-weight:700;font-size:clamp(13px,1.45vw,19px);margin-bottom:10px}
+  .lname.dim{color:var(--muted)}
+  .row3{display:flex;align-items:center;gap:12px}
+  .pill{border-radius:9px;padding:9px 20px;font-weight:750;color:#0b0f18;font-size:clamp(12px,1.4vw,18px)}
+  .pill.p1{background:var(--accent)}.pill.p2{background:var(--ok)}.pill.p3{background:var(--accent2)}
+  .ar{color:var(--muted);font-size:18px}
+  .chips{display:flex;gap:11px;flex-wrap:wrap}
+  .chip{border:1px solid var(--line);border-radius:8px;padding:9px 15px;font-family:"SF Mono",Menlo,Consolas,monospace;font-size:clamp(11px,1.3vw,16px);color:var(--fg);background:var(--bg2)}
+  .down{text-align:center;color:var(--muted);font-size:19px;line-height:1;margin:1px 0}
+
+  /* vertical pipeline diagram */
+  .pipe{display:flex;flex-direction:column;align-items:center;gap:3px;margin-top:.3em}
+  .pstep{width:min(600px,84%);border-radius:10px;padding:11px 16px;text-align:center;font-weight:700;color:#0b0f18;font-size:clamp(13px,1.4vw,18px)}
+  .pstep b{font-family:"SF Mono",Menlo,Consolas,monospace;font-weight:750}
+  .pstep span{font-weight:600;opacity:.82;font-size:.85em;margin-left:8px}
+  .pstep.p1{background:var(--accent)}.pstep.p2{background:var(--ok)}.pstep.p3{background:var(--accent2)}
+  .pstep.p4{background:#c792ea}.pstep.p5{background:#4fd1c5}
+  .pstep.pd{background:var(--card);color:var(--fg);border:1px solid var(--line)}
+  .pdown{color:var(--muted);font-size:15px;line-height:.7}
+  .pfoot{display:flex;gap:14px;margin-top:14px;flex-wrap:wrap;justify-content:center}
+  .pfoot span{border:1px solid var(--line);border-radius:8px;padding:8px 14px;color:var(--muted);font-size:clamp(11px,1.25vw,15px)}
 
   pre{
-    background:#0b101b;
-    border:1px solid var(--line);
-    border-radius:14px;
-    padding:20px 24px;
-    margin-top:.3em;
-    overflow-x:auto;
+    background:#0b101b;border:1px solid var(--line);border-radius:14px;
+    padding:16px 22px;margin-top:.2em;overflow-x:auto;
     font-family:"SF Mono",Menlo,Consolas,monospace;
-    font-size:clamp(12px,1.5vw,19px);
-    line-height:1.6;
-    color:#d6deee;
-    max-width:100%;
+    font-size:clamp(12px,1.45vw,19px);line-height:1.55;color:#d6deee;max-width:100%;
   }
-  .k{color:var(--kw)}
-  .s{color:var(--str)}
-  .c{color:var(--com)}
-  .t{color:var(--ty)}
-  .f{color:var(--accent)}
-  .y{color:var(--accent2)}
+  .k{color:var(--kw)}.s{color:var(--str)}.c{color:var(--com)}.t{color:var(--ty)}.f{color:var(--accent)}.y{color:var(--accent2)}
 
-  .metrics{display:flex;gap:40px;margin:.2em 0 .1em;flex-wrap:wrap}
-  .metric .v{font-size:clamp(40px,6vw,74px);font-weight:850;line-height:1;letter-spacing:-.03em;background:linear-gradient(120deg,var(--accent),var(--ok));-webkit-background-clip:text;background-clip:text;color:transparent}
-  .metric .l{color:var(--muted);font-size:clamp(13px,1.4vw,17px);margin-top:.5em}
+  table.tbl{border-collapse:collapse;width:100%;margin-top:.2em;font-size:clamp(13px,1.45vw,19px)}
+  table.tbl th{text-align:left;padding:.45em .7em;border-bottom:1px solid var(--line);color:var(--accent);text-transform:uppercase;font-size:.8em;letter-spacing:.05em}
+  table.tbl td{text-align:left;padding:.45em .7em;border-bottom:1px solid var(--line)}
+  table.tbl td b{color:#fff}
+  table.tbl .dim{color:var(--muted)}
+  .mono{font-family:"SF Mono",Menlo,Consolas,monospace;color:var(--accent)}
+
+  /* compare panels */
+  .compare{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:.2em}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+  .panel.good{border-color:rgba(126,231,135,.5)}
+  .panel.bad{border-color:rgba(255,128,128,.45)}
+  .panel .h{font-weight:750;font-size:clamp(15px,1.6vw,20px);margin-bottom:.5em}
+  .panel.good .h{color:var(--ok)}.panel.bad .h{color:var(--bad)}
+  .bubble{background:#0b101b;border:1px solid var(--line);border-radius:10px;padding:9px 12px;font-size:clamp(12px,1.35vw,16px);line-height:1.4;margin-top:7px;color:#cdd6e8}
+  .bubble .who{color:var(--muted);font-size:.82em;display:block;margin-bottom:2px;font-family:"SF Mono",Menlo,Consolas,monospace}
+  .panel .miss{color:var(--bad)}.panel .step{color:var(--accent);font-family:"SF Mono",Menlo,Consolas,monospace}
 
   /* about-me */
   .about{display:grid;grid-template-columns:1.35fr 1fr;gap:44px;align-items:center}
-  .about ul{margin-top:.2em}
-  .photo{
-    width:100%;max-width:360px;aspect-ratio:1024/640;
-    border-radius:16px;border:1px solid var(--line);
-    background:#e9ecf2 url('assets/pavel.png') center/cover no-repeat;
-    justify-self:center;
-  }
+  .photo{width:100%;max-width:360px;aspect-ratio:1024/640;border-radius:16px;border:1px solid var(--line);background:#e9ecf2 url('assets/pavel.png') center/cover no-repeat;justify-self:center}
   .contact{display:flex;align-items:center;gap:18px;margin-top:1.1em}
-  .qr{width:clamp(96px,12vw,132px);height:clamp(96px,12vw,132px);flex:none}
+  .qr{width:clamp(96px,12vw,128px);height:clamp(96px,12vw,128px);flex:none}
   .qr img{width:100%;height:100%;object-fit:contain;display:block}
-  .contact .handle{font-family:"SF Mono",Menlo,Consolas,monospace;color:var(--accent);font-size:clamp(15px,1.7vw,21px)}
+  .contact .handle{font-family:"SF Mono",Menlo,Consolas,monospace;color:var(--accent);font-size:clamp(14px,1.6vw,20px)}
   .contact .handle span{display:block;color:var(--muted);font-family:inherit;font-size:.8em;margin-top:.3em}
 
-  /* compare panels */
-  .compare{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:.3em}
-  .panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px}
-  .panel.good{border-color:rgba(126,231,135,.5)}
-  .panel.bad{border-color:rgba(255,128,128,.45)}
-  .panel .h{font-weight:750;font-size:clamp(15px,1.7vw,21px);margin-bottom:.6em;display:flex;align-items:center;gap:.5em}
-  .panel.good .h{color:var(--ok)}
-  .panel.bad .h{color:var(--bad)}
-  .bubble{background:#0b101b;border:1px solid var(--line);border-radius:10px;padding:10px 13px;font-size:clamp(12px,1.4vw,17px);line-height:1.45;margin-top:8px;color:#cdd6e8}
-  .bubble .who{color:var(--muted);font-size:.82em;display:block;margin-bottom:3px;font-family:"SF Mono",Menlo,Consolas,monospace}
-  .panel .miss{color:var(--bad)}
-  .panel .step{color:var(--accent);font-family:"SF Mono",Menlo,Consolas,monospace}
-
-  footer{position:fixed;bottom:18px;left:8vw;right:8vw;display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:14px;letter-spacing:.02em}
+  /* nav */
   .bar{position:fixed;bottom:0;left:0;height:4px;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .3s ease;z-index:30}
   .bartrack{position:fixed;bottom:0;left:0;right:0;height:4px;background:var(--line);z-index:29}
-  .hint{opacity:.55}
-  code{font-family:"SF Mono",Menlo,Consolas,monospace;background:var(--bg2);border:1px solid var(--line);border-radius:6px;padding:.08em .4em;font-size:.9em;color:var(--accent)}
-
-  /* navigation controls */
   .pageno{position:fixed;left:14px;bottom:12px;z-index:20;font-family:"SF Mono",Menlo,Consolas,monospace;color:var(--muted);font-size:13px;letter-spacing:.03em}
   .pageno b{color:var(--accent);font-weight:700}
   .controls{position:fixed;right:16px;bottom:12px;display:flex;align-items:center;gap:8px;z-index:20}
-  .navbtn{
-    width:0;height:0;background:none;border:none;cursor:pointer;padding:14px;position:relative;
-    opacity:.75;transition:opacity .15s ease;
-  }
-  .navbtn::before{
-    content:"";position:absolute;top:50%;left:50%;width:11px;height:11px;
-    border-right:2px solid var(--accent2);border-bottom:2px solid var(--accent2);
-  }
+  .navbtn{width:0;height:0;background:none;border:none;cursor:pointer;padding:14px;position:relative;opacity:.75;transition:opacity .15s ease}
+  .navbtn::before{content:"";position:absolute;top:50%;left:50%;width:11px;height:11px;border-right:2px solid var(--accent2);border-bottom:2px solid var(--accent2)}
   .navbtn#btnPrev::before{transform:translate(-30%,-50%) rotate(135deg)}
   .navbtn#btnNext::before{transform:translate(-70%,-50%) rotate(-45deg)}
-  .navbtn:hover{opacity:1}
-  .navbtn:disabled{opacity:.2;cursor:default}
+  .navbtn:hover{opacity:1}.navbtn:disabled{opacity:.2;cursor:default}
 
-  /* overview grid */
   .overview{position:fixed;inset:0;background:rgba(9,13,22,.96);z-index:40;display:none;padding:5vh 5vw;overflow-y:auto}
   .overview.show{display:block}
   .overview h4{color:var(--muted);font-size:14px;text-transform:uppercase;letter-spacing:.12em;margin-bottom:18px;font-weight:700}
-  .ovgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px}
-  .ovcard{
-    background:var(--card);border:1px solid var(--line);border-radius:10px;
-    padding:14px 15px;cursor:pointer;min-height:96px;transition:all .15s ease;position:relative;
-  }
+  .ovgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:12px}
+  .ovcard{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 13px;cursor:pointer;min-height:84px;transition:all .15s ease}
   .ovcard:hover{border-color:var(--accent);transform:translateY(-2px)}
   .ovcard.cur{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent) inset}
   .ovcard .num{font-family:"SF Mono",Menlo,Consolas,monospace;color:var(--accent2);font-size:12px;font-weight:700}
-  .ovcard .tt{color:var(--fg);font-size:15px;font-weight:650;margin-top:6px;line-height:1.25;letter-spacing:-.01em}
+  .ovcard .tt{color:var(--fg);font-size:14px;font-weight:650;margin-top:5px;line-height:1.22;letter-spacing:-.01em}
 
-  /* help + jump overlays */
   .overlay{position:fixed;inset:0;background:rgba(9,13,22,.9);z-index:50;display:none;align-items:center;justify-content:center}
   .overlay.show{display:flex}
   .helpbox{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:28px 34px;max-width:440px}
@@ -177,16 +188,13 @@
   .helpbox .row:last-child{border-bottom:0}
   .helpbox .row .keys{font-family:"SF Mono",Menlo,Consolas,monospace;color:var(--accent)}
   .helpbox .row .desc{color:var(--muted)}
-  .kbd{display:inline-block;background:var(--bg2);border:1px solid var(--line);border-radius:5px;padding:.1em .45em;font-family:"SF Mono",Menlo,Consolas,monospace;font-size:.85em;color:var(--accent)}
   .jumpbox{background:var(--card);border:1px solid var(--accent);border-radius:14px;padding:22px 26px;text-align:center}
   .jumpbox label{display:block;color:var(--muted);font-size:15px;margin-bottom:12px}
-  .jumpbox input{
-    width:120px;background:var(--bg2);border:1px solid var(--line);border-radius:8px;
-    color:var(--fg);font-family:"SF Mono",Menlo,Consolas,monospace;font-size:28px;text-align:center;
-    padding:8px 10px;outline:none;
-  }
+  .jumpbox input{width:120px;background:var(--bg2);border:1px solid var(--line);border-radius:8px;color:var(--fg);font-family:"SF Mono",Menlo,Consolas,monospace;font-size:28px;text-align:center;padding:8px 10px;outline:none}
   .jumpbox input:focus{border-color:var(--accent)}
   .jumpbox .hint2{color:var(--muted);font-size:13px;margin-top:12px}
+
+  code{font-family:"SF Mono",Menlo,Consolas,monospace;background:var(--bg2);border:1px solid var(--line);border-radius:6px;padding:.08em .4em;font-size:.9em;color:var(--accent)}
 </style>
 </head>
 <body>
@@ -194,7 +202,7 @@
 <div class="bar" id="bar"></div>
 <div id="deck">
 
-  <!-- 1. Title -->
+  <!-- 1 Title -->
   <section class="slide active">
     <div class="kicker">Open source, Python, MIT</div>
     <h1>SGR Agent Core</h1>
@@ -202,17 +210,17 @@
     <p class="lead" style="margin-top:1.6em;color:var(--muted)">Павел Рыков - Pavel Zloi</p>
   </section>
 
-  <!-- 2. About me -->
+  <!-- 2 About me -->
   <section class="slide">
     <div class="kicker">Знакомство</div>
     <div class="about">
       <div>
         <h2 style="margin-bottom:.4em">Всем привет, я Павел Рыков</h2>
-        <ul>
-          <li>Известен как <b>Павел Злой</b>, инженер в ML и LLM, агентные системы и self-host</li>
-          <li>Пишу open-source и веду телеграм-канал про AI</li>
+        <ul class="tight">
+          <li>Известен как <b>Павел Злой</b>, руководитель импортозамещения ML в Росгосстрах</li>
+          <li>ML и LLM, агентные системы, self-host и инференс, open-source и телеграм-канал</li>
           <li>В SGR Agent Core отвечаю за <b>разработку API</b> - HTTP-сервер и ACP</li>
-          <li>Поддерживаю проект за прозрачность рассуждения и запуск без облака</li>
+          <li>Проект развивает сообщество neuraldeep и vamplabAI при поддержке <b>red_mad_robot</b></li>
         </ul>
         <div class="contact">
           <div class="qr"><img src="assets/qr-telegram.png" alt="Telegram QR"></div>
@@ -223,55 +231,51 @@
     </div>
   </section>
 
-  <!-- 3. Problem -->
+  <!-- 3 Agenda -->
   <section class="slide">
-    <div class="kicker">Проблема</div>
-    <h2>Free-form prompting непредсказуем</h2>
-    <ul>
-      <li>Агент сам решает, когда рассуждать, а когда звать инструмент</li>
-      <li>Пропускает шаги рассуждения и путает их порядок</li>
-      <li>Ход мыслей спрятан внутри модели, повторить и отладить нельзя</li>
+    <div class="kicker">Программа</div>
+    <h2>О чём поговорим</h2>
+    <ul class="cols2">
+      <li>Что такое SGR и зачем он нужен</li>
+      <li>Архитектура - API и ACP</li>
+      <li>Системные тулы и встроенные агенты</li>
+      <li>YAML-конфигурация и реестры</li>
+      <li>Как собрать свой тул и агента</li>
+      <li>Как запустить и куда подключить</li>
+      <li>Deep Research и файловый агент</li>
+      <li>Метрики, тесты и Langfuse</li>
     </ul>
-    <p class="sub" style="max-width:44ch">Промпт просит модель быть аккуратной, но ничего не гарантирует</p>
+    <p class="sub" style="max-width:52ch">Теория, компоненты и короткие примеры кода</p>
   </section>
 
-  <!-- 5. Problem demo -->
+  <!-- 4 What is SGR (concept diagram) -->
   <section class="slide">
-    <div class="kicker">Как это выглядит</div>
-    <h2>Один вопрос, два поведения</h2>
-    <div class="compare">
-      <div class="panel bad">
-        <div class="h">Free-form агент</div>
-        <div class="bubble"><span class="who">user</span>Сравни цены на BMW X6 2025 в трёх странах</div>
-        <div class="bubble"><span class="who">agent</span>сразу зовёт поиск с общим запросом, <span class="miss">без плана</span></div>
-        <div class="bubble"><span class="who">agent</span>отвечает по одной стране, <span class="miss">две подзадачи потеряны</span></div>
+    <div class="kicker">Идея</div>
+    <h2>Что такое Schema-Guided Reasoning</h2>
+    <div class="concept">
+      <div class="cside">
+        <div class="ccap">Классический агент - чёрный ящик</div>
+        <div class="bbox"><span>?</span><span>?</span><span>?</span></div>
+        <div class="cio">вход &nbsp;-&nbsp; ??? &nbsp;-&nbsp; выход</div>
       </div>
-      <div class="panel good">
-        <div class="h">SGR агент</div>
-        <div class="bubble"><span class="who">user</span>Сравни цены на BMW X6 2025 в трёх странах</div>
-        <div class="bubble"><span class="who">reasoning</span><span class="step">plan</span> - три подзадачи, по стране на каждую</div>
-        <div class="bubble"><span class="who">reasoning</span><span class="step">enough_data=false</span> - идём дальше, пока не собрано всё</div>
+      <div class="cvs">VS</div>
+      <div class="cside">
+        <div class="ccap">SGR-агент - прозрачный</div>
+        <div class="phases">
+          <div class="phase p1">Рассуждение<small>JSON-схема</small></div>
+          <div class="phase p2">Планирование<small>JSON-схема</small></div>
+          <div class="phase p3">Действие<small>JSON-схема</small></div>
+          <div class="phase p4">Ответ<small>JSON-схема</small></div>
+        </div>
       </div>
     </div>
-    <p class="sub" style="max-width:52ch">Слева результат плавает от запуска к запуску, справа шаги фиксированы схемой</p>
+    <p class="sub" style="max-width:60ch">Вместо непрозрачного ящика - явные фазы, каждая описана схемой и проверяется</p>
   </section>
 
-  <!-- 6. Solution -->
+  <!-- 7 Schema in code -->
   <section class="slide">
-    <div class="kicker">Решение</div>
-    <h2>SGR переводит рассуждение в структуру данных</h2>
-    <ul>
-      <li>Рассуждение описано как строгая pydantic-схема</li>
-      <li>Модель обязана заполнить все поля по порядку, прежде чем действовать</li>
-      <li>Пропустить шаг или переставить его нельзя - это зашито в ядро фреймворка</li>
-    </ul>
-    <p class="sub" style="max-width:46ch">Не просим модель быть умной, а даём рельсы, по которым думать</p>
-  </section>
-
-  <!-- 7. Schema in code -->
-  <section class="slide">
-    <div class="kicker">Базовый компонент - схема</div>
-    <h2>Та самая структура в коде</h2>
+    <div class="kicker">Схема в коде</div>
+    <h2>Та самая структура - pydantic-модель</h2>
     <pre><span class="k">class</span> <span class="t">ReasoningTool</span>(<span class="t">SystemBaseTool</span>):
     reasoning_steps:   <span class="t">list</span>[<span class="t">str</span>]   <span class="c"># ход мысли, 2-3 шага</span>
     current_situation: <span class="t">str</span>         <span class="c"># где мы сейчас</span>
@@ -279,194 +283,384 @@
     enough_data:       <span class="t">bool</span>        <span class="c"># хватает данных</span>
     remaining_steps:   <span class="t">list</span>[<span class="t">str</span>]   <span class="c"># что осталось</span>
     task_completed:    <span class="t">bool</span>        <span class="c"># задача закрыта</span></pre>
-    <p class="sub" style="max-width:52ch">Каждое поле это обязательный шаг рассуждения, а не пожелание в промпте</p>
+    <p class="sub" style="max-width:56ch">После конвертации в JSON схема уходит в модель, каждое поле - обязательный шаг</p>
   </section>
 
-  <!-- 8. Agent types -->
+  <!-- 8 Architecture -->
   <section class="slide">
-    <div class="kicker">Базовые компоненты - агенты</div>
-    <h2>Три типа из коробки</h2>
-    <table style="border-collapse:collapse;width:100%;margin-top:.3em;font-size:clamp(14px,1.5vw,20px)">
-      <thead>
-        <tr>
-          <th style="text-align:left;padding:.52em .7em;border-bottom:1px solid var(--line);color:var(--accent);text-transform:uppercase;font-size:.82em;letter-spacing:.06em">Агент</th>
-          <th style="text-align:left;padding:.52em .7em;border-bottom:1px solid var(--line);color:var(--accent);text-transform:uppercase;font-size:.82em;letter-spacing:.06em">Механизм</th>
-          <th style="text-align:left;padding:.52em .7em;border-bottom:1px solid var(--line);color:var(--accent);text-transform:uppercase;font-size:.82em;letter-spacing:.06em">Рассуждение видно</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td style="padding:.52em .7em;border-bottom:1px solid var(--line)"><b style="color:#fff">SGRAgent</b></td><td style="padding:.52em .7em;border-bottom:1px solid var(--line)">SGR через Structured Output</td><td style="padding:.52em .7em;border-bottom:1px solid var(--line)">да, полностью</td></tr>
-        <tr><td style="padding:.52em .7em;border-bottom:1px solid var(--line)"><b style="color:#fff">ToolCallingAgent</b></td><td style="padding:.52em .7em;border-bottom:1px solid var(--line)">чистый Function Calling</td><td style="padding:.52em .7em;border-bottom:1px solid var(--line);color:var(--muted)">нет</td></tr>
-        <tr><td style="padding:.52em .7em;border-bottom:1px solid var(--line)"><b style="color:#fff">SGRToolCallingAgent</b></td><td style="padding:.52em .7em;border-bottom:1px solid var(--line)">гибрид, SGR плюс FC</td><td style="padding:.52em .7em;border-bottom:1px solid var(--line)">да, на шаге рассуждения</td></tr>
-      </tbody>
-    </table>
-    <p class="sub" style="max-width:48ch">Любой можно расширить своим наследником, механизм ядра общий</p>
-  </section>
-
-  <!-- 9. Reasoning loop + routing -->
-  <section class="slide">
-    <div class="kicker">Базовые компоненты - цикл</div>
-    <h2>Reasoning-цикл и routing</h2>
-    <div class="flow">
-      <div class="node hl">Рассуждение<br><span style="color:var(--muted);font-size:.8em">заполнить схему</span></div>
-      <span class="arrow">-&gt;</span>
-      <div class="node act">Routing<br><span style="color:var(--muted);font-size:.8em">выбор инструмента</span></div>
-      <span class="arrow">-&gt;</span>
-      <div class="node">Вызов тула<br><span style="color:var(--muted);font-size:.8em">и разбор ответа</span></div>
+    <div class="kicker">Архитектура</div>
+    <h2>Один агент, три способа запуска</h2>
+    <div class="cards">
+      <div class="card">
+        <div class="n">API</div>
+        <h3>HTTP-сервер</h3>
+        <p>OpenAI-совместимый эндпоинт, стриминг по SSE, stateless и stateful. Open WebUI, LibreChat, любой OpenAI-клиент</p>
+      </div>
+      <div class="card">
+        <div class="n">ACP</div>
+        <h3>Редакторы по stdio</h3>
+        <p>Agent Client Protocol, агент как подпроцесс по JSON-RPC. Obsidian, Zed, VS Code, Claude Desktop</p>
+      </div>
+      <div class="card">
+        <div class="n">CLI</div>
+        <h3>Терминал</h3>
+        <p>Интерактивный шелл и одиночные запросы прямо из командной строки</p>
+      </div>
     </div>
-    <p class="loopback">Цикл повторяется, пока task_completed не станет true</p>
-    <ul style="margin-top:.7em">
-      <li>Routing это выбор следующего инструмента на основе заполненной схемы</li>
-      <li>Есть лимиты итераций и кларификаций, чтобы агент не крутился вечно</li>
+    <p class="sub" style="max-width:56ch">Логика агента одна, меняется только способ запуска и один и тот же конфиг</p>
+  </section>
+
+  <!-- 9 ACP detail -->
+  <section class="slide">
+    <div class="kicker">Архитектура - ACP</div>
+    <h2>Agent Client Protocol</h2>
+    <div class="two">
+      <div class="col">
+        <h3 style="color:var(--fg)">Что это</h3>
+        <ul class="tight" style="margin-top:0">
+          <li>Протокол для локальных агентов поверх stdio</li>
+          <li>Агент запускается как подпроцесс</li>
+          <li>Общение через JSON-RPC</li>
+          <li>Поддержка tools, resources, prompts</li>
+        </ul>
+      </div>
+      <div class="col">
+        <h3 style="color:var(--fg)">Хосты</h3>
+        <ul class="tight" style="margin-top:0">
+          <li>Obsidian с плагином Agent Client</li>
+          <li>Zed - нативная панель агента</li>
+          <li>VS Code, JetBrains и другие IDE</li>
+          <li>Claude Desktop</li>
+        </ul>
+      </div>
+    </div>
+    <p class="sub" style="max-width:52ch">Запускается командой sgracp с тем же конфигом, что и HTTP-сервер</p>
+  </section>
+
+  <!-- 10 API Mode REST -->
+  <section class="slide">
+    <div class="kicker">Архитектура - API</div>
+    <h2>API Mode - REST-сервер</h2>
+    <div class="two">
+      <div class="col">
+        <h3 style="color:var(--fg)">Жизненный цикл</h3>
+        <ul class="tight" style="margin-top:0">
+          <li>Создание - загрузка конфига, инициализация тулов</li>
+          <li>Выполнение - обработка запроса, SGR-пайплайн</li>
+          <li>Очистка - освобождение ресурсов</li>
+        </ul>
+      </div>
+      <div class="col">
+        <h3 style="color:var(--fg)">Режимы</h3>
+        <ul class="tight" style="margin-top:0">
+          <li>Stateless - каждый запрос независимый</li>
+          <li>Stateful - контекст диалога по agent_id</li>
+          <li>Стриминг по SSE, отмена выполнения</li>
+        </ul>
+      </div>
+    </div>
+    <p class="sub" style="max-width:54ch">FastAPI-сервер с хранилищем агентов, совместим с любым OpenAI-клиентом</p>
+  </section>
+
+  <!-- 11 System tools -->
+  <section class="slide">
+    <div class="kicker">Компоненты - тулы</div>
+    <h2>Системные тулы</h2>
+    <ul class="cols2 tight">
+      <li><code>reasoning_tool</code> <span class="m">анализ и следующий шаг</span></li>
+      <li><code>generate_plan_tool</code> <span class="m">генерация плана</span></li>
+      <li><code>adapt_plan_tool</code> <span class="m">адаптация плана</span></li>
+      <li><code>clarification_tool</code> <span class="m">запрос уточнения</span></li>
+      <li><code>final_answer_tool</code> <span class="m">финализация ответа</span></li>
+      <li><code>answer_tool</code> <span class="m">промежуточный ответ</span></li>
+      <li><code>web_search_tool</code> <span class="m">Tavily, Brave, Perplexity</span></li>
+      <li><code>extract_page_content_tool</code> <span class="m">контент из URL</span></li>
+      <li><code>create_report_tool</code> <span class="m">отчёт с цитатами</span></li>
+      <li><code>run_command_tool</code> <span class="m">команды и код в песочнице</span></li>
     </ul>
   </section>
 
-  <!-- 10. Config philosophy -->
+  <!-- 12 Built-in agents -->
   <section class="slide">
-    <div class="kicker">Конфигурация вместо кода</div>
-    <h2>Иерархия настроек</h2>
+    <div class="kicker">Компоненты - агенты</div>
+    <h2>Встроенные агенты</h2>
+    <ul class="tight">
+      <li><code>sgr_agent</code> <span class="m">максимально строгий и управляемый SGR</span></li>
+      <li><code>sgr_tool_calling_agent</code> <span class="m">SGR плюс нативный tool calling, больше совместимости</span></li>
+      <li><code>tool_calling_agent</code> <span class="m">тулколлинг без SGR</span></li>
+      <li><code>dialog_agent</code> <span class="m">диалог с промежуточными результатами</span></li>
+      <li><code>iron_agent</code> <span class="m">упрощённый, без tool calling</span></li>
+    </ul>
+    <p class="sub" style="max-width:52ch">Любой можно расширить своим наследником, механизм ядра общий</p>
+  </section>
+
+  <!-- 13 YAML hierarchy -->
+  <section class="slide">
+    <div class="kicker">Конфигурация</div>
+    <h2>Иерархия настроек - конфиг вместо кода</h2>
     <div class="flow">
-      <div class="node">Дефолты в коде</div>
+      <div class="node">Дефолты фреймворка</div>
       <span class="arrow">-&gt;</span>
       <div class="node">Переменные окружения</div>
       <span class="arrow">-&gt;</span>
       <div class="node">config.yaml</div>
       <span class="arrow">-&gt;</span>
-      <div class="node hl">agents.yaml</div>
+      <div class="node hl">Параметры CLI</div>
     </div>
-    <ul style="margin-top:1.1em">
-      <li>Каждый следующий слой переопределяет предыдущий</li>
-      <li>Базовый конфиг задаёт LLM и лимиты, агент меняет только своё</li>
-      <li>Меньше кода - агенты и тулы описываются данными, а не классами</li>
+    <p style="margin-top:1em;color:var(--muted);font-size:clamp(14px,1.6vw,20px)">Каждый следующий слой переопределяет предыдущий. Секции конфига:</p>
+    <ul class="cols2 tight" style="margin-top:.4em">
+      <li><span class="mono">llm</span> <span class="m">настройки LLM</span></li>
+      <li><span class="mono">execution</span> <span class="m">лимиты и директории</span></li>
+      <li><span class="mono">tools</span> <span class="m">регистрация тулов</span></li>
+      <li><span class="mono">mcp</span> <span class="m">MCP-серверы</span></li>
+      <li><span class="mono">agents</span> <span class="m">определение агентов</span></li>
+      <li><span class="mono">acp</span> <span class="m">настройки ACP</span></li>
     </ul>
   </section>
 
-  <!-- 11. config.yaml structure -->
+  <!-- 14 Tools registry -->
   <section class="slide">
-    <div class="kicker">Конфиг - структура</div>
-    <h2>Один config.yaml на всё</h2>
-    <pre><span class="y">llm:</span>              <span class="c"># модель и доступ</span>
-  <span class="y">model:</span> <span class="s">"gpt-4o-mini"</span>
-  <span class="y">base_url:</span> <span class="s">"https://api.openai.com/v1"</span>
-<span class="y">execution:</span>        <span class="c"># лимиты цикла</span>
-  <span class="y">max_iterations:</span> <span class="f">10</span>
-  <span class="y">max_clarifications:</span> <span class="f">3</span>
-<span class="y">mcp:</span>              <span class="c"># внешние источники по MCP</span>
-  <span class="y">mcpServers:</span> {<span class="y">deepwiki:</span> {<span class="y">url:</span> <span class="s">"https://mcp.deepwiki.com/mcp"</span>}}
-<span class="y">tools:</span> ...        <span class="c"># настройки тулов</span>
-<span class="y">agents:</span> ...       <span class="c"># определения агентов</span></pre>
-    <p class="sub" style="max-width:50ch">Секции llm и execution наследуются всеми агентами по умолчанию</p>
+    <div class="kicker">Конфигурация - реестр тулов</div>
+    <h2>Регистрируем тулы в config.yaml</h2>
+    <pre><span class="y">tools:</span>
+  <span class="c"># простая регистрация</span>
+  <span class="y">reasoning_tool:</span> {}
+  <span class="y">final_answer_tool:</span> {}
+
+  <span class="c"># с конфигурацией</span>
+  <span class="y">web_search_tool:</span>
+    <span class="y">engine:</span> <span class="s">"tavily"</span>        <span class="c"># или brave, perplexity</span>
+    <span class="y">api_key:</span> <span class="s">"${TAVILY_API_KEY}"</span>
+    <span class="y">max_results:</span> <span class="f">10</span>
+
+  <span class="c"># кастомный тул из модуля</span>
+  <span class="y">read_file_tool:</span>
+    <span class="y">base_class:</span> <span class="s">"tools.ReadFileTool"</span></pre>
   </section>
 
-  <!-- 12. Create agent via config -->
+  <!-- 15 MCP registry -->
   <section class="slide">
-    <div class="kicker">Создание агента - через конфиг</div>
-    <h2>Агент это несколько строк YAML</h2>
+    <div class="kicker">Конфигурация - реестр MCP</div>
+    <h2>Подключаем внешние MCP-серверы</h2>
+    <pre><span class="y">mcp:</span>
+  <span class="y">mcpServers:</span>
+    <span class="c"># удалённый сервер по URL</span>
+    <span class="y">deepwiki:</span>
+      <span class="y">url:</span> <span class="s">"https://mcp.deepwiki.com/mcp"</span>
+
+    <span class="c"># локальный stdio-сервер</span>
+    <span class="y">filesystem:</span>
+      <span class="y">command:</span> <span class="s">"npx"</span>
+      <span class="y">args:</span> [<span class="s">"-y"</span>, <span class="s">"@modelcontextprotocol/server-filesystem"</span>]</pre>
+    <p class="sub" style="max-width:52ch">Агент автоматически получает тулы от подключённых MCP-серверов</p>
+  </section>
+
+  <!-- 16 Agents registry -->
+  <section class="slide">
+    <div class="kicker">Конфигурация - реестр агентов</div>
+    <h2>Определяем агента в config.yaml</h2>
     <pre><span class="y">agents:</span>
-  <span class="y">fast_research_agent:</span>
-    <span class="y">base_class:</span> <span class="s">"SGRToolCallingAgent"</span>   <span class="c"># тип из коробки</span>
+  <span class="y">sgr_tool_calling_agent:</span>
+    <span class="y">base_class:</span> <span class="s">"agents.ResearchSGRToolCallingAgent"</span>
     <span class="y">llm:</span>
-      <span class="y">model:</span> <span class="s">"gpt-4o-mini"</span>              <span class="c"># переопределяем только нужное</span>
-    <span class="y">tools:</span>                            <span class="c"># набор инструментов</span>
-      - <span class="y">web_search_tool:</span> {<span class="y">max_searches:</span> <span class="f">3</span>}
+      <span class="y">model:</span> <span class="s">"gpt-4.1-mini"</span>
+      <span class="y">temperature:</span> <span class="f">0.4</span>
+    <span class="y">tools:</span>
+      - <span class="s">"reasoning_tool"</span>          <span class="c"># обязателен для SGR</span>
+      - <span class="s">"web_search_tool"</span>
       - <span class="s">"create_report_tool"</span>
       - <span class="s">"final_answer_tool"</span></pre>
-    <p class="sub" style="max-width:52ch">Выбираем базовый класс и список тулов - остальное берётся из глобального конфига</p>
   </section>
 
-  <!-- 13. Create agent via inheritance -->
+  <!-- 17 Components diagram -->
   <section class="slide">
-    <div class="kicker">Создание агента - через код</div>
-    <h2>Когда нужна своя логика - наследование</h2>
-    <pre><span class="k">from</span> sgr_agent_core.agents <span class="k">import</span> <span class="t">ToolCallingAgent</span>
-
-<span class="k">class</span> <span class="t">SGRFileAgent</span>(<span class="t">ToolCallingAgent</span>):
-    name = <span class="s">"sgr_file_agent"</span>
-    toolkit = [<span class="t">ListDirectoryTool</span>, <span class="t">ReadFileTool</span>,
-               <span class="t">FindTool</span>, <span class="t">GrepTool</span>]
-
-    <span class="c"># при желании переопределяем шаги цикла</span></pre>
-    <p class="sub" style="max-width:52ch">Наследник регистрируется в ядре автоматически и доступен по имени в конфиге</p>
+    <div class="kicker">Связь компонентов</div>
+    <h2>Агент, тулы и MCP</h2>
+    <div class="layers">
+      <div class="layer">
+        <div class="lname">Агент - SGR Pipeline / Tool Calling</div>
+        <div class="row3">
+          <div class="pill p1">Reasoning</div><span class="ar">-&gt;</span>
+          <div class="pill p2">Planning</div><span class="ar">-&gt;</span>
+          <div class="pill p3">Acting</div>
+        </div>
+      </div>
+      <div class="down">&#8595;</div>
+      <div class="layer">
+        <div class="lname">Tools Layer - зарегистрированные тулы</div>
+        <div class="chips">
+          <div class="chip">web_search_tool</div>
+          <div class="chip">extract_page_content_tool</div>
+          <div class="chip">create_report_tool</div>
+          <div class="chip">run_command_tool</div>
+        </div>
+      </div>
+      <div class="down">&#8595;</div>
+      <div class="layer dashed">
+        <div class="lname dim">MCP Servers - внешние</div>
+        <div class="chips">
+          <div class="chip">deepwiki</div>
+          <div class="chip">filesystem</div>
+          <div class="chip">git</div>
+          <div class="chip">...</div>
+        </div>
+      </div>
+    </div>
   </section>
 
-  <!-- 14. Create a tool -->
+  <!-- 18 Create a tool -->
   <section class="slide">
-    <div class="kicker">Создание тула</div>
+    <div class="kicker">Свой инструмент</div>
     <h2>Тул это схема плюс один метод</h2>
-    <pre><span class="k">class</span> <span class="t">FindTool</span>(<span class="t">BaseTool</span>):
+    <pre><span class="k">from</span> sgr_agent_core.base_tool <span class="k">import</span> <span class="t">BaseTool</span>
+<span class="k">from</span> pydantic <span class="k">import</span> <span class="t">Field</span>
+
+<span class="k">class</span> <span class="t">FindTool</span>(<span class="t">BaseTool</span>):
     tool_name = <span class="s">"find_tool"</span>
     reasoning: <span class="t">str</span> = <span class="t">Field</span>(description=<span class="s">"зачем ищем файлы"</span>)
     pattern:   <span class="t">str</span> = <span class="t">Field</span>(description=<span class="s">"glob-паттерн имени"</span>)
 
     <span class="k">async def</span> <span class="f">__call__</span>(self, context, config) -&gt; <span class="t">str</span>:
-        <span class="c"># своя логика, возвращаем текст для модели</span>
-        <span class="k">return</span> find_files(self.pattern)</pre>
-    <p class="sub" style="max-width:52ch">Поля Field это одновременно аргументы и подсказка модели, как их заполнить</p>
+        <span class="k">return</span> find_files(self.pattern)   <span class="c"># текст для модели</span></pre>
+    <p class="sub" style="max-width:54ch">Поля Field это одновременно аргументы и подсказка модели, как их заполнить</p>
   </section>
 
-  <!-- 15. How to start -->
+  <!-- 19 Create an agent -->
+  <section class="slide">
+    <div class="kicker">Свой агент</div>
+    <h2>Своя логика - наследование</h2>
+    <pre><span class="k">from</span> sgr_agent_core.agents <span class="k">import</span> <span class="t">SGRToolCallingAgent</span>
+
+<span class="k">class</span> <span class="t">SGRFileAgent</span>(<span class="t">SGRToolCallingAgent</span>):
+    name = <span class="s">"sgr_file_agent"</span>
+    toolkit = [<span class="t">ListDirTool</span>, <span class="t">ReadFileTool</span>,
+               <span class="t">FindTool</span>, <span class="t">GrepTool</span>]
+
+    <span class="c"># working_directory ограничивает песочницу</span>
+    <span class="c"># при желании переопределяем шаги цикла</span></pre>
+    <p class="sub" style="max-width:54ch">Наследник регистрируется в ядре автоматически и доступен по имени в конфиге</p>
+  </section>
+
+  <!-- 20 How to start -->
   <section class="slide">
     <div class="kicker">Как начать</div>
     <h2>Установка и запуск</h2>
     <pre><span class="c"># поставить пакет</span>
 pip install sgr-agent-core
 
-<span class="c"># запустить один и тот же агент в любом режиме</span>
+<span class="c"># скопировать и заполнить ключи в config.yaml, затем запустить</span>
 sgr    -c config.yaml     <span class="c"># HTTP-сервер, OpenAI-совместимый API</span>
 sgrsh  -c config.yaml     <span class="c"># интерактивный CLI</span>
 sgracp -c config.yaml     <span class="c"># агент по протоколу ACP через stdio</span></pre>
-    <p class="sub" style="max-width:52ch">Дальше обращаемся как к обычному OpenAI API, где model это имя агента</p>
+    <p class="sub" style="max-width:54ch">Дальше обращаемся как к обычному OpenAI API, где model это имя агента</p>
   </section>
 
-  <!-- 16. For whom -->
+  <!-- 21 Deep Research -->
   <section class="slide">
-    <div class="kicker">Кому это полезно</div>
-    <h2>Для кого инструмент</h2>
-    <div class="cards">
-      <div class="card">
-        <div class="n">Команды</div>
-        <h3>От промптов к конфигу</h3>
-        <p>Кто хочет воспроизводимые пайплайны вместо простыней промптов</p>
+    <div class="kicker">Пример - Deep Research</div>
+    <h2>Готовый агент исследования</h2>
+    <div class="pipe">
+      <div class="pstep p1"><b>generate_plan_tool</b></div>
+      <div class="pdown">&#8595;</div>
+      <div class="pstep p3"><b>web_search_tool</b> <span>Tavily, Brave, Perplexity</span></div>
+      <div class="pdown">&#8595;</div>
+      <div class="pstep p4"><b>extract_page_content_tool</b></div>
+      <div class="pdown">&#8595;</div>
+      <div class="pstep p2"><b>reasoning_tool</b> <span>анализ и адаптация плана</span></div>
+      <div class="pdown">&#8595;</div>
+      <div class="pstep p5"><b>create_report_tool</b> <span>Markdown с цитатами</span></div>
+      <div class="pdown">&#8595;</div>
+      <div class="pstep pd"><b>final_answer_tool</b></div>
+      <div class="pfoot"><span>logs/ - логи выполнения</span><span>reports/ - итоговый отчёт</span></div>
+    </div>
+  </section>
+
+  <!-- 22 File agent -->
+  <section class="slide">
+    <div class="kicker">Пример - файловый агент</div>
+    <h2>Агент по локальным файлам</h2>
+    <div class="pipe">
+      <div class="pstep p1"><b>reasoning_tool</b> <span>анализ запроса и план</span></div>
+      <div class="pdown">&#8595;</div>
+      <div class="pstep p3"><b>find_tool</b> <span>поиск файлов по имени</span></div>
+      <div class="pdown">&#8595;</div>
+      <div class="pstep p4"><b>read_file_tool / grep_tool</b> <span>чтение и анализ</span></div>
+      <div class="pdown">&#8595;</div>
+      <div class="pstep p2"><b>final_answer_tool</b> <span>итоговый ответ</span></div>
+      <div class="pfoot"><span>read-only по умолчанию</span><span>working_directory - песочница</span></div>
+    </div>
+  </section>
+
+  <!-- 23 Integrations -->
+  <section class="slide">
+    <div class="kicker">Куда подключается</div>
+    <h2>Готовые клиенты без своего UI</h2>
+    <div class="two">
+      <div class="col">
+        <h3>Через OpenAI API</h3>
+        <ul class="tight" style="margin-top:0">
+          <li>Open WebUI - локальный веб-интерфейс</li>
+          <li>LibreChat - мульти-модельный чат</li>
+          <li>Continue и любой клиент с OPENAI_BASE_URL</li>
+        </ul>
       </div>
-      <div class="card">
-        <div class="n">Инженеры</div>
-        <h3>Свой агентный API</h3>
-        <p>Кому нужен OpenAI-совместимый сервис на своих моделях и on-prem</p>
-      </div>
-      <div class="card">
-        <div class="n">Задачи</div>
-        <h3>Research и работа с данными</h3>
-        <p>Deep research, разбор документов, файловые и доменные агенты</p>
+      <div class="col">
+        <h3>Через ACP</h3>
+        <ul class="tight" style="margin-top:0">
+          <li>Obsidian - плагин Agent Client</li>
+          <li>Zed - нативная панель агента</li>
+          <li>VS Code и JetBrains через расширения ACP</li>
+        </ul>
       </div>
     </div>
-    <p class="sub" style="max-width:52ch">Особенно там, где важны прозрачность шагов и приватность данных</p>
+    <p class="sub" style="max-width:52ch">Берём готовый клиент и указываем адрес агента, свой фронт писать не нужно</p>
   </section>
 
-  <!-- 17. Outro -->
+  <!-- 24 Metrics + Langfuse -->
+  <section class="slide">
+    <div class="kicker">Наблюдаемость</div>
+    <h2>Метрики, тесты и Langfuse</h2>
+    <ul class="tight">
+      <li>Каждый шаг агента виден в логах - прозрачный пайплайн, а не чёрный ящик</li>
+      <li>Тулы тестируются как обычные классы - unit-тест на вход и выход</li>
+      <li>Langfuse подключается блоком в конфиге - трейсы, задержки, стоимость</li>
+      <li>Метрики - полнота ответа, число лишних вызовов, регрессия при смене модели</li>
+    </ul>
+    <p class="sub" style="max-width:52ch">Поверх видимых шагов можно строить метрики и сравнивать прогоны</p>
+  </section>
+
+  <!-- 25 Summary / roadmap -->
   <section class="slide">
     <div class="kicker">Итог</div>
+    <h2>Зачем начинать пользоваться</h2>
+    <ul class="tight">
+      <li><b>Предсказуемость</b> <span class="m">рассуждение по схеме, без пропущенных шагов</span></li>
+      <li><b>Переносимость</b> <span class="m">любой OpenAI-совместимый провайдер и локальные модели</span></li>
+      <li><b>Расширяемость</b> <span class="m">свои тулы, схемы и агенты через конфиг и наследование</span></li>
+      <li><b>Экосистема</b> <span class="m">готовые клиенты через OpenAI API и ACP, MCP, Langfuse</span></li>
+    </ul>
+    <p class="sub" style="max-width:58ch">github.com/vamplabAI/sgr-agent-core - проект команды neuraldeep и vamplabAI при поддержке red_mad_robot, концепция SGR - LLM Under the Hood</p>
+  </section>
+
+  <!-- 26 Thanks -->
+  <section class="slide">
     <div class="about">
       <div>
-        <h2 style="margin-bottom:.4em">Зачем начинать пользоваться</h2>
-        <ul>
-          <li><b>Предсказуемость</b> <span class="m">рассуждение по схеме, без пропущенных шагов</span></li>
-          <li><b>Переносимость</b> <span class="m">любой OpenAI-совместимый провайдер и локальные модели</span></li>
-          <li><b>Расширяемость</b> <span class="m">свои тулы, схемы и агенты через конфиг и наследование</span></li>
-        </ul>
-        <p style="margin-top:1em;color:var(--muted);font-size:clamp(14px,1.6vw,20px);max-width:50ch">github.com/vamplabAI/sgr-agent-core - проект команды neuraldeep и vamplabAI, концепция SGR - LLM Under the Hood</p>
+        <div class="kicker">Спасибо за внимание</div>
+        <h2 style="margin-bottom:.5em">Вопросы?</h2>
+        <p style="color:var(--muted);max-width:34ch">Пишите в канал, там разборы про агентов, SGR и self-host без маркетинга.</p>
+        <div class="contact" style="margin-top:1.4em">
+          <div class="qr"><img src="assets/qr-telegram.png" alt="Telegram QR"></div>
+          <div class="handle">t.me/evilfreelancer<span>Павел Рыков - Pavel Zloi</span></div>
+        </div>
       </div>
-      <div style="justify-self:center;text-align:center">
-        <div class="qr" style="width:clamp(150px,20vw,220px);height:clamp(150px,20vw,220px);margin:0 auto"><img src="assets/qr-telegram.png" alt="Telegram QR"></div>
-        <div style="margin-top:14px;color:var(--accent);font-family:'SF Mono',Menlo,Consolas,monospace;font-size:clamp(14px,1.6vw,20px)">t.me/evilfreelancer</div>
-        <div style="margin-top:6px;color:var(--muted);font-size:clamp(13px,1.4vw,17px)">Спасибо. Вопросы?</div>
-      </div>
+      <div class="photo" role="img" aria-label="Павел Рыков"></div>
     </div>
   </section>
 
 </div>
 
-<div class="pageno"><b id="cur">1</b> / <span id="tot">16</span></div>
-
+<div class="pageno"><b id="cur">1</b> / <span id="tot">24</span></div>
 <div class="controls">
   <button class="navbtn" id="btnPrev" title="Назад (стрелка влево)" aria-label="Назад"></button>
   <button class="navbtn" id="btnNext" title="Вперёд (стрелка вправо)" aria-label="Вперёд"></button>
@@ -493,7 +687,7 @@ sgracp -c config.yaml     <span class="c"># агент по протоколу A
 <div class="overlay" id="jump">
   <div class="jumpbox">
     <label>Перейти к слайду</label>
-    <input id="jumpInput" type="text" inputmode="numeric" autocomplete="off" placeholder="1-16">
+    <input id="jumpInput" type="text" inputmode="numeric" autocomplete="off" placeholder="1-24">
     <div class="hint2">Enter - перейти · Esc - отмена</div>
   </div>
 </div>
@@ -512,11 +706,7 @@ sgracp -c config.yaml     <span class="c"># агент по протоколу A
   const jumpInput=document.getElementById('jumpInput');
   document.getElementById('tot').textContent=slides.length;
 
-  // titles for overview, derived from each slide
-  const titles=slides.map(s=>{
-    const h=s.querySelector('h1,h2');
-    return h?h.textContent.trim():'Слайд';
-  });
+  const titles=slides.map(s=>{const h=s.querySelector('h1,h2');return h?h.textContent.trim():'Слайд';});
 
   function show(n,push){
     i=Math.max(0,Math.min(slides.length-1,n));
@@ -526,15 +716,11 @@ sgracp -c config.yaml     <span class="c"># агент по протоколу A
     btnPrev.disabled=(i===0);
     btnNext.disabled=(i===slides.length-1);
     document.querySelectorAll('.ovcard').forEach((c,k)=>c.classList.toggle('cur',k===i));
-    if(push!==false){
-      const hash='#/'+(i+1);
-      if(location.hash!==hash) history.replaceState(null,'',hash);
-    }
+    if(push!==false){const hash='#/'+(i+1);if(location.hash!==hash) history.replaceState(null,'',hash);}
   }
   function next(){show(i+1)}
   function prev(){show(i-1)}
 
-  // build overview grid
   titles.forEach((t,k)=>{
     const c=document.createElement('div');
     c.className='ovcard';
@@ -574,14 +760,12 @@ sgracp -c config.yaml     <span class="c"># агент по протоколу A
     else if(k==='End'){e.preventDefault();show(slides.length-1)}
   });
 
-  // click halves to navigate, but not on controls/overlays
   document.addEventListener('click',e=>{
     if(anyOpen())return;
     if(e.target.closest('.controls')||e.target.closest('a'))return;
     if(e.clientX>window.innerWidth*0.5)next();else prev();
   });
 
-  // deep-link and back/forward via hash
   function fromHash(){const m=(location.hash||'').match(/#\/(\d+)/);if(m){show(parseInt(m[1],10)-1,false)}else{show(0,false)}}
   window.addEventListener('hashchange',fromHash);
   fromHash();
