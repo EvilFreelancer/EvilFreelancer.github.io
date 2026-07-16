@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, maximum-scale=6.0">
+<title>Речь · SGR Agent Core</title>
+<style>
+  :root{ font-size:20px; }
+  *{ box-sizing:border-box; -webkit-text-size-adjust:100%; }
+  body{
+    margin:0; background:#ffffff; color:#111111;
+    font-family:-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    line-height:1.6;
+  }
+  .bar{
+    position:sticky; top:0; z-index:10;
+    display:flex; align-items:center; gap:.6rem;
+    background:#ffffff; border-bottom:1px solid #e6e6e6;
+    padding:.5rem .8rem;
+  }
+  .bar .t{ font-weight:800; font-size:.8rem; letter-spacing:.02em; margin-right:auto; color:#000; }
+  .bar button{
+    font:inherit; font-weight:800; font-size:.9rem;
+    background:#111; color:#fff; border:0; border-radius:.5rem;
+    padding:.35rem .7rem; cursor:pointer; min-width:2.6rem;
+  }
+  .bar button.ghost{ background:#fff; color:#111; border:1.5px solid #111; }
+  main{ max-width:44rem; margin:0 auto; padding:1.4rem 1.1rem 6rem; }
+  .lead{ color:#555; font-size:1rem; border-left:4px solid #111; padding-left:.9rem; margin:.2rem 0 1.4rem; }
+  section{ padding:1.6rem 0; border-top:2px solid #ececec; }
+  section:first-of-type{ border-top:0; }
+  .head{ margin-bottom:.9rem; }
+  .lbl{
+    display:inline-block; font-weight:800; font-size:.72rem; letter-spacing:.16em;
+    text-transform:uppercase; color:#0a5cff; margin-bottom:.35rem;
+  }
+  h2{ margin:0; font-size:2.05rem; line-height:1.12; font-weight:800; letter-spacing:-.01em; }
+  p{ margin:.75rem 0; font-size:1.12rem; }
+  section p:first-of-type{ margin-top:0; }
+  /* contents drawer */
+  #toc{ display:none; max-width:44rem; margin:0 auto; padding:.4rem 1.1rem 1rem; border-bottom:1px solid #e6e6e6; }
+  #toc.open{ display:block; }
+  #toc a{ display:block; padding:.5rem .2rem; color:#111; text-decoration:none; border-bottom:1px solid #f0f0f0; font-size:1rem; }
+  #toc a:active{ background:#f4f7ff; }
+  .top{ display:block; text-align:center; margin-top:2rem; color:#0a5cff; font-weight:800; text-decoration:none; }
+</style>
+</head>
+<body>
+  <div class="bar">
+    <span class="t">SGR Agent Core · речь</span>
+    <button class="ghost" id="toc-btn" aria-label="Оглавление">Слайды</button>
+    <button id="minus" aria-label="Меньше шрифт">А−</button>
+    <button id="plus" aria-label="Больше шрифт">А+</button>
+  </div>
+  <nav id="toc">
+    <a href="#s0">Слайд 1 · Заставка</a>
+<a href="#s1">Слайд 2 · О себе</a>
+<a href="#s2">Слайд 3 · Программа</a>
+<a href="#s3">Слайд 4 · Что такое SGR</a>
+<a href="#s4">Слайд 5 · Схема в коде</a>
+<a href="#s5">Слайд 6 · Архитектура</a>
+<a href="#s6">Слайд 7 · ACP подробнее</a>
+<a href="#s7">Слайд 8 · API Mode</a>
+<a href="#s8">Слайд 9 · Системные тулы</a>
+<a href="#s9">Слайд 10 · Встроенные агенты</a>
+<a href="#s10">Слайд 11 · Конфигурация</a>
+<a href="#s11">Слайд 12 · Реестр тулов</a>
+<a href="#s12">Слайд 13 · Реестр MCP</a>
+<a href="#s13">Слайд 14 · Реестр агентов</a>
+<a href="#s14">Слайд 15 · Связь компонентов</a>
+<a href="#s15">Слайд 16 · Свой инструмент</a>
+<a href="#s16">Слайд 17 · Свой агент</a>
+<a href="#s17">Слайд 18 · Как начать</a>
+<a href="#s18">Слайд 19 · Пример - Deep Research</a>
+<a href="#s19">Слайд 20 · Пример - файловый агент</a>
+<a href="#s20">Слайд 21 · Куда подключается</a>
+<a href="#s21">Слайд 22 · Метрики и Langfuse</a>
+<a href="#s22">Слайд 23 · Итог</a>
+<a href="#s23">Слайд 24 · Спасибо за внимание</a>
+<a href="#s24">Запас по времени</a>
+  </nav>
+  <main>
+    <h1 style="font-size:1.5rem;font-weight:800;margin:.2rem 0 1rem;line-height:1.2">Речь к докладу SGR Agent Core - как и зачем начать им пользоваться</h1>
+    <p class="lead">Слот 20:35 - 21:10. Целимся в 30 минут выступления, остальное на вопросы. Текст ниже это опора, а не читка слово в слово. 24 слайда. Только теория, компоненты и короткие примеры кода, без практических заданий.</p>
+    <section id="s0">
+<div class="head"><div class="lbl">Слайд 1</div><h2>Заставка</h2></div>
+<p>Всем привет. Сегодня расскажу про SGR Agent Core - как и зачем начать им пользоваться.</p>
+<p>Проект открытый, на Python, под лицензией MIT.</p>
+</section>
+<section id="s1">
+<div class="head"><div class="lbl">Слайд 2</div><h2>О себе</h2></div>
+<p>Пара слов о себе. Меня зовут Павел Рыков, в миру более известен под творческим псевдонимом Павел Злой.</p>
+<p>По работе я руководитель импортозамещения ML в Росгосстрах.</p>
+<p>Занимаюсь ML и LLM, агентными системами, self-host и инференсом моделей, пишу open-source и веду телеграм-канал про AI.</p>
+<p>В самом SGR Agent Core я отвечаю за разработку API - HTTP-сервер и ACP.</p>
+<p>Сам проект командный - его развивает сообщество neuraldeep и vamplabAI при поддержке red_mad_robot, а концепция SGR выросла из сообщества LLM Under the Hood.</p>
+<p>Кому интересно, вот QR на канал, там про всё это подробнее.</p>
+</section>
+<section id="s2">
+<div class="head"><div class="lbl">Слайд 3</div><h2>Программа</h2></div>
+<p>Коротко о том, что будет дальше.</p>
+<p>Сначала разберём, что такое SGR и зачем он нужен. Потом архитектуру - три способа запуска, API, ACP и CLI. Дальше базовые компоненты - системные тулы и встроенные агенты. Затем самое важное - YAML-конфигурация и реестры. Потом покажу, как собрать свой тул и агента, как всё запустить и куда подключить. В конце два готовых примера - Deep Research и файловый агент, и блок про метрики и Langfuse.</p>
+<p>Дисклеймер - сегодня без промптов на 500 строк. Фокус на конфигурации, воспроизводимости и прозрачности.</p>
+</section>
+<section id="s3">
+<div class="head"><div class="lbl">Слайд 4</div><h2>Что такое SGR</h2></div>
+<p>Начнём с главного. SGR это Schema-Guided Reasoning, рассуждение по схеме.</p>
+<p>Слева на слайде обычный агент - чёрный ящик. Запрос ушёл, внутри произошла какая-то магия, ответ пришёл. Что там происходило и почему - нам не видно.</p>
+<p>Справа SGR-агент - прозрачный. Мы явно описываем фазы - рассуждение, планирование, действие, ответ. И каждая фаза это не пожелание в промпте, а строгая схема, которую модель обязана заполнить. За счёт этого рассуждение видно, его можно проверить и повторить.</p>
+<p>То есть мы не просим модель быть умной, мы даём ей рельсы, показываем как думать, а дальше она уже сама.</p>
+</section>
+<section id="s4">
+<div class="head"><div class="lbl">Слайд 5</div><h2>Схема в коде</h2></div>
+<p>Чтобы не звучало абстрактно, вот та самая структура в коде.</p>
+<p>Это ReasoningTool, обычная pydantic-модель. После конвертации в JSON-схему она уходит в модель как формат ответа.</p>
+<p>Поля - шаги рассуждения, текущая ситуация, статус плана, флаг хватает ли данных, что осталось и завершена ли задача.</p>
+<p>Каждое поле это обязательный шаг, а не пожелание. Модель заполняет всю схему целиком, и мы получаем видимое, повторяемое рассуждение прямо в структуре ответа.</p>
+</section>
+<section id="s5">
+<div class="head"><div class="lbl">Слайд 6</div><h2>Архитектура</h2></div>
+<p>Теперь про то, как это крутится. Один и тот же агент запускается тремя способами.</p>
+<p>Первый - API, это HTTP-сервер с OpenAI-совместимым эндпоинтом. Стриминг по SSE, режимы stateless и stateful, работает с Open WebUI, LibreChat и любым OpenAI-клиентом.</p>
+<p>Второй - ACP, Agent Client Protocol поверх stdio, для локальных агентов прямо в редакторах - Obsidian, Zed, VS Code.</p>
+<p>Третий - CLI, интерактивный шелл в терминале для одиночных запросов.</p>
+<p>Логика агента одна, меняется только способ запуска, а конфиг один и тот же.</p>
+</section>
+<section id="s6">
+<div class="head"><div class="lbl">Слайд 7</div><h2>ACP подробнее</h2></div>
+<p>Пара слов про ACP, потому что это относительно новая для многих штука.</p>
+<p>Это протокол для локальных агентов поверх stdio. Агент запускается как подпроцесс и общается по JSON-RPC. Поддерживает tools, resources и prompts.</p>
+<p>Хосты, которые его понимают - Obsidian с плагином Agent Client, Zed с нативной панелью агента, VS Code и JetBrains через расширения, Claude Desktop.</p>
+<p>Запускается командой sgracp с тем же конфигом, что и HTTP-сервер.</p>
+</section>
+<section id="s7">
+<div class="head"><div class="lbl">Слайд 8</div><h2>API Mode</h2></div>
+<p>Теперь про серверную часть подробнее. Это FastAPI-сервер, который хранит агентов в памяти и управляет их жизненным циклом.</p>
+<p>Цикл простой - создание, то есть загрузка конфига и инициализация тулов, выполнение, то есть обработка запроса через SGR-пайплайн, и очистка.</p>
+<p>Два режима. Stateless - клиент шлёт полный контекст каждый раз, как обычный REST. Stateful - диалог по agent_id, история хранится на сервере. Плюс стриминг по SSE и возможность отменить выполнение.</p>
+<p>Важно помнить, что stateful-агент живёт в памяти сервера и имеет таймаут.</p>
+</section>
+<section id="s8">
+<div class="head"><div class="lbl">Слайд 9</div><h2>Системные тулы</h2></div>
+<p>Из чего собирается агент. Начнём с тулов.</p>
+<p>Из коробки идёт готовый набор. Системные - reasoning для анализа и выбора следующего шага, generate_plan и adapt_plan для плана, clarification для уточнений, final_answer и answer для ответов.</p>
+<p>Прикладные - web_search с провайдерами Tavily, Brave и Perplexity, extract_page_content для контента страниц, create_report для отчётов с цитатами, и run_command для команд и выполнения кода в песочнице.</p>
+<p>Это те кирпичики, из которых собираются агенты.</p>
+</section>
+<section id="s9">
+<div class="head"><div class="lbl">Слайд 10</div><h2>Встроенные агенты</h2></div>
+<p>Агенты, которые есть сразу.</p>
+<p>sgr_agent - максимально строгий и управляемый SGR. sgr_tool_calling_agent - SGR-логика плюс нативный tool calling, больше совместимости и отказоустойчивости. tool_calling_agent - просто тулколлинг без SGR. dialog_agent - диалоговый, с промежуточными результатами. И iron_agent - упрощённый, без tool calling, для совсем простых сценариев.</p>
+<p>Любой можно расширить своим наследником, механизм ядра при этом общий.</p>
+</section>
+<section id="s10">
+<div class="head"><div class="lbl">Слайд 11</div><h2>Конфигурация</h2></div>
+<p>Теперь то, ради чего многие и приходят - конфигурация. Ключевая философия SGR это конфигурация вместо кода.</p>
+<p>Есть иерархия настроек. Сначала дефолты фреймворка, потом переменные окружения, потом config.yaml, потом параметры командной строки. Каждый следующий слой переопределяет предыдущий.</p>
+<p>Сам конфиг разбит на секции - llm, execution, tools, mcp, agents и acp. Дальше пройдёмся по главным реестрам.</p>
+</section>
+<section id="s11">
+<div class="head"><div class="lbl">Слайд 12</div><h2>Реестр тулов</h2></div>
+<p>Реестр тулов. Здесь мы регистрируем инструменты и настраиваем их.</p>
+<p>Можно просто объявить тул пустым словарём, если он без параметров. Можно задать конфигурацию - например у веб-поиска указать провайдера, ключ и лимиты. А можно подключить свой кастомный тул из модуля через base_class.</p>
+<p>Тул, объявленный тут, дальше подключается к агентам по имени.</p>
+</section>
+<section id="s12">
+<div class="head"><div class="lbl">Слайд 13</div><h2>Реестр MCP</h2></div>
+<p>Реестр MCP-серверов. MCP это Model Context Protocol, способ подключить внешние источники с их тулами.</p>
+<p>Сервер можно подключить по URL, как удалённый deepwiki, или запустить локально как stdio-процесс, например filesystem через npx.</p>
+<p>Агент автоматически получает тулы от подключённых MCP-серверов, ядро при этом трогать не нужно.</p>
+</section>
+<section id="s13">
+<div class="head"><div class="lbl">Слайд 14</div><h2>Реестр агентов</h2></div>
+<p>И реестр агентов. Тут определяем конкретного агента.</p>
+<p>Выбираем базовый класс, при необходимости переопределяем настройки LLM - модель, температуру, и перечисляем список тулов.</p>
+<p>Важный момент - для SGR-агента в списке обязательно должен быть reasoning_tool. Именно он запускает фазу рассуждения по схеме, без него агент не будет думать структурно.</p>
+<p>Ключевая идея всего блока - минимальные переопределения. Базовый конфиг задаёт LLM и лимиты, а конкретный агент только выбирает класс и тулы.</p>
+</section>
+<section id="s14">
+<div class="head"><div class="lbl">Слайд 15</div><h2>Связь компонентов</h2></div>
+<p>Соберём картину целиком.</p>
+<p>Наверху агент - это SGR Pipeline с фазами Reasoning, Planning, Acting. Он опирается на слой тулов - зарегистрированные в конфиге инструменты вроде web_search, extract_page_content, create_report, run_command.</p>
+<p>А снизу подключаются внешние MCP-серверы - deepwiki, filesystem, git и другие, которые добавляют агенту ещё тулов.</p>
+<p>То есть агент, тулы и MCP это три слоя, которые собираются конфигом.</p>
+</section>
+<section id="s15">
+<div class="head"><div class="lbl">Слайд 16</div><h2>Свой инструмент</h2></div>
+<p>Теперь как расширять. Начнём с самого нижнего уровня - свой тул.</p>
+<p>Тул это схема плюс один метод. Импортируем BaseTool из ядра и Field из pydantic, наследуемся от BaseTool, задаём имя, описываем поля через Field.</p>
+<p>Тонкость в том, что поля Field это одновременно и аргументы тула, и подсказка модели, как их заполнить - описание идёт прямо в схему.</p>
+<p>А в методе call пишем свою логику и возвращаем текст, который увидит модель. Всё, тул готов, можно подключать в конфиге.</p>
+</section>
+<section id="s16">
+<div class="head"><div class="lbl">Слайд 17</div><h2>Свой агент</h2></div>
+<p>Уровень выше - свой агент, когда нужна своя логика.</p>
+<p>Наследуемся от готового типа, например SGRToolCallingAgent, задаём имя и список тулов. Для файлового агента добавляем working_directory, который ограничивает песочницу, за неё агент не выйдет. При желании переопределяем шаги цикла.</p>
+<p>Наследник регистрируется в ядре автоматически и становится доступен по имени в конфиге, как и встроенные.</p>
+</section>
+<section id="s17">
+<div class="head"><div class="lbl">Слайд 18</div><h2>Как начать</h2></div>
+<p>Как это запустить. Ставим пакет через pip install sgr-agent-core.</p>
+<p>Копируем пример конфига, прописываем ключи, и дальше один и тот же агент можно поднять в любом режиме.</p>
+<p>Команда sgr - HTTP-сервер с OpenAI-совместимым API. Команда sgrsh - интерактивный CLI. Команда sgracp - агент по протоколу ACP через stdio.</p>
+<p>После этого обращаемся к нему как к обычному OpenAI API, в поле model указываем имя нашего агента.</p>
+</section>
+<section id="s18">
+<div class="head"><div class="lbl">Слайд 19</div><h2>Пример - Deep Research</h2></div>
+<p>Первый готовый пример - Deep Research, агент глубокого исследования темы.</p>
+<p>Пайплайн такой. Сначала generate_plan строит план. Потом web_search ищет в интернете. extract_page_content вытаскивает контент страниц. reasoning анализирует и при необходимости адаптирует план. create_report собирает отчёт в Markdown с цитатами. И final_answer выдаёт результат.</p>
+<p>Всё это не чёрный ящик - в логах виден каждый шаг, а итоговый отчёт сохраняется в reports.</p>
+</section>
+<section id="s19">
+<div class="head"><div class="lbl">Слайд 20</div><h2>Пример - файловый агент</h2></div>
+<p>Второй пример, ради которого многие и приходят - файловый агент, работа с локальными файлами.</p>
+<p>Пайплайн проще. reasoning анализирует запрос и планирует. find ищет файлы по имени. read_file и grep читают и анализируют содержимое. final_answer формирует ответ.</p>
+<p>По умолчанию всё read-only, а working_directory ограничивает агента одной папкой. Через ACP такого агента удобно подключить прямо к Obsidian и спрашивать по своим заметкам.</p>
+</section>
+<section id="s20">
+<div class="head"><div class="lbl">Слайд 21</div><h2>Куда подключается</h2></div>
+<p>Отдельно про то, куда это подключается, потому что свой фронт писать не нужно.</p>
+<p>Через OpenAI API работают Open WebUI, LibreChat, Continue и любой клиент, который умеет OPENAI_BASE_URL.</p>
+<p>Через ACP - Obsidian с плагином Agent Client, Zed с нативной панелью агента, VS Code и JetBrains через расширения.</p>
+<p>Берём готовый клиент и просто указываем адрес нашего агента.</p>
+</section>
+<section id="s21">
+<div class="head"><div class="lbl">Слайд 22</div><h2>Метрики и Langfuse</h2></div>
+<p>И про наблюдаемость, потому что агент это не только запустить, но и понять, что он делает.</p>
+<p>Каждый шаг виден в логах, это прозрачный пайплайн, а не чёрный ящик. Тулы тестируются как обычные классы - unit-тест на вход и выход.</p>
+<p>Для трейсинга есть Langfuse, подключается блоком в конфиге, показывает вызовы, задержки и стоимость.</p>
+<p>А метрики простые - полнота ответа, число лишних вызовов тулов, регрессия при смене модели. Совет из практики - проверяйте не только правильный путь, но и как агент ведёт себя на пустых папках и странных запросах.</p>
+</section>
+<section id="s22">
+<div class="head"><div class="lbl">Слайд 23</div><h2>Итог</h2></div>
+<p>Давайте резюмируем, зачем всё это.</p>
+<p>Предсказуемость - рассуждение идёт по схеме, без пропущенных шагов. Переносимость - любой OpenAI-совместимый провайдер и локальные модели. Расширяемость - свои тулы, схемы и агенты через конфиг и наследование. И экосистема - готовые клиенты через OpenAI API и ACP, MCP и Langfuse.</p>
+<p>Проект делает команда neuraldeep и vamplabAI при поддержке red_mad_robot, концепция SGR выросла из сообщества LLM Under the Hood.</p>
+</section>
+<section id="s23">
+<div class="head"><div class="lbl">Слайд 24</div><h2>Спасибо за внимание</h2></div>
+<p>На этом всё. Спасибо за внимание.</p>
+<p>Вот ещё раз QR на канал, там разборы про агентов, SGR и self-host без маркетинга.</p>
+<p>Готов ответить на вопросы.</p>
+</section>
+<section id="s24">
+<div class="head"><h2>Запас по времени</h2></div>
+<p>Целевые 30 минут - это верх слота, поэтому темп ровный, не частим. Если поджимает, первыми сворачиваем слайды 12-14 (три реестра) в одну мысль - агенты, тулы и MCP описываются данными в config.yaml. Опорные слайды, которые нельзя пропускать - 4 что такое SGR, 5 схема в коде, 15 связь компонентов и 16 создание тула.</p>
+</section>
+    <a class="top" href="#">Наверх</a>
+  </main>
+<script>
+  var root=document.documentElement;
+  var KEY="rech-fs";
+  function apply(px){ px=Math.max(15,Math.min(40,px)); root.style.fontSize=px+"px"; localStorage.setItem(KEY,px); }
+  var saved=parseInt(localStorage.getItem(KEY)||"20",10); apply(isNaN(saved)?20:saved);
+  document.getElementById("plus").onclick=function(){ apply(parseInt(root.style.fontSize)+2); };
+  document.getElementById("minus").onclick=function(){ apply(parseInt(root.style.fontSize)-2); };
+  var toc=document.getElementById("toc");
+  document.getElementById("toc-btn").onclick=function(){ toc.classList.toggle("open"); };
+  toc.addEventListener("click",function(e){ if(e.target.tagName==="A") toc.classList.remove("open"); });
+</script>
+</body>
+</html>
