@@ -55,7 +55,7 @@
     .reveal a { color: var(--coral); text-decoration: none; }
 
     /* единый вертикальный ритм */
-    .reveal .accent-line { display:inline-block; border-bottom: 6px solid var(--coral); padding-bottom: 14px; margin: 0 0 52px; }
+    .reveal .accent-line { display:inline-block; border-bottom: 6px solid var(--coral); padding-bottom: 14px; margin: 0 0 40px; }
     .reveal .mt   { margin-top: 30px; }
     .reveal .mt-s { margin-top: 14px; }
     .reveal .mt2  { margin-top: 40px; }
@@ -157,10 +157,10 @@
 <!-- 1 · титул -->
 <section data-background-gradient="radial-gradient(1400px 800px at 80% 0%, rgba(59,107,255,0.28), transparent 55%), radial-gradient(1200px 700px at 5% 100%, rgba(111,2,206,0.30), transparent 55%), #0a0e27">
   <div class="eyebrow">Podlodka AI Crew</div>
-  <h1>Выше потолка<br>инференса</h1>
-  <p class="lead mt" style="max-width:1400px;">On-premise модели для разработки в закрытом контуре, и что делать, когда модель <em>не тянет</em></p>
-  <div class="speaker">
-    <div style="font-size:38px;font-weight:800;">Павел Рыков &middot; Pavel Zloi</div>
+  <h1>Выше потолка не прыгнешь</h1>
+  <p class="lead mt" style="max-width:1400px;">On-premise модели для разработки с агентами в закрытом контуре, и что делать, когда модель <em>не тянет</em></p>
+  <div class="speaker mt2">
+    <div style="font-size:38px;font-weight:800;">Павел Рыков <small style="opacity: 50%;">aka</small> Pavel Zloi</div>
   </div>
 </section>
 
@@ -170,7 +170,8 @@
     <div>
       <h2 style="margin-bottom:30px;">Всем привет, я Павел Рыков</h2>
       <ul class="dot" style="font-size:31px;">
-        <li>Известен как <strong>Павел Злой</strong>, руководитель направления в Росгосстрах.</li>
+        <li>Известен как <strong>Павел Злой</strong>.</li>
+        <li>Руководитель направления импортозамещения ML в Росгосстрах.</li>
         <li>Обучаю модели: серия <strong>Saiga</strong>, фреймворк <strong>impruver</strong>, адаптеры <strong>MoDA</strong>.</li>
         <li>Автор кодового агента <strong>Coddy Agent</strong>, контрибьютор <strong>SGR Agent Core</strong>.</li>
         <li>Пишу про агентов, harness, on-prem и инференс на своём железе на Хабр и в телеграм.</li>
@@ -192,16 +193,7 @@
   </div>
 </section>
 
-<!-- 3 · рамка -->
-<section>
-  <div style="font-size:82px;font-weight:800;letter-spacing:-0.02em;">
-    <span style="color:var(--blue);">LLM</span><span style="color:var(--dim);"> + </span><span style="color:var(--coral);">Harness</span><span style="color:var(--dim);"> = </span><span style="color:var(--purple);">Agent</span>
-  </div>
-  <p class="lead mt" style="max-width:1560px;">On-prem жёстко ограничивает вас в выборе LLM. Какое железо, такая и модель. Это ваш <strong>потолок инференса</strong>.</p>
-  <p class="statement mt" style="font-size:46px;max-width:1580px;">Потолок пробивают <span class="em">железом под большую модель</span>, а разрыв с SOTA закрывают <span class="em">прокачкой harness</span>.</p>
-</section>
-
-<!-- 4 · соблазн сэкономить -->
+<!-- 3 · соблазн сэкономить -->
 <section>
   <h2 class="accent-line">Хочу кодовую модель на своём железе</h2>
   <ul class="dot" style="font-size:35px;">
@@ -212,6 +204,15 @@
   <p class="statement mt2" style="font-size:46px;">Дёшево, локально и сегодня. <span class="em">В чём подвох?</span></p>
 </section>
 
+<!-- 4 · рамка -->
+<section>
+  <div style="font-size:82px;font-weight:800;letter-spacing:-0.02em;">
+    <span style="color:var(--blue);">LLM</span><span style="color:var(--dim);"> + </span><span style="color:var(--coral);">Harness</span><span style="color:var(--dim);"> = </span><span style="color:var(--purple);">Agent</span>
+  </div>
+  <p class="lead mt2" style="max-width:1560px;">On-prem жёстко ограничивает вас в выборе LLM. Какое железо, такая и модель. Это ваш <strong>потолок инференса</strong>.</p>
+  <p class="statement mt2" style="font-size:46px;max-width:1580px;">Потолок пробивают <span class="em">железом под большую модель</span>, а разрыв с SOTA закрывают <span class="em">прокачкой harness</span>.</p>
+</section>
+
 <!-- 5 · маленькая не тянет -->
 <section>
   <h2 class="accent-line">Маленькая и ужатая не тянет код</h2>
@@ -220,14 +221,14 @@
     <div class="card warn"><div class="ctitle">~ 13B</div><p>Где по моим наблюдениям начинается эмерджентность.</p></div>
     <div class="card" style="border-color:var(--coral);"><div class="ctitle">20B+</div><p>Минимум для агента, генерирующего код. Ниже - только автодополнение по табу.</p></div>
   </div>
-  <p class="lead mt2">Модели вроде <strong>Qwen3.5-27B</strong> или <strong>gpt-oss-20B</strong> с реальным кодом не справляются. А агрессивная квантизация ниже 4 бит роняет качество там, где и так впритык.</p>
+  <p class="lead mt2">Модели вроде <strong>Qwen3.5-27B</strong> или <strong>GPT-OSS-20B</strong> с реальным кодом не справляются, а агрессивная квантизация от 4х бит и ниже ухудшает качество на больших контекстах и продолжительных агентых петлях.</p>
 </section>
 
 <!-- 6 · соблазн обучить -->
 <section>
   <h2 class="accent-line">Не тянет? Давайте дообучим</h2>
   <p class="statement" style="font-size:48px;max-width:1540px;">"У нас гигантская кодовая база. Дообучим модель на ней - <span class="em">она выучит наш код и станет нашей</span>."</p>
-  <p class="lead mt2">Идея хорошая, дообучение - нормальный инструмент, я им сам живу. Но давайте посмотрим, как оно устроено и во что обходится.</p>
+  <p class="lead mt2">Идея хорошая, дообучение - нормальный вариант, однако, есть нюансы.</p>
 </section>
 
 <!-- 7 · пайплайн -->
@@ -240,18 +241,18 @@
     <div class="arrow">&rarr;</div>
     <div class="step"><b>Alignment</b><span>предпочтения: RLHF, DPO и другие</span></div>
   </div>
-  <p class="lead mt2">Когда заказчики говорят "давай дообучим", они почти всегда представляют себе <em>SFT поверх готовой модели</em>.</p>
+  <p class="lead mt2">Когда говорят "давай дообучим", почти всегда имеют ввиду только <em>SFT</em> поверх готовой модели.</p>
 </section>
 
 <!-- 8 · SFT форма/смысл -->
 <section>
   <h2 class="accent-line">SFT запоминает форму, а не смысл</h2>
   <div class="grid-2">
-    <div class="card good"><div class="ctitle">Что реально происходит</div><p>Модель заучивает <strong>форму</strong> кода: стиль, имена, структуру. Внутри домена датасета - хорошо.</p></div>
-    <div class="card bad"><div class="ctitle">Чего НЕ происходит</div><p>Смыслы и факты <strong>надёжно не закладываются</strong>. Модель так же выдумывает несуществующие функции.</p></div>
+    <div class="card good"><div class="ctitle">Что реально происходит</div><p>Модель заучивает <strong>форму</strong> кода: стиль, имена, структуру. Внутри домена датасета тесты показывают хорошие результаты, однако, модель чаще галюцинирует за его пределами.</p></div>
+    <div class="card bad"><div class="ctitle">Чего НЕ происходит</div><p>Смыслы и факты <strong>не закладываются</strong>, модель так же выдумывает несуществующие функции.</p></div>
   </div>
-  <p class="dim small mt2">Замер в работе сделан на игровых задачах, перенос вывода на код - мой инженерный.</p>
-  <div class="srcs">
+  <p class="lead mt2">Замер в работе сделан на тестовых задачах, подтверждено эмпирически на моих проектах.</p>
+  <div class="srcs mt2">
     <div class="src">
       <div class="qr"><img src="assets/qr-arxiv-sft.png" alt="arXiv 2501.17161"></div>
       <div><a href="https://arxiv.org/abs/2501.17161">arxiv.org/abs/2501.17161</a><div class="lbl">SFT Memorizes, RL Generalizes</div></div>
@@ -271,7 +272,9 @@
     <div class="arrow">&rarr;</div>
     <div class="step purple" style="border-color:var(--purple);"><b>GPU</b><span>обучать и переобучать много раз</span></div>
   </div>
-  <p class="lead mt2">Дампа репозитория мало - нужны размеченные траектории. Такого датасета обычно <strong>нет</strong>, а собрать его <em>дороже, чем купить GPU</em>.</p>
+  <p class="lead mt2">Дампа репозитория недостаточно для RL.</p>
+  <p class="lead mt2">Нужны ещё размеченные примеры диалогов с агентом, как для SFT так и для RL.</p>
+  <p class="lead mt2">Такого датасета обычно нет, а собрать и поддерживать его дороже, чем купить GPU.</p>
 </section>
 
 <!-- 10 · результаты хуже -->
@@ -281,7 +284,7 @@
     <div class="card purple"><div class="ctitle">Catastrophic forgetting</div><p>Дообучили под свой стек - общие способности просели. Модель теряет качество по осям, которых <strong>в вашем бенче нет</strong>.</p></div>
     <div class="card blue"><div class="ctitle">Иллюзия улучшения</div><p>Без eval легко перепутать "стала чаще молчать или соглашаться" со "стала умнее".</p></div>
   </div>
-  <div class="srcs">
+  <div class="srcs mt2">
     <div class="src">
       <div class="qr"><img src="assets/qr-arxiv-forget.png" alt="arXiv 2308.08747"></div>
       <div><a href="https://arxiv.org/abs/2308.08747">arxiv.org/abs/2308.08747</a><div class="lbl">Catastrophic forgetting, 1-7B</div></div>
@@ -306,7 +309,7 @@
 <!-- 12 · разворот к железу -->
 <section data-background-gradient="radial-gradient(1300px 800px at 75% 5%, rgba(59,107,255,0.18), transparent 55%), radial-gradient(1100px 700px at 10% 105%, rgba(111,2,206,0.20), transparent 55%), #0a0e27">
   <h2 class="accent-line">Меняем стратегию</h2>
-  <p class="statement" style="font-size:48px;max-width:1580px;">Маленькая не тянет, обучение дорого и даёт результат хуже. Остаётся только одно - <span class="em">вложиться в железо</span> и поднять большую модель.</p>
+  <p class="lead">Маленькая не тянет, обучение дорого и даёт слабые результат хуже, следовательно остаётся <strong>вложиться в железо</strong> и поднять большую модель.</p>
   <div class="ceil mt2">
     <div class="h low">Маленькая / кванты</div>
     <div class="gt">&lt;</div>
@@ -314,7 +317,8 @@
     <div class="gt">&lt;</div>
     <div class="h high">Большая на своём железе</div>
   </div>
-  <p class="lead mt2">Поднимаем через <strong>vLLM</strong> или <strong>SGLang</strong> - Qwen3.5-397B, Kimi K2.7 на 1T. И это меньше железа, чем ушло бы на полноценное обучение с RL.</p>
+  <p class="lead mt2">Используя через <strong>vLLM</strong> или <strong>SGLang</strong> поднимаем Qwen3.5 на 397B или Kimi K2.7 на 1T.</p>
+  <p class="lead mt2">И это потребует меньше железа, чем ушло бы на полноценное обучение с SFT и RL меньшей модели.</p>
 </section>
 
 <!-- 13 · догоняющий -->
@@ -325,29 +329,29 @@
     <li>Лучшие open-weight отстают от SOTA на несколько месяцев.</li>
     <li>Даже большая модель на своём железе - <strong>чуть хуже</strong> облачного лидера.</li>
   </ul>
-  <p class="statement mt2" style="font-size:44px;">Этот разрыв никуда не денется. Его закрываем <span class="em">не весами, а harness</span>.</p>
+  <p class="statement mt2" style="font-size:44px;">Этот разрыв никуда не денется, его закрываем <span class="em">не весами, а harness</span>.</p>
 </section>
 
 <!-- 14 · дайте инструменты -->
 <section>
   <h2 class="accent-line">Дайте модели инструменты</h2>
-  <p class="statement" style="font-size:46px;max-width:1520px;">Не тащите данные к модели - <span class="em">дайте модели дотянуться самой</span>.</p>
+  <p class="lead">Не тащите данные к модели, лучше дайте модели <em>дотянуться к ним самой</em>.</p>
   <div class="grid-3 mt2">
-    <div class="card"><div class="ctitle">Инструменты</div><p>Поиск по файлам, чтение, grep. Модель <strong>сама находит</strong> нужное.</p></div>
-    <div class="card"><div class="ctitle">Промпты и правила</div><p>Объясняете, что и как делать: AGENTS.md, спеки, тесты.</p></div>
-    <div class="card"><div class="ctitle">Агентный цикл</div><p>Модель сама решает, что открыть и что положить в контекст.</p></div>
+    <div class="card"><div class="ctitle">Инструменты</div><p>Поиск по файлам, чтение, консольные тулы и скрипты. Модель принимает решения и <strong>сама находит</strong> нужное.</p></div>
+    <div class="card"><div class="ctitle">Промпты и правила</div><p>Объясняете, что и как делать: AGENTS.md, документация, спецификации, рулесы, тесты.</p></div>
+    <div class="card"><div class="ctitle">Агентный цикл</div><p>Модель сама решает, что открыть и что положить в контекст. Как правило уже встроен в большинство харнесов.</p></div>
   </div>
-  <p class="dim small mt2">Это и есть harness. Так работают Claude Code, Codex и мой Coddy: агентный поиск вместо векторного.</p>
+  <p class="lead mt2">Это и есть <em>harness</em>, так работают Cursor, Claude Code, Codex, мой Coddy и другие агенты.</p>
 </section>
 
 <!-- 15 · внимание -->
 <section>
   <h2 class="accent-line">Большой контекст - это инженерия</h2>
   <div class="grid-2">
-    <div class="card blue"><div class="ctitle">Влезло &ne; использовано</div><p>Модель лучше видит <strong>начало и конец</strong> окна и проседает на середине.</p></div>
+    <div class="card blue"><div class="ctitle">Влезло != использовано</div><p>Модель лучше видит <strong>начало и конец</strong> окна, но из-за механизмов разреженного внимания проседает на середине.</p></div>
     <div class="card"><div class="ctitle">Как держим внимание</div><p>Маленькие шаги, спеки и тесты перед кодом, свежий контекст, оркестрация, сэмплинг из карточки.</p></div>
   </div>
-  <div class="srcs">
+  <div class="srcs mt2">
     <div class="src">
       <div class="qr"><img src="assets/qr-arxiv-lostmiddle.png" alt="arXiv 2307.03172"></div>
       <div><a href="https://arxiv.org/abs/2307.03172">arxiv.org/abs/2307.03172</a><div class="lbl">Lost in the Middle</div></div>
@@ -365,7 +369,7 @@
   <div class="flow">
     <div class="step hot"><b>Готовый harness</b><span>OpenCode, Coddy, ZCODE</span></div>
     <div class="arrow">+</div>
-    <div class="step"><b>Правила</b><span>AGENTS.md, процесс</span></div>
+    <div class="step"><b>Правила</b><span>AGENTS.md, рулесы, спеки</span></div>
     <div class="arrow">+</div>
     <div class="step"><b>Скилы</b><span>практики под задачи</span></div>
     <div class="arrow">+</div>
@@ -373,8 +377,8 @@
     <div class="arrow">+</div>
     <div class="step" style="border-color:var(--green);"><b>CLI</b><span>рантайм-утилиты</span></div>
   </div>
-  <p class="statement mt2" style="font-size:42px;">Каждый слой <span class="em">компенсирует разрыв</span> между вашей моделью и SOTA.</p>
-  <div class="srcs">
+  <p class="lead mt2">Каждый слой <em>компенсирует разрыв</em> между вашей моделью и SOTA.</p>
+  <div class="srcs mt2">
     <div class="src">
       <div class="qr"><img src="assets/qr-coddy.png" alt="Coddy Agent QR"></div>
       <div><a href="https://github.com/coddy-project/coddy-agent">github.com/coddy-project/coddy-agent</a><div class="lbl">мой кодовый агент, любой OpenAI-совместимый сервер</div></div>
@@ -386,11 +390,12 @@
 <section>
   <h2 class="accent-line">Промпты и правила проекта</h2>
   <div class="grid-3">
-    <div class="card"><div class="ctitle">Правила в корень</div><p>AGENTS.md или .cursor/rules: как собирать, как тестировать, что можно трогать, а что нельзя.</p></div>
-    <div class="card"><div class="ctitle">Общий процесс</div><p>Команда принимает <strong>BDD</strong> или хотя бы <strong>TDD</strong> - у модели всегда есть план, что делать дальше.</p></div>
-    <div class="card"><div class="ctitle">Спека перед кодом</div><p>Сначала спецификация и тесты, потом реализация. Так вы наводите внимание модели на результат.</p></div>
+    <div class="card"><div class="ctitle">Правила в корень</div><p>AGENTS.md или .coddy/rules/ там описываем архитектуру, как собирать, как тестировать, что можно трогать, а что нельзя.</p></div>
+    <div class="card"><div class="ctitle">Общий процесс</div><p>Разработчики договариваются работать по <strong>BDD</strong> или хотя бы <strong>TDD</strong>, благодаря этому у модели всегда будут рельсы и план, что и как делать.</p></div>
+    <div class="card"><div class="ctitle">Спека перед кодом</div><p>Сначала спецификация и тесты, потом реализация, это позволяет сфокусировать внимание модели (см. Lost in the Middle).</p></div>
   </div>
-  <p class="lead mt2">Правила - это память проекта, которую агент читает на каждом шаге. Без них даже большая модель работает вполсилы.</p>
+  <p class="lead mt2">Правила - это память проекта, которую агент читает на каждом шаге, без них даже большая модель работает вполсилы.</p>
+  <p class="lead mt2">Тесты - это тоже память проекта, они гарантируют, что при добавлении новых фичей старые фичи не были сломаны в процессе.</p>
 </section>
 
 <!-- 18 · скилы -->
@@ -406,7 +411,7 @@
     <div class="it"><b>rpa-gen-rules</b><span>правила проекта сразу под все агенты</span></div>
     <div class="it"><b>verification-before-completion</b><span>проверка результата перед словом "готово"</span></div>
   </div>
-  <div class="srcs">
+  <div class="srcs mt2">
     <div class="src">
       <div class="qr"><img src="assets/qr-skills-list.png" alt="Список скилов QR"></div>
       <div><a href="https://github.com/EvilFreelancer/EvilFreelancer.github.io/blob/main/speech/2026-07-20_on-prem/resources/skills.md">полный список скилов со ссылками</a><div class="lbl">мои rpa-skills + коллекция superpowers</div></div>
@@ -426,7 +431,7 @@
     <div class="it"><b>sequential-thinking</b><span>структурированное пошаговое рассуждение</span></div>
   </div>
   <p class="dim small mt2">Не больше 5-7 серверов: каждый MCP должен отбивать свои токены.</p>
-  <div class="srcs">
+  <div class="srcs mt2">
     <div class="src">
       <div class="qr"><img src="assets/qr-mcp-list.png" alt="Список MCP QR"></div>
       <div><a href="https://github.com/EvilFreelancer/EvilFreelancer.github.io/blob/main/speech/2026-07-20_on-prem/resources/mcp.md">полный список MCP со ссылками</a><div class="lbl">плюс где искать ещё серверы</div></div>
@@ -437,16 +442,16 @@
 <!-- 20 · CLI -->
 <section>
   <h2 class="accent-line">Консольные утилиты - уровень рантайма</h2>
-  <p class="lead">Там, где задачу надо решать в рантайме, агенту нужны обычные консольные инструменты. Он вызывает их сам.</p>
+  <p class="lead">Там, где задачу надо решать в рантайме, агенту нужны обычные консольные инструменты, а он уже вызывает их сам.</p>
   <div class="deflist mt2">
+    <div class="it"><b>git</b><span>для работы с кодовой базой</span></div>
     <div class="it"><b>gh / glab</b><span>GitHub и GitLab из консоли: PR, issues, CI</span></div>
-    <div class="it"><b>ripgrep (rg)</b><span>быстрый поиск по коду, уважает .gitignore</span></div>
+    <div class="it"><b>ripgrep (rg) / ast-grep (sg)</b><span>быстрый поиск по коду</span></div>
     <div class="it"><b>fd</b><span>быстрый поиск файлов вместо find</span></div>
-    <div class="it"><b>ast-grep (sg)</b><span>структурный поиск и рефакторинг по AST</span></div>
     <div class="it"><b>jq / yq</b><span>фильтрация JSON и YAML, пока не съели контекст</span></div>
     <div class="it"><b>curl / docker</b><span>HTTP-запросы и запуск в контейнерах</span></div>
   </div>
-  <div class="srcs">
+  <div class="srcs mt2">
     <div class="src">
       <div class="qr"><img src="assets/qr-cli-list.png" alt="Список CLI QR"></div>
       <div><a href="https://github.com/EvilFreelancer/EvilFreelancer.github.io/blob/main/speech/2026-07-20_on-prem/resources/cli.md">полный список утилит со ссылками</a><div class="lbl">git-хостинг, поиск, данные, запуск</div></div>
@@ -456,7 +461,7 @@
 
 <!-- 21 · ложка дёгтя -->
 <section>
-  <h2 class="accent-line">Большая модель и harness - не бесплатно</h2>
+  <h2 class="accent-line">Ложка дёгтя в бочке мёда</h2>
   <div class="grid-2">
     <div class="card warn"><div class="ctitle">Железа нужно много</div><p>Под веса, под контекст и под <strong>параллельные потоки</strong>. Впритык - одновременно работает пара человек, не больше.</p></div>
     <div class="card warn"><div class="ctitle">У токена есть цена</div><p>Электричество плюс амортизация железа в пересчёте на <strong>миллион токенов</strong>. Посчитаем это дальше.</p></div>
@@ -467,11 +472,11 @@
 <!-- 23 · формула -->
 <section>
   <h2 class="accent-line">Сколько стоит миллион токенов</h2>
-  <div class="fplate"><img src="assets/formula_main.png" alt="Себестоимость 1M токенов с амортизацией"></div>
+  <div class="fplate" style="max-width: 900px;"><img src="assets/formula_main.png" alt="Себестоимость 1M токенов с амортизацией"></div>
   <p class="params mt2">
     <b>P</b> - мощность узла, кВт &middot; <b>T</b> - цена электричества, &#8381;/кВт&middot;ч &middot; <b>S</b> - цена железа, &#8381; &middot; <b>H</b> - срок службы, ч &middot; <b>R</b> - скорость генерации, ток/с
   </p>
-  <div class="srcs">
+  <div class="srcs mt2">
     <div class="src">
       <div class="qr"><img src="assets/qr-habr-token.png" alt="Habr QR"></div>
       <div><a href="https://habr.com/ru/articles/1049880/">habr.com/ru/articles/1049880</a><div class="lbl">мой пост "Почём нынче токен для народа?"</div></div>
@@ -482,24 +487,23 @@
 <!-- 24 · расчёт Kimi -->
 <section>
   <h2 class="accent-line">Пример: Kimi K2.7 на 8&times;H100</h2>
-  <p class="lead">Предположим, закупили узел из восьми H100 и подняли на нём Kimi K2.7.</p>
-  <div class="grid-2 mt2">
-    <div class="card blue">
-      <div class="ctitle">Вводные</div>
-      <p class="calc">
-        P &asymp; 8 кВт &middot; T &asymp; 9 &#8381;/кВт&middot;ч<br>
-        S &asymp; 40 млн &#8381; &middot; H &asymp; 43&#8201;800 ч<br>
-        R &asymp; 1900 ток/с при батчинге
-      </p>
-    </div>
-    <div class="card warn">
-      <div class="ctitle">Итог</div>
-      <p class="calc">электричество ~72 &#8381;/ч<br>амортизация ~913 &#8381;/ч</p>
-      <div class="result">&asymp; 144 &#8381; за 1M выходных токенов</div>
-      <p class="dim small" style="margin-top:8px;">из них электричество ~10 &#8381;, остальное - амортизация железа</p>
-    </div>
+  <p class="lead">Предположим, закупили узел из восьми H100 и хотим поднять на нём Kimi K2.7.</p>
+  <div class="deflist blue mt2" style="grid-template-columns:repeat(3,1fr);gap:22px 40px;">
+    <div class="it"><b>P = 8 кВт</b><span>мощность узла под инференс</span></div>
+    <div class="it"><b>T = 9 &#8381;/кВт&middot;ч</b><span>электричество, юрлицо в Москве</span></div>
+    <div class="it"><b>S = 40 млн &#8381;</b><span>сервер 8&times;H100</span></div>
+    <div class="it"><b>H = 43&#8201;800 ч</b><span>срок службы, 5 лет</span></div>
+    <div class="it"><b>R = 1900 ток/с</b><span>скорость при батчинге</span></div>
+    <div class="it"><b>INT4, ~640 ГБ</b><span>модель впритык в узле</span></div>
   </div>
-  <p class="dim small mt2">Без плотной загрузки и параллельных потоков цифра растёт. Числа по железу и тарифу сверить перед эфиром.</p>
+  <div class="flow mt2">
+    <div class="step"><b>&asymp; 985 &#8381;/час</b><span>72 электричество + 913 амортизация</span></div>
+    <div class="arrow">&rarr;</div>
+    <div class="step blue"><b>6,84 млн ток/час</b><span>1900 &times; 3600</span></div>
+    <div class="arrow">&rarr;</div>
+    <div class="step hot"><b>&asymp; 144 &#8381; / 1M</b><span>выходных токенов</span></div>
+  </div>
+  <p class="lead mt2">Из них электричество ~10 &#8381;, остальное - амортизация, а без постоянной загрузки ещё дороже.</p>
 </section>
 
 <!-- 25 · итог -->
