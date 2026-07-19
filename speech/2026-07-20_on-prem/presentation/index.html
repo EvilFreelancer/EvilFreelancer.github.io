@@ -148,7 +148,7 @@
     .clink { color:var(--coral); font-family:'JetBrains Mono',monospace; font-size:32px; font-weight:700; }
     .clbl { color:var(--dim); font-size:24px; margin-top:8px; }
 
-    .reveal .slide-number { font-family:'JetBrains Mono',monospace; background:transparent; color:var(--dim); font-size:20px; }
+    .reveal .slide-number { font-family:'JetBrains Mono',monospace; background:transparent; color:var(--dim); font-size:20px; right:auto; left:16px; bottom:14px; }
     .reveal .progress { color: var(--coral); height:5px; }
   </style>
 </head>
@@ -161,7 +161,6 @@
   <h1>Выше потолка<br>инференса</h1>
   <p class="lead" style="max-width:1350px;margin-top:10px;">Качество on-prem модели живёт <em>в контексте</em>, а не в весах</p>
   <div class="speaker">
-    <div class="ava" role="img" aria-label="Павел Рыков"></div>
     <div>
       <div style="font-size:38px;font-weight:800;">Павел Рыков &middot; Pavel Zloi</div>
       <div class="muted small">Обучаю языковые модели: Saiga, impruver, MoDA, Coddy &middot; huggingface.co/evilfreelancer</div>
@@ -176,10 +175,10 @@
     <div>
       <h2 style="margin-bottom:30px;">Всем привет, я Павел Рыков</h2>
       <ul class="dot" style="font-size:31px;">
-        <li>Известен как <strong>Павел Злой</strong>, руководитель импортозамещения ML в Росгосстрах.</li>
+        <li>Известен как <strong>Павел Злой</strong>, руководитель направления ML в Росгосстрах.</li>
         <li>Обучаю модели: серия <strong>Saiga</strong>, фреймворк <strong>impruver</strong>, адаптеры <strong>MoDA</strong>.</li>
-        <li>Автор self-hosted кодового агента <strong>Coddy</strong>, контрибьютор SGR Agent Core.</li>
-        <li>Пишу про агентов, harness и инференс на своём железе - Хабр и телеграм.</li>
+        <li>Автор кодового агента <strong>Coddy</strong>, контрибьютор SGR Agent Core.</li>
+        <li>Пишу про агентов, harness, on-prem и инференс на своём железе на Хабр и телеграм.</li>
       </ul>
       <div class="contact">
         <div class="qr-frame"><img src="assets/qr-telegram.png" alt="Telegram QR" style="width:130px;height:130px;"></div>
@@ -204,7 +203,7 @@
   <div style="font-size:82px;font-weight:800;letter-spacing:-0.02em;margin:0 0 14px;">
     <span style="color:var(--blue);">LLM</span><span style="color:var(--dim);"> + </span><span style="color:var(--coral);">Harness</span><span style="color:var(--dim);"> = </span><span style="color:var(--purple);">Agent</span>
   </div>
-  <p class="statement" style="font-size:52px;max-width:1520px;margin-top:20px;">On-prem модель с хорошим harness работает <span class="em">не хуже</span>, чем после дообучения или с RAG. И сильно дешевле.</p>
+  <p class="statement" style="font-size:52px;max-width:1520px;margin-top:20px;">On-prem модель с хорошим harness работает <span class="em">не хуже</span>, чем после дообучения или с RAG. <span class="em">И сильно дешевле.</span></p>
 </section>
 
 <!-- 4 -->
@@ -215,9 +214,9 @@
     <li>SOTA недоступна: цена, регуляции или внутренняя политика.</li>
     <li>Взяли open-weight модель, подняли в закрытом контуре.</li>
     <li>Качество ниже привычного облачного.</li>
-    <li><strong>Первый инстинкт:</strong> "у нас же огромная кодовая база - дообучим, и модель выучит наш код".</li>
+    <li><strong>Идея:</strong> "но у нас же огромная кодовая база - дообучим, и модель выучит наш код".</li>
   </ul>
-  <p class="statement" style="margin-top:38px;">Мысль интуитивная. <span class="em">И почти всегда это ловушка.</span></p>
+  <p class="statement" style="margin-top:38px;">Идея отличная, но очень <span class="em">ситуативная</span>. Так какие у нас варианты с этой кодовой базой?</p>
 </section>
 
 <!-- 5 -->
