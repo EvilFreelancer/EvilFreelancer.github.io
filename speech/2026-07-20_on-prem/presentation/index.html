@@ -226,9 +226,9 @@
 
 <!-- 6 · соблазн обучить -->
 <section>
-  <h2 class="accent-line">Не тянет? Давайте дообучим</h2>
+  <h2 class="accent-line">Не тянет? Так давайте дообучим!</h2>
   <p class="statement" style="font-size:48px;max-width:1540px;">"У нас гигантская кодовая база, давайте обучим модель, она посмотрит наш код и начнёт лучше работать."</p>
-  <p class="lead mt2">Это вторая идея - обучить своё, это вполне нормальный вариант, однако, есть нюансы.</p>
+  <p class="lead mt2">Это вторая идея - обучить своё, вполне нормальный вариант, однако, есть нюансы.</p>
 </section>
 
 <!-- 7 · пайплайн -->
@@ -277,7 +277,18 @@
   <p class="lead mt2">Такого датасета обычно нет, а собрать и поддерживать его дороже, чем купить GPU.</p>
 </section>
 
-<!-- 10 · результаты хуже -->
+<!-- 10 · железо и время на обучение -->
+<section>
+  <h2 class="accent-line">Обучить Qwen3.5-35B - данные и железо</h2>
+  <div class="grid-2">
+    <div class="card blue"><div class="ctitle">Датасеты</div><p>SFT - десятки и сотни тысяч размеченных траекторий диалогов с агентом. RL - ещё и среда с проверяемой наградой плюс тысячи промптов и роллаутов.</p></div>
+    <div class="card warn"><div class="ctitle">Железо и время</div><p>Full SFT: веса ~70 ГБ, а с оптимизатором AdamW ~560 ГБ - это узел 8&times;H100. RL сверху кратно дороже, роллауты медленные. Один прогон - дни, а прогонов много.</p></div>
+  </div>
+  <p class="lead mt2" style="font-size:42px;">Даже если решить вопрос с датасетом, остаётся проблема нехватки железа: либо много железа и очень много времени, либо очень много железа и много времени.</p>
+  <p class="dim small mt2">Порядок величины для полного файнтюна: ~16 байт на параметр, обучение больших моделей длится дни или даже недели.</p>
+</section>
+
+<!-- 11 · результаты хуже -->
 <section>
   <h2 class="accent-line">Результаты на бенчмарках хуже, чем до обучения</h2>
   <div class="grid-2">
@@ -300,16 +311,17 @@
 <section>
   <h2 class="accent-line">Тюнил ruGPT3XL-8k под агентность</h2>
   <div class="grid-2">
-    <div class="card blue"><div class="ctitle">Сетап, всё по уму</div><p>Консервативный <strong>QLoRA</strong>, 4-bit, LoRA rank 16, 150k агентных и ризонинг-сэмплов, десятки часов на RTX 4090 48Гб.</p></div>
-    <div class="card bad"><div class="ctitle">Что вышло</div><p>Уловила шаблон рассуждения - и <strong>забыла русский</strong>, ушла в repetition loop. Forgetting вживую.</p></div>
+    <div class="card blue"><div class="ctitle">Маленькая модель - надо мало железа</div><p>Консервативный <strong>QLoRA</strong>, 4-bit, LoRA rank 16, 150k агентных и ризонинг-сэмплов. Хватило <strong>одной RTX 4090 48Гб</strong>, обучение заняло десятки часов.</p></div>
+    <div class="card bad"><div class="ctitle">Но результат так себе</div><p>Уловила шаблон рассуждения, но <strong>забыла русский</strong>, не тянет длинный контекст и срывается в repetition loop.</p></div>
   </div>
-  <p class="muted mt2" style="font-size:33px;line-height:1.4;">И со стороны то же: <strong>Kodify Nano</strong> 1.5B от MTS AI - специализированная маленькая <em>не обходит general покрупнее</em>.</p>
+  <p class="lead mt2">Обучить маленькую <em>дешевле по железу</em>, но отдача слабая.</p>
+  <p class="lead mt2">И например Kodify Nano на 1.5B от MTS AI не обходит general покрупнее и годится максимум для автодополнения.</p>
 </section>
 
 <!-- 12 · разворот к железу -->
 <section data-background-gradient="radial-gradient(1300px 800px at 75% 5%, rgba(59,107,255,0.18), transparent 55%), radial-gradient(1100px 700px at 10% 105%, rgba(111,2,206,0.20), transparent 55%), #0a0e27">
   <h2 class="accent-line">Меняем стратегию</h2>
-  <p class="lead">Маленькая не тянет, обучение дорого и даёт слабые результат хуже, следовательно остаётся <strong>вложиться в железо</strong> и поднять большую модель.</p>
+  <p class="lead">Маленькая не тянет, обучение дорого и даёт слабые результат хуже, следовательно практичнее будет <strong>вложиться в железо</strong> и поднять большую модель общего назначения.</p>
   <div class="ceil mt2">
     <div class="h low">Маленькая / кванты</div>
     <div class="gt">&lt;</div>
@@ -317,7 +329,7 @@
     <div class="gt">&lt;</div>
     <div class="h high">Большая на своём железе</div>
   </div>
-  <p class="lead mt2">Используя через <strong>vLLM</strong> или <strong>SGLang</strong> поднимаем Qwen3.5 на 397B или Kimi K2.7 на 1T.</p>
+  <p class="lead mt2">Используя движок <strong>vLLM</strong> или <strong>SGLang</strong> поднимаем Qwen3.5 на 397B или Kimi K2.7 на 1T.</p>
   <p class="lead mt2">И это потребует меньше железа, чем ушло бы на полноценное обучение с SFT и RL меньшей модели.</p>
 </section>
 
@@ -401,7 +413,8 @@
 <!-- 18 · скилы -->
 <section>
   <h2 class="accent-line">Скилы - готовые пакеты практик</h2>
-  <div class="deflist">
+  <p class="lead">Помимо готовых можно всегда написать свои.</p>
+  <div class="deflist mt2">
     <div class="it"><b>rpa-init</b><span>онбординг агента на репозиторий, отчёт по проекту</span></div>
     <div class="it"><b>test-driven-development</b><span>тесты до кода, красный - зелёный - рефактор</span></div>
     <div class="it"><b>rpa-feat</b><span>фича строго по BDD: план, тесты, реализация, линтер</span></div>
@@ -422,7 +435,8 @@
 <!-- 19 · MCP -->
 <section>
   <h2 class="accent-line">MCP-серверы - точечно</h2>
-  <div class="deflist blue">
+  <p class="lead">Позволяют дать агенту действовать с защищённым удалёнными систеамими.</p>
+  <div class="deflist blue mt2">
     <div class="it"><b>context7</b><span>актуальная документация библиотек по версии</span></div>
     <div class="it"><b>serena / codegraph</b><span>семантический граф кода, навигация по символам</span></div>
     <div class="it"><b>filesystem</b><span>файловые операции, часто уже встроено в агента</span></div>
@@ -430,7 +444,7 @@
     <div class="it"><b>postgres</b><span>прямые запросы к схеме и данным</span></div>
     <div class="it"><b>sequential-thinking</b><span>структурированное пошаговое рассуждение</span></div>
   </div>
-  <p class="dim small mt2">Не больше 5-7 серверов: каждый MCP должен отбивать свои токены.</p>
+  <p class="lead mt2">Не больше 5-7 серверов: каждый MCP должен отбивать свои токены.</p>
   <div class="srcs mt2">
     <div class="src">
       <div class="qr"><img src="assets/qr-mcp-list.png" alt="Список MCP QR"></div>
@@ -442,7 +456,7 @@
 <!-- 20 · CLI -->
 <section>
   <h2 class="accent-line">Консольные утилиты - уровень рантайма</h2>
-  <p class="lead">Там, где задачу надо решать в рантайме, агенту нужны обычные консольные инструменты, а он уже вызывает их сам.</p>
+  <p class="lead">Если задачу надо решать в рантайме, агенту нужны обычные консольные инструменты.</p>
   <div class="deflist mt2">
     <div class="it"><b>git</b><span>для работы с кодовой базой</span></div>
     <div class="it"><b>gh / glab</b><span>GitHub и GitLab из консоли: PR, issues, CI</span></div>
