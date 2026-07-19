@@ -506,15 +506,16 @@
   <p class="lead mt2">Из них электричество ~10 &#8381;, остальное - амортизация, а без постоянной загрузки ещё дороже.</p>
 </section>
 
-<!-- 25 · итог -->
+<!-- 24 · выводы -->
 <section data-background-gradient="radial-gradient(1400px 800px at 80% 0%, rgba(59,107,255,0.28), transparent 55%), radial-gradient(1200px 700px at 5% 100%, rgba(111,2,206,0.30), transparent 55%), #0a0e27">
-  <p class="statement" style="font-size:50px;max-width:1580px;">Потолок инференса пробивают <span class="em">железом под большую модель</span>, разрыв с SOTA закрывают <span class="em">прокачкой harness</span>.</p>
-  <p class="lead mt2"><span style="color:var(--blue);font-weight:800;">LLM</span> + <span style="color:var(--coral);font-weight:800;">Harness</span> = <span style="color:var(--purple);font-weight:800;">Agent</span>. Не экономьте на весах ниже порога, не тратьте месяцы на дообучение. <strong>Веса вам дали - harness вы строите сами.</strong></p>
-  <div class="grid-3 mt2">
-    <div class="card"><div class="ctitle" style="font-size:26px;">Обучение</div><p class="small"><a href="https://github.com/EvilFreelancer/impruver">github.com/EvilFreelancer/impruver</a></p></div>
-    <div class="card"><div class="ctitle" style="font-size:26px;">Harness</div><p class="small"><a href="https://github.com/coddy-project/coddy-agent">github.com/coddy-project/coddy-agent</a></p></div>
-    <div class="card"><div class="ctitle" style="font-size:26px;">Скилы</div><p class="small"><a href="https://github.com/EvilFreelancer/rpa-skills">github.com/EvilFreelancer/rpa-skills</a></p></div>
-  </div>
+  <h2 class="accent-line">Выводы</h2>
+  <ul class="dot" style="font-size:34px;">
+    <li>Маленькая или сильно квантованная модель <strong>не тянет</strong> код.</li>
+    <li>Дообучение не спасает: учит форме, а не смыслу, и <strong>роняет бенчмарки</strong>.</li>
+    <li>Реальный рычаг - <strong>железо под большую модель</strong>, но on-prem всегда догоняющий.</li>
+    <li>Разрыв с SOTA закрывает не веса, а <strong>толстый harness</strong>: правила, скилы, MCP, CLI.</li>
+    <li>On-prem не бесплатен - себестоимость токена считайте заранее.</li>
+  </ul>
 </section>
 
 <!-- 26 · вопросы -->
