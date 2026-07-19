@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Выше потолка инференса | Павел Рыков</title>
+  <link rel="stylesheet" href="assets/reveal.css">
+  <style>
+    :root {
+      --bg:      #0a0e27;
+      --bg2:     #121a3a;
+      --bg3:     #1b2550;
+      --blue:    #3b6bff;
+      --blue-d:  #0039c8;
+      --purple:  #8a3ffc;
+      --purple-d:#6f02ce;
+      --coral:   #ff8562;
+      --coral-d: #ff6b45;
+      --text:    #f4f5fa;
+      --muted:   #aeb4cf;
+      --dim:     #7c86ad;
+      --green:   #34d399;
+      --amber:   #fbbf24;
+      --red:     #f87171;
+      --line:    rgba(138,63,252,0.28);
+    }
+
+    .reveal-viewport {
+      background:
+        radial-gradient(1200px 700px at 78% -8%, rgba(59,107,255,0.20), transparent 60%),
+        radial-gradient(1000px 600px at 8% 108%, rgba(111,2,206,0.22), transparent 60%),
+        var(--bg);
+    }
+    .reveal {
+      font-family: 'Nunito', 'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      color: var(--text);
+      font-size: 34px;
+    }
+    .reveal .slides { text-align: left; }
+    .reveal .slides section { padding: 20px 0; text-align: left; }
+    .reveal h1, .reveal h2, .reveal h3 {
+      color: var(--text); text-transform: none; letter-spacing: -0.02em;
+      margin: 0 0 26px; line-height: 1.1; font-weight: 800;
+    }
+    .reveal h1  { font-size: 92px; }
+    .reveal h2  { font-size: 64px; }
+    .reveal h3  { font-size: 38px; }
+    .reveal p   { margin: 10px 0; line-height: 1.4; }
+    .reveal ul  { list-style: none; padding: 0; margin: 0; }
+    .reveal li  { margin: 14px 0; line-height: 1.35; }
+    .reveal img { margin: 0; }
+    .reveal strong { color: #fff; }
+    .reveal em { color: var(--coral); font-style: normal; }
+    .reveal a { color: var(--blue); text-decoration: none; }
+
+    .block-tag {
+      font-family: 'JetBrains Mono','Courier New',monospace;
+      font-size: 22px; letter-spacing: .22em; text-transform: uppercase;
+      color: var(--coral); margin-bottom: 26px;
+      display: flex; align-items: center; gap: 14px;
+    }
+    .block-tag::before { content:""; width:16px; height:16px; background:var(--coral); border-radius:4px; flex-shrink:0; }
+
+    .accent-line { display:inline-block; border-bottom: 6px solid var(--coral); padding-bottom: 14px; margin-bottom: 40px !important; }
+
+    .statement { font-size: 58px; font-weight: 800; line-height: 1.14; letter-spacing: -0.02em; }
+    .statement .em { color: var(--coral); }
+    .lead { font-size: 40px; color: var(--muted); line-height: 1.35; }
+    .muted { color: var(--muted); }
+    .dim { color: var(--dim); }
+    .small { font-size: 28px; }
+    .kpi { color: var(--coral); font-weight: 800; }
+
+    .badge {
+      display:inline-block; background: var(--bg3);
+      border:2px solid var(--line); color: var(--purple);
+      border-radius:10px; padding:6px 18px; font-size:24px;
+      font-family:'JetBrains Mono','Courier New',monospace; font-weight:700; margin:4px 6px 4px 0;
+    }
+
+    .grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:22px; }
+    .grid-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+    .card { background: var(--bg2); border:1px solid var(--line); border-radius:16px; padding:26px 30px; }
+    .card .ctitle { color: var(--coral); font-weight:800; font-size:32px; margin-bottom:12px; display:flex; align-items:center; gap:12px; }
+    .card p { color: var(--muted); font-size:28px; margin:6px 0 0; }
+    .card.blue { border-color: rgba(59,107,255,0.45); }
+    .card.blue .ctitle { color: var(--blue); }
+    .card.purple { border-color: rgba(138,63,252,0.5); }
+    .card.purple .ctitle { color: var(--purple); }
+
+    .flow { display:flex; align-items:stretch; gap:0; margin-top:34px; }
+    .flow .step { flex:1; background:var(--bg2); border:1px solid var(--line); border-radius:14px; padding:24px 22px; text-align:center; }
+    .flow .step b { display:block; font-size:32px; color:var(--text); margin-bottom:8px; }
+    .flow .step span { color:var(--muted); font-size:24px; }
+    .flow .arrow { display:flex; align-items:center; padding:0 18px; color:var(--coral); font-size:46px; font-weight:800; }
+    .flow .step.hot { border-color: var(--coral); background: rgba(255,133,98,0.08); }
+    .flow .step.blue { border-color: rgba(59,107,255,0.5); }
+    .flow .step.cold { opacity:0.55; }
+
+    .stair { display:flex; align-items:flex-end; gap:18px; margin-top:30px; height:520px; }
+    .stair .rung { flex:1; border-radius:16px 16px 0 0; padding:26px 24px 30px; display:flex; flex-direction:column; justify-content:flex-start; border:1px solid var(--line); border-bottom:none; }
+    .stair .rung .n { font-family:'JetBrains Mono',monospace; font-size:24px; color:var(--dim); }
+    .stair .rung .t { font-size:32px; font-weight:800; margin:8px 0 6px; }
+    .stair .rung .d { font-size:25px; color:var(--muted); line-height:1.3; }
+    .stair .r1 { height:40%;  background:rgba(255,133,98,0.12); border-color:rgba(255,133,98,0.5); }
+    .stair .r2 { height:56%;  background:rgba(59,107,255,0.10);  border-color:rgba(59,107,255,0.4); }
+    .stair .r3 { height:74%;  background:rgba(52,211,153,0.10);  border-color:rgba(52,211,153,0.4); }
+    .stair .r4 { height:100%; background:rgba(138,63,252,0.12);  border-color:rgba(138,63,252,0.5); }
+    .stair .r1 .t { color:var(--coral); }
+    .stair .r2 .t { color:var(--blue); }
+    .stair .r3 .t { color:var(--green); }
+    .stair .r4 .t { color:var(--purple); }
+
+    table.cmp { width:100%; border-collapse:collapse; margin-top:28px; font-size:29px; }
+    table.cmp th, table.cmp td { text-align:left; padding:16px 20px; border-bottom:1px solid rgba(255,255,255,0.08); }
+    table.cmp thead th { color:var(--dim); font-size:24px; text-transform:uppercase; letter-spacing:.08em; font-weight:700; }
+    table.cmp td.yes { color:var(--green); font-weight:700; }
+    table.cmp td.no  { color:var(--red);   font-weight:700; }
+    table.cmp tbody td:first-child { color:var(--text); font-weight:700; }
+
+    .hier { display:flex; align-items:center; gap:0; margin-top:40px; font-weight:800; }
+    .hier .h { padding:22px 20px; border-radius:14px; text-align:center; font-size:34px; flex:1; }
+    .hier .gt { padding:0 16px; color:var(--dim); font-size:36px; }
+    .hier .h1 { background:rgba(138,63,252,0.16); border:1px solid var(--purple); color:var(--purple); }
+    .hier .h2 { background:rgba(59,107,255,0.14); border:1px solid var(--blue); color:var(--blue); }
+    .hier .h3 { background:rgba(255,133,98,0.12); border:1px solid var(--coral); color:var(--coral); }
+    .hier .h4 { background:var(--bg2); border:1px solid var(--line); color:var(--muted); }
+
+    .check li { display:flex; gap:16px; align-items:flex-start; font-size:33px; }
+    .check li::before { content:"?"; color:var(--coral); font-weight:800; flex-shrink:0; width:34px; }
+
+    ul.dot li { position:relative; padding-left:36px; }
+    ul.dot li::before { content:""; position:absolute; left:6px; top:14px; width:14px; height:14px; background:var(--coral); border-radius:4px; }
+
+    .kbd { font-family:'JetBrains Mono',monospace; background:var(--bg3); border:1px solid var(--line); border-radius:8px; padding:2px 12px; font-size:0.82em; color:var(--purple); }
+
+    .speaker { display:flex; gap:26px; align-items:center; margin-top:20px; }
+    .speaker .ava { width:190px; height:120px; border-radius:20px; border:1px solid var(--line); background:#e9ecf2 url('assets/pavel.png') center/cover no-repeat; flex-shrink:0; }
+
+    .about-grid { display:grid; grid-template-columns:1.25fr 0.85fr; gap:60px; align-items:center; }
+    .photo-box { width:100%; max-width:560px; aspect-ratio:1024/640; border-radius:20px; border:1px solid var(--line);
+      background:#e9ecf2 url('assets/pavel.png') center/cover no-repeat; justify-self:center;
+      box-shadow:0 0 0 1px rgba(255,255,255,0.04), 0 20px 60px rgba(0,0,0,0.5); }
+    .contact { display:flex; align-items:center; gap:26px; margin-top:38px; }
+    .qr-frame { background:#fff; border-radius:16px; padding:14px; flex:none; }
+    .qr-frame img { width:150px; height:150px; display:block; }
+    .qr-frame.big img { width:260px; height:260px; }
+    .clink { color:var(--coral); font-family:'JetBrains Mono',monospace; font-size:32px; font-weight:700; }
+    .clbl { color:var(--dim); font-size:24px; margin-top:8px; }
+
+    .reveal .slide-number { font-family:'JetBrains Mono',monospace; background:transparent; color:var(--dim); font-size:20px; }
+    .reveal .progress { color: var(--coral); height:5px; }
+  </style>
+</head>
+<body>
+<div class="reveal"><div class="slides">
+
+<!-- 1 -->
+<section data-background-gradient="radial-gradient(1400px 800px at 80% 0%, rgba(59,107,255,0.28), transparent 55%), radial-gradient(1200px 700px at 5% 100%, rgba(111,2,206,0.30), transparent 55%), #0a0e27">
+  <div class="block-tag">Podlodka AI Crew &middot; on-prem</div>
+  <h1>Выше потолка<br>инференса</h1>
+  <p class="lead" style="max-width:1350px;margin-top:10px;">Качество on-prem модели живёт <em>в контексте</em>, а не в весах</p>
+  <div class="speaker">
+    <div class="ava" role="img" aria-label="Павел Рыков"></div>
+    <div>
+      <div style="font-size:38px;font-weight:800;">Павел Рыков &middot; Pavel Zloi</div>
+      <div class="muted small">Обучаю языковые модели: Saiga, impruver, MoDA, Coddy &middot; huggingface.co/evilfreelancer</div>
+    </div>
+  </div>
+</section>
+
+<!-- 2 -->
+<section>
+  <div class="block-tag">Знакомство</div>
+  <div class="about-grid">
+    <div>
+      <h2 style="margin-bottom:30px;">Всем привет, я Павел Рыков</h2>
+      <ul class="dot" style="font-size:31px;">
+        <li>Известен как <strong>Павел Злой</strong>, руководитель импортозамещения ML в Росгосстрах.</li>
+        <li>Обучаю модели: серия <strong>Saiga</strong>, фреймворк <strong>impruver</strong>, адаптеры <strong>MoDA</strong>.</li>
+        <li>Автор self-hosted кодового агента <strong>Coddy</strong>, контрибьютор SGR Agent Core.</li>
+        <li>Пишу про агентов, harness и инференс на своём железе - Хабр и телеграм.</li>
+      </ul>
+      <div class="contact">
+        <div class="qr-frame"><img src="assets/qr-telegram.png" alt="Telegram QR" style="width:130px;height:130px;"></div>
+        <div>
+          <a href="https://t.me/evilfreelancer"><div class="clink" style="font-size:27px;">t.me/evilfreelancer</div></a>
+          <div class="clbl">канал Pavel Zloi</div>
+        </div>
+        <div class="qr-frame"><img src="assets/qr-huggingface.png" alt="Hugging Face QR" style="width:130px;height:130px;"></div>
+        <div>
+          <a href="https://huggingface.co/evilfreelancer"><div class="clink" style="font-size:27px;">hf.co/evilfreelancer</div></a>
+          <div class="clbl">модели и датасеты</div>
+        </div>
+      </div>
+    </div>
+    <div class="photo-box" role="img" aria-label="Павел Рыков"></div>
+  </div>
+</section>
+
+<!-- 3 -->
+<section>
+  <div class="block-tag">Рамка</div>
+  <div style="font-size:82px;font-weight:800;letter-spacing:-0.02em;margin:0 0 14px;">
+    <span style="color:var(--blue);">LLM</span><span style="color:var(--dim);"> + </span><span style="color:var(--coral);">Harness</span><span style="color:var(--dim);"> = </span><span style="color:var(--purple);">Agent</span>
+  </div>
+  <p class="statement" style="font-size:52px;max-width:1520px;margin-top:20px;">On-prem модель с хорошим harness работает <span class="em">не хуже</span>, чем после дообучения или с RAG. И сильно дешевле.</p>
+</section>
+
+<!-- 4 -->
+<section>
+  <div class="block-tag">Соблазн</div>
+  <h2 class="accent-line">Знакомая ситуация</h2>
+  <ul class="dot" style="font-size:36px;">
+    <li>SOTA недоступна: цена, регуляции или внутренняя политика.</li>
+    <li>Взяли open-weight модель, подняли в закрытом контуре.</li>
+    <li>Качество ниже привычного облачного.</li>
+    <li><strong>Первый инстинкт:</strong> "у нас же огромная кодовая база - дообучим, и модель выучит наш код".</li>
+  </ul>
+  <p class="statement" style="margin-top:38px;">Мысль интуитивная. <span class="em">И почти всегда это ловушка.</span></p>
+</section>
+
+<!-- 5 -->
+<section>
+  <div class="block-tag">Карта</div>
+  <h2 class="accent-line">Три дороги к качеству</h2>
+  <div class="grid-3">
+    <div class="card"><div class="ctitle" style="color:var(--red);">Дообучить</div><p>GPU, данные, недели. И риск сломать модель по осям, которых <strong>нет в вашем бенче</strong>.</p></div>
+    <div class="card"><div class="ctitle" style="color:var(--amber);">Построить RAG</div><p>Индекс тащит в окно похожее вместо нужного. И его надо <strong>сопровождать</strong>: чанкинг, переиндексация, железо.</p></div>
+    <div class="card hot" style="border-color:var(--coral);"><div class="ctitle">Построить harness</div><p>Инструменты, промпты, контекст. <strong>Дни, а не месяцы</strong>. Модель действует сама.</p></div>
+  </div>
+  <p class="lead" style="margin-top:36px;">Хватаются за первые две. Третью недооценивают. Дальше - почему так вышло.</p>
+</section>
+
+<!-- 6 -->
+<section data-background-gradient="radial-gradient(1200px 800px at 50% 50%, rgba(111,2,206,0.22), transparent 60%), #0a0e27">
+  <div class="block-tag">Тезис</div>
+  <p class="statement" style="font-size:64px;max-width:1500px;">Знание живёт <span class="em">в контексте</span>,<br>а не в весах.</p>
+  <p class="lead" style="margin-top:36px;">Точная версия: <strong>актуальное состояние репозитория</strong> дешевле и надёжнее держать в контексте, чем зашивать в веса. Разберём границы этого тезиса.</p>
+</section>
+
+<!-- 7 -->
+<section>
+  <div class="block-tag">Ментальная модель</div>
+  <h2 class="accent-line">Как получается модель</h2>
+  <div class="flow">
+    <div class="step blue"><b>Pretrain</b><span>корпуса текста, язык и закономерности</span></div>
+    <div class="arrow">&rarr;</div>
+    <div class="step hot"><b>SFT</b><span>инструкции, формат ответа</span></div>
+    <div class="arrow">&rarr;</div>
+    <div class="step"><b>Alignment</b><span>предпочтения: RLHF, DPO и другие</span></div>
+  </div>
+  <p class="lead" style="margin-top:44px;">"Дообучить" - это почти всегда <em>вот этот шаг, SFT</em>, поверх готовой модели.</p>
+</section>
+
+<!-- 8 -->
+<section>
+  <div class="block-tag">Ключ</div>
+  <h2 class="accent-line">SFT запоминает форму, а не смысл</h2>
+  <div class="grid-2">
+    <div class="card"><div class="ctitle" style="color:var(--green);">Что реально происходит</div><p>Модель заучивает <strong>форму</strong> кода: стиль, имена, структуру. Внутри домена датасета - хорошо.</p></div>
+    <div class="card"><div class="ctitle" style="color:var(--red);">Чего НЕ происходит</div><p>Смыслы и факты <strong>надёжно не закладываются</strong>. Модель так же выдумывает функции - теперь в вашем стиле.</p></div>
+  </div>
+  <p class="muted small" style="margin-top:24px;">SFT Memorizes, RL Generalizes &middot; arXiv 2501.17161 &middot; замер на игровых задачах, вывод для кода - мой инженерный</p>
+  <p class="lead" style="margin-top:12px;">Свежее знание и состояние репозитория через SFT <em>надёжно не закладываются</em>.</p>
+</section>
+
+<!-- 9 -->
+<section>
+  <div class="block-tag">Цена</div>
+  <h2 class="accent-line">Счёт, который забывают выставить</h2>
+  <div class="grid-2">
+    <div class="card purple">
+      <div class="ctitle">Catastrophic forgetting</div>
+      <p>Дообучил под свой стек - просели общие способности. Модель ломается по осям, которых <strong>в вашем бенче нет</strong>.</p>
+      <p class="dim small">arXiv 2308.08747 &middot; continual instruction tuning, 1-7B</p>
+    </div>
+    <div class="card blue">
+      <div class="ctitle">Иллюзия улучшения</div>
+      <p>Без eval легко перепутать "стала чаще молчать / соглашаться" с "стала умнее".</p>
+      <p class="dim small">SimpleQA &middot; arXiv 2411.04368</p>
+    </div>
+  </div>
+</section>
+
+<!-- 10 -->
+<section data-background-gradient="radial-gradient(1200px 800px at 30% 20%, rgba(255,133,98,0.16), transparent 60%), #0a0e27">
+  <div class="block-tag">Главное про обучение</div>
+  <p class="statement" style="font-size:60px;">Всё качество дообучения - это <span class="em">данные</span>.</p>
+  <ul class="dot" style="font-size:34px;margin-top:34px;">
+    <li>Для кода нужен <strong>не дамп репозитория</strong>, а траектории: задача - решение - проверка.</li>
+    <li>Для SFT - размеченные пары, для RL - ещё и <strong>проверяемая награда</strong> (песочница, тесты).</li>
+    <li>Такого датасета у команды обычно <strong>нет</strong>. Собрать его дороже GPU.</li>
+  </ul>
+  <p class="lead" style="margin-top:26px;">Это, а не железо, - <em>главный скрытый расход</em> затеи.</p>
+</section>
+
+<!-- 11 -->
+<section>
+  <div class="block-tag">Я сам это пробовал</div>
+  <h2 class="accent-line">Тюнил ruGPT3XL-8k под агентность</h2>
+  <div class="grid-2">
+    <div class="card blue">
+      <div class="ctitle">Сетап, всё по уму</div>
+      <p>Консервативный <strong>QLoRA</strong>, 4-bit, LoRA rank 16. 150k сэмплов агентных и ризонинг-датасетов. Десятки часов на 4090.</p>
+    </div>
+    <div class="card">
+      <div class="ctitle" style="color:var(--muted);">Цель</div>
+      <p>Научить держать agentic-loop, пользоваться инструментами, не разваливаться на многошаговых задачах.</p>
+    </div>
+  </div>
+  <p class="muted small" style="margin-top:24px;">Делал не абы как - консервативно и осознанно.</p>
+</section>
+
+<!-- 12 -->
+<section data-background-gradient="radial-gradient(1200px 800px at 70% 30%, rgba(248,113,113,0.16), transparent 60%), #0a0e27">
+  <div class="block-tag">Что вышло</div>
+  <p class="statement" style="font-size:54px;max-width:1500px;">Модель уловила шаблон рассуждения - <span class="em">но забыла русский язык</span> и ушла в repetition loop.</p>
+  <p class="lead" style="margin-top:30px;">Catastrophic forgetting <strong>вживую</strong>. Чинил агентность - сломал язык. Рассказываю как есть: не получилось.</p>
+  <p class="muted small" style="margin-top:16px;">Про гиперпараметры можно спорить - разбор в вопросах. Но риск задокументирован: arXiv 2308.08747.</p>
+</section>
+
+<!-- 13 -->
+<section>
+  <div class="block-tag">И это не только у меня</div>
+  <h2 class="accent-line">Kodify Nano (MTS AI)</h2>
+  <div class="grid-2">
+    <div class="card blue"><div class="ctitle">Что это</div><p><strong>1.5B</strong> поверх Qwen Coder 2.5, заточена под код, в опенсорсе. Смелый шаг, уважаю.</p></div>
+    <div class="card"><div class="ctitle" style="color:var(--red);">Что у меня при запуске</div><p>GGUF-версия выдавала <strong>артефакты</strong> - возможно, конвертация или шаблон, не SFT. Но релиз хрупкий.</p></div>
+  </div>
+  <p class="lead" style="margin-top:26px;">Суть кейса: специализированная маленькая модель <em>не обходит general покрупнее</em>.</p>
+</section>
+
+<!-- 14 -->
+<section>
+  <div class="block-tag">Правило рубикона</div>
+  <h2 class="accent-line">Размер имеет значение</h2>
+  <div class="grid-3">
+    <div class="card"><div class="ctitle" style="color:var(--red);">&lt; 7B</div><p>По моему опыту под сложные задачи можно почти не пробовать.</p></div>
+    <div class="card"><div class="ctitle" style="color:var(--amber);">~ 13B</div><p>Где по моим наблюдениям начинается эмерджентность.</p></div>
+    <div class="card blue"><div class="ctitle">GigaChat 10B</div><p>Мой прогон: SWE и TAU - <strong>0%</strong>. Не держит контекст, уходит в циклы.</p></div>
+  </div>
+  <p class="lead" style="margin-top:32px;">Дообучить маленькую и обойти большую general - <em>у меня не вышло ни разу.</em></p>
+  <p class="dim small" style="margin-top:12px;">Эмпирика, не теорема. Конфиги и логи: github.com/EvilFreelancer/gigachat-benchmarking</p>
+</section>
+
+<!-- 15 -->
+<section>
+  <div class="block-tag">Лесенка</div>
+  <h2 class="accent-line">Что поднимает качество раньше файнтюна</h2>
+  <div class="stair">
+    <div class="rung r1"><div class="n">01</div><div class="t">Контекст<br>и внимание</div><div class="d">положи нужное в окно</div></div>
+    <div class="rung r2"><div class="n">02</div><div class="t">Инструменты<br>и промпты</div><div class="d">агентный поиск вместо индекса</div></div>
+    <div class="rung r3"><div class="n">03</div><div class="t">RAG</div><div class="d">если корпус больше окна</div></div>
+    <div class="rung r4"><div class="n">04</div><div class="t">Файнтюн</div><div class="d">данные, GPU, eval</div></div>
+  </div>
+  <p class="muted small" style="margin-top:20px;">Высота ступени - цена и сложность. Идём слева направо и <strong>останавливаемся как можно раньше</strong>.</p>
+</section>
+
+<!-- 16 -->
+<section>
+  <div class="block-tag">Ступень 1 &middot; главная</div>
+  <h2 class="accent-line">Контекст стал большим - и это меняет всё</h2>
+  <p class="lead">То, что раньше пытались вложить <strong>дообучением</strong> или доставать <strong>RAG-ом</strong>, теперь часто просто кладётся в окно.</p>
+  <div class="grid-2" style="margin-top:28px;">
+    <div class="card blue"><div class="ctitle">Нужен интерфейс?</div><p>Положи файл с интерфейсом прямо в контекст.</p></div>
+    <div class="card blue"><div class="ctitle">Нужен стиль?</div><p>Покажи пример кода в контексте.</p></div>
+  </div>
+  <p class="statement" style="margin-top:30px;font-size:46px;">Без обучения. Без рагов. <span class="em">Просто дай модели нужное.</span></p>
+</section>
+
+<!-- 17 -->
+<section>
+  <div class="block-tag">Нюанс, без которого не работает</div>
+  <h2 class="accent-line">Главное ограничение - внимание</h2>
+  <div class="grid-2">
+    <div class="card"><div class="ctitle" style="color:var(--blue);">Lost in the Middle</div><p>Модель лучше использует <strong>начало и конец</strong> окна и проседает на середине.</p><p class="dim small">arXiv 2307.03172 &middot; Chroma, Context Rot (2025): 18 моделей, лишние куски в окне роняют точность</p></div>
+    <div class="card"><div class="ctitle">Мой вывод с земли</div><p>Модель помнит то, что <strong>ближе</strong> к текущему месту, и забывает начало диалога.</p><p class="dim small">t.me/evilfreelancer/1646</p></div>
+  </div>
+  <p class="statement" style="margin-top:28px;font-size:46px;">Большой контекст - это <span class="em">не "свалить всё"</span>, это инженерия.</p>
+</section>
+
+<!-- 18 -->
+<section>
+  <div class="block-tag">Ступень 1 &middot; практика</div>
+  <h2 class="accent-line">Контекст-инжиниринг: как держать внимание</h2>
+  <ul class="dot" style="font-size:34px;">
+    <li><strong>Маленькие шаги</strong> вместо one-shot.</li>
+    <li><strong>Спецификации и тесты перед кодом</strong> - настройка внимания, а не фантазии.</li>
+    <li><strong>Свежий контекст</strong> - не тащить лишнее: влезло в окно &ne; модель это использует.</li>
+    <li><strong>Оркестрация и рой агентов</strong> - каждый актор держит свой узкий чистый контекст.</li>
+  </ul>
+  <p class="muted small" style="margin-top:20px;">Плюс сэмплинг из карточки модели, а не из чатов. Так мы обходим ограничение внимания, а не боремся с ним.</p>
+</section>
+
+<!-- 19 -->
+<section>
+  <div class="block-tag">Ступень 2 &middot; главный ход</div>
+  <h2 class="accent-line">Дайте модели инструменты</h2>
+  <p class="statement" style="font-size:48px;max-width:1500px;">Не таскайте данные к модели - <span class="em">дайте модели дотянуться до данных</span>.</p>
+  <div class="grid-3" style="margin-top:30px;">
+    <div class="card"><div class="ctitle">Инструменты</div><p>Поиск по файлам, чтение, grep. Модель <strong>сама находит</strong> нужное.</p></div>
+    <div class="card"><div class="ctitle">Промпты и правила</div><p>Объясняете, что и как делать: AGENTS.md, спеки, тесты.</p></div>
+    <div class="card"><div class="ctitle">Агентный цикл</div><p>Модель сама решает, что открыть и что положить в контекст. Дальше действует сама.</p></div>
+  </div>
+  <p class="lead" style="margin-top:28px;">Это и есть harness. Без индекса и без обучения.</p>
+  <p class="dim small" style="margin-top:10px;">Так работают Claude Code, Codex и мой Coddy: агентный поиск вместо векторного.</p>
+</section>
+
+<!-- 20 -->
+<section>
+  <div class="block-tag">А где же RAG</div>
+  <h2 class="accent-line">Моя иерархия решений</h2>
+  <div class="hier">
+    <div class="h h1">Harness</div><div class="gt">&gt;</div>
+    <div class="h h2">Agent</div><div class="gt">&gt;</div>
+    <div class="h h3">RAG</div><div class="gt">&gt;</div>
+    <div class="h h4">LLM</div>
+  </div>
+  <p class="lead" style="margin-top:34px;">Векторный и полнотекстовый поиск тащат в окно <strong>похожее, а не нужное</strong>. Мусор копится, точность падает - это <em>context rot</em>, гниение контекста.</p>
+  <p class="muted small" style="margin-top:12px;">И индекс не бесплатный: чанкинг, переиндексация, реранкеры, железо - его надо сопровождать. Где RAG честно выигрывает: корпус сильно больше окна, права доступа, цитирование.</p>
+</section>
+
+<!-- 21 -->
+<section data-background-gradient="radial-gradient(1200px 800px at 70% 30%, rgba(59,107,255,0.25), transparent 60%), #0a0e27">
+  <div class="block-tag">Демо &middot; ~4 мин, отрепетировано</div>
+  <h2 class="accent-line">Одна модель, одна задача, два прогона</h2>
+  <div class="grid-2">
+    <div class="card"><div class="ctitle" style="color:var(--red);">Прогон 1 - кода нет в контексте</div><p>Только формулировка. Отвечает общо, придумывает интерфейсы, мимо проекта.</p></div>
+    <div class="card hot" style="border-color:var(--coral);"><div class="ctitle">Прогон 2 - файлы в контексте</div><p>То же железо. Попадает в реальные функции и стиль.</p></div>
+  </div>
+  <p class="statement" style="margin-top:32px;font-size:46px;">Ни обучения, ни RAG. <span class="em">Только контекст.</span></p>
+  <p class="dim small" style="margin-top:12px;">Fallback: записанный ролик + слайд с итогом.</p>
+</section>
+
+<!-- 22 -->
+<section>
+  <div class="block-tag">Честно про обратную сторону</div>
+  <h2 class="accent-line">Когда имеет смысл менять веса</h2>
+  <div class="grid-3">
+    <div class="card blue"><div class="ctitle">Узкий стабильный формат</div><p>Вывод, стиль, доменный язык, function-calling под свой протокол.</p></div>
+    <div class="card blue"><div class="ctitle">Дистилляция</div><p>Перенос способностей из старшей модели в младшую. Отдельный метод.</p></div>
+    <div class="card blue"><div class="ctitle">Экономика на потоке</div><p>Массовая стабильная задача: короче промпт, ниже латентность и цена.</p></div>
+  </div>
+  <p class="lead" style="margin-top:24px;">Критерий: <em>частота обновления знания, объём данных, латентность, повторяемость</em>.</p>
+  <p class="dim small" style="margin-top:12px;">Microsoft (2401.08406): в узком стабильном домене файнтюн +6 п.п., RAG ещё +5 сверху - методы дополняют друг друга.</p>
+</section>
+
+<!-- 23 -->
+<section>
+  <div class="block-tag">Почему кодинг - не сюда</div>
+  <h2 class="accent-line">Кодинг ломает все условия</h2>
+  <table class="cmp">
+    <thead><tr><th>Что нужно файнтюну</th><th>Что у кодинга</th></tr></thead>
+    <tbody>
+      <tr><td>узкая задача</td><td class="no">открытая, решений много</td></tr>
+      <tr><td>стабильные данные</td><td class="no">база меняется каждый день</td></tr>
+      <tr><td>память о примерах</td><td class="no">нужен reasoning + инструменты</td></tr>
+      <tr><td>один формат</td><td class="no">вывод разнообразный</td></tr>
+    </tbody>
+  </table>
+  <p class="statement" style="margin-top:28px;font-size:44px;">Всё это работает против SFT и <span class="em">в пользу контекста.</span></p>
+</section>
+
+<!-- 24 -->
+<section>
+  <div class="block-tag">Если решились</div>
+  <h2 class="accent-line">Не всю модель - адаптерами</h2>
+  <div class="grid-3">
+    <div class="card purple"><div class="ctitle">LoRA / QLoRA</div><p>Малый адаптер поверх, в т.ч. квантованной модели, на одной карте. Так я и тюнил ruGPT3XL-8k.</p><p class="dim small">2106.09685 &middot; 2305.14314</p></div>
+    <div class="card purple"><div class="ctitle">MoDA</div><p>Набор узких адаптеров + роутинг через function call, без обучения классификатора.</p><p class="dim small">vs Mixture-of-LoRAs 2403.03432</p></div>
+    <div class="card purple"><div class="ctitle">SFT + RL</div><p>Не голый SFT. Помните слайд про обобщение.</p></div>
+  </div>
+</section>
+
+<!-- 25 -->
+<section>
+  <div class="block-tag">На практике</div>
+  <h2 class="accent-line">Мини-пайплайн на impruver</h2>
+  <div class="flow">
+    <div class="step"><b>config</b><span>модель, датасет, параметры</span></div>
+    <div class="arrow">&rarr;</div>
+    <div class="step hot"><b>данные</b><span>самый долгий этап</span></div>
+    <div class="arrow">&rarr;</div>
+    <div class="step"><b>SFT</b><span>обучение адаптера</span></div>
+    <div class="arrow">&rarr;</div>
+    <div class="step blue"><b>eval</b><span>обязательно</span></div>
+    <div class="arrow">&rarr;</div>
+    <div class="step purple" style="border-color:var(--purple);"><b>finetune_grpo</b><span>RL с наградой</span></div>
+  </div>
+  <p class="lead" style="margin-top:40px;">По объёму - <em>отдельный маленький проект</em> с данными, прогонами и проверкой.</p>
+</section>
+
+<!-- 26 -->
+<section>
+  <div class="block-tag">Грабли</div>
+  <h2 class="accent-line">Что топит проекты дообучения</h2>
+  <ul class="dot" style="font-size:33px;">
+    <li><strong>Нет eval - нет обучения.</strong> Не узнаете, лучше или хуже.</li>
+    <li><strong>Catastrophic forgetting.</strong> Чините одно - ломаете другое (мой ruGPT3XL).</li>
+    <li><strong>Квантизация после обучения</strong> может убить эффект - тестируйте каждый формат выкладки.</li>
+    <li><strong>Alignment и guardrails</strong> добавляют отказы: модель откажется копаться в source maps.</li>
+  </ul>
+  <p class="muted small" style="margin-top:22px;">Каждая по отдельности способна обнулить месяцы работы.</p>
+</section>
+
+<!-- 27 -->
+<section data-background-gradient="radial-gradient(1200px 800px at 40% 10%, rgba(111,2,206,0.24), transparent 60%), #0a0e27">
+  <div class="block-tag">Чеклист</div>
+  <h2 class="accent-line">Прежде чем дообучать</h2>
+  <ul class="check">
+    <li>Положил нужное в контекст - и проверил, что модель это использует</li>
+    <li>Поработал с вниманием: шаги, спеки, оркестрация, сэмплинг из карточки</li>
+    <li>Собрал eval, которому доверяю</li>
+    <li>Есть данные под метод: пары для SFT, проверяемая награда для RL</li>
+  </ul>
+  <p class="lead" style="margin-top:26px;">Слева на лесенке ещё есть что выжать - <em>для файнтюна рано.</em></p>
+</section>
+
+<!-- 28 -->
+<section data-background-gradient="radial-gradient(1400px 800px at 80% 0%, rgba(59,107,255,0.28), transparent 55%), radial-gradient(1200px 700px at 5% 100%, rgba(111,2,206,0.30), transparent 55%), #0a0e27">
+  <div class="block-tag">Итог</div>
+  <p class="statement" style="font-size:54px;max-width:1520px;">Качество on-prem модели живёт <span class="em">в контексте</span>, а не в весах.</p>
+  <p class="lead" style="margin-top:22px;"><span style="color:var(--blue);font-weight:800;">LLM</span> + <span style="color:var(--coral);font-weight:800;">Harness</span> = <span style="color:var(--purple);font-weight:800;">Agent</span>. Веса вам дали - harness вы строите сами. <strong>Не меняйте веса, пока контекстная версия не измерена на том же eval.</strong></p>
+  <div class="grid-3" style="margin-top:32px;">
+    <div class="card"><div class="ctitle" style="font-size:26px;">Обучение</div><p class="small">github.com/EvilFreelancer/impruver &middot; MoDA</p></div>
+    <div class="card"><div class="ctitle" style="font-size:26px;">Harness</div><p class="small">github.com/coddy-project/coddy-agent</p></div>
+    <div class="card"><div class="ctitle" style="font-size:26px;">Канал</div><p class="small">t.me/evilfreelancer</p></div>
+  </div>
+</section>
+
+<!-- 29 -->
+<section data-background-gradient="radial-gradient(1400px 800px at 80% 0%, rgba(59,107,255,0.28), transparent 55%), radial-gradient(1200px 700px at 5% 100%, rgba(111,2,206,0.30), transparent 55%), #0a0e27">
+  <div class="about-grid">
+    <div>
+      <div class="block-tag">Спасибо за внимание</div>
+      <h1 style="font-size:96px;margin-bottom:20px;">Вопросы?</h1>
+      <p class="lead" style="max-width:820px;">В канале - разборы про агентов, harness и self-host без маркетинга.</p>
+      <div class="contact" style="gap:56px;">
+        <div style="text-align:center;">
+          <div class="qr-frame" style="display:inline-block;"><img src="assets/qr-telegram.png" alt="Telegram QR" style="width:210px;height:210px;"></div>
+          <a href="https://t.me/evilfreelancer"><div class="clink" style="font-size:27px;margin-top:14px;">t.me/evilfreelancer</div></a>
+          <div class="clbl">канал</div>
+        </div>
+        <div style="text-align:center;">
+          <div class="qr-frame" style="display:inline-block;"><img src="assets/qr-huggingface.png" alt="Hugging Face QR" style="width:210px;height:210px;"></div>
+          <a href="https://huggingface.co/evilfreelancer"><div class="clink" style="font-size:27px;margin-top:14px;">hf.co/evilfreelancer</div></a>
+          <div class="clbl">модели и датасеты</div>
+        </div>
+      </div>
+    </div>
+    <div class="photo-box" role="img" aria-label="Павел Рыков"></div>
+  </div>
+</section>
+
+</div></div>
+
+<script src="assets/reveal.js"></script>
+<script>
+  Reveal.initialize({
+    hash: true,
+    transition: 'fade',
+    transitionSpeed: 'fast',
+    controls: true,
+    progress: true,
+    slideNumber: 'c/t',
+    width: 1920,
+    height: 1080,
+    margin: 0.05,
+    minScale: 0.2,
+    maxScale: 2.0,
+    center: true,
+  });
+</script>
+</body>
+</html>
