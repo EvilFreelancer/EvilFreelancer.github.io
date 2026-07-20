@@ -213,15 +213,47 @@
   <p class="statement mt2" style="font-size:46px;max-width:1580px;">Потолок пробивают <span class="em">железом под большую модель</span>, а разрыв с SOTA закрывают <span class="em">прокачкой harness</span>.</p>
 </section>
 
-<!-- 5 · маленькая не тянет -->
+<!-- 5 · маленькая не вывозит длинные циклы -->
 <section>
-  <h2 class="accent-line">Маленькая и ужатая не тянет код</h2>
+  <h2 class="accent-line">Маленькие не вывозят длинные циклы</h2>
   <div class="grid-3">
-    <div class="card bad"><div class="ctitle">&lt; 7B</div><p>По моему опыту под сложные задачи можно почти не пробовать.</p></div>
-    <div class="card warn"><div class="ctitle">~ 13B</div><p>Где по моим наблюдениям начинается эмерджентность.</p></div>
-    <div class="card" style="border-color:var(--coral);"><div class="ctitle">20B+</div><p>Минимум для агента, генерирующего код. Ниже - только автодополнение по табу.</p></div>
+    <div class="card bad"><div class="ctitle">&lt; 30B</div><p>Хватает на короткие задачи - скрипты на bash и Python, запуск тестов. На многих шагах уходит в repetition loop.</p></div>
+    <div class="card warn"><div class="ctitle">30-100B</div><p>Иногда справляется, но на длинном контексте нестабильна, закладываться не стал бы.</p></div>
+    <div class="card" style="border-color:var(--coral);"><div class="ctitle">100B+</div><p>С этого порога у меня начинается стабильный кодовый агент.</p></div>
   </div>
-  <p class="lead mt2">Модели вроде <strong>Qwen3.5-27B</strong> или <strong>GPT-OSS-20B</strong> с реальным кодом не справляются, а агрессивная квантизация от 4х бит и ниже ухудшает качество на больших контекстах и продолжительных агентных петлях.</p>
+  <p class="lead mt2">В моей практике модели ниже 100B - <strong>Qwen3.5-27B</strong> и <strong>35B</strong>, <strong>GPT-OSS-20B</strong>, <strong>Qwen3-Coder-30B</strong> - тянут короткие задачи, но в длинных агентных циклах теряют контекст и уходят в повторяющиеся вызовы. Квантизация от 4 бит и ниже ещё сильнее снижает качество на больших окнах.</p>
+  <p class="lead mt2">Отдельные команды работают и на меньших моделях, но стабильного результата в длинных циклах я не получил. Если коротко, <strong>ниже 100B жизни нет</strong> - это мой опыт, а не универсальный закон.</p>
+</section>
+
+<!-- 5b · бенчмарки, self-host отстаёт от фронтира -->
+<section>
+  <h2 class="accent-line">И бенчмарки про то же</h2>
+  <div class="grid-2">
+    <div class="fplate" style="padding:8px 16px;"><img src="assets/bench_bfcl.png" alt="BFCL v4, вызов инструментов" style="width:100%;"></div>
+    <div class="fplate" style="padding:8px 16px;"><img src="assets/bench_longcli.png" alt="LongCLI-Bench, длинный горизонт" style="width:100%;"></div>
+  </div>
+  <p class="dim small mt2"><span style="display:inline-block;width:13px;height:13px;background:var(--blue);border-radius:3px;vertical-align:middle;"></span> закрытые облачные &nbsp;&nbsp; <span style="display:inline-block;width:13px;height:13px;background:var(--coral);border-radius:3px;vertical-align:middle;"></span> open-weight, self-host</p>
+  <p class="lead mt2">На вызове инструментов открытые модели ниже фронтира, а на длинном горизонте обваливаются даже гиганты. Маленькие тут не участники.</p>
+  <div class="srcs mt2">
+    <div class="src"><div class="qr"><img src="assets/qr-bfcl.png" alt="BFCL QR"></div><div><a href="https://gorilla.cs.berkeley.edu/leaderboard.html">gorilla.cs.berkeley.edu</a><div class="lbl">BFCL v4, вызов инструментов</div></div></div>
+    <div class="src"><div class="qr"><img src="assets/qr-longcli.png" alt="LongCLI QR"></div><div><a href="https://arxiv.org/abs/2602.14337">arxiv.org/abs/2602.14337</a><div class="lbl">LongCLI-Bench, длинный CLI</div></div></div>
+  </div>
+</section>
+
+<!-- 5c · размер решает не всё -->
+<section>
+  <h2 class="accent-line">Но размер решает не всё</h2>
+  <div class="grid-2">
+    <div class="fplate" style="padding:8px 16px;"><img src="assets/bench_tau2.png" alt="tau2-bench Telecom по размеру модели" style="width:100%;"></div>
+    <div class="fplate" style="padding:8px 16px;"><img src="assets/bench_swe.png" alt="SWE-bench Verified по размеру модели" style="width:100%;"></div>
+  </div>
+  <p class="dim small mt2"><span style="display:inline-block;width:13px;height:13px;background:var(--coral);border-radius:3px;vertical-align:middle;"></span> менее 40B &nbsp;&nbsp; <span style="display:inline-block;width:13px;height:13px;background:var(--purple);border-radius:3px;vertical-align:middle;"></span> 40-200B &nbsp;&nbsp; <span style="display:inline-block;width:13px;height:13px;background:var(--blue);border-radius:3px;vertical-align:middle;"></span> более 200B &nbsp;&nbsp; <span style="display:inline-block;width:13px;height:13px;background:var(--green);border-radius:3px;vertical-align:middle;"></span> закрытый фронтир</p>
+  <p class="lead mt2">На некоторых бенчах 27B обходит 235B и 671B, а на SWE 3B активных идут рядом с фронтиром. Разнобой результатов намекает на трейн на бенчах.</p>
+  <div class="srcs mt2">
+    <div class="src"><div class="qr"><img src="assets/qr-tau2.png" alt="tau2 QR"></div><div><a href="https://benchmarklist.com/benchmarks/tau2_bench_telecom/">benchmarklist.com/tau2</a><div class="lbl">tau²-bench Telecom</div></div></div>
+    <div class="src"><div class="qr"><img src="assets/qr-swe.png" alt="SWE QR"></div><div><a href="https://llm-stats.com/benchmarks/swe-bench-verified">llm-stats.com/swe-bench-verified</a><div class="lbl">SWE-bench Verified</div></div></div>
+    <div class="src"><div class="qr"><img src="assets/qr-llmarena.png" alt="LLM Arena QR"></div><div><a href="https://t.me/llm_arena">t.me/llm_arena</a><div class="lbl">LLM Arena, ведёт Роман Куцев</div></div></div>
+  </div>
 </section>
 
 <!-- 6 · соблазн обучить -->
@@ -290,7 +322,7 @@
 
 <!-- 11 · результаты хуже -->
 <section>
-  <h2 class="accent-line">Результаты на бенчмарках хуже, чем до обучения</h2>
+  <h2 class="accent-line">У меня чаще выходило хуже, чем до обучения</h2>
   <div class="grid-2">
     <div class="card purple"><div class="ctitle">Catastrophic forgetting</div><p>Дообучили под свой стек - общие способности просели. Модель теряет качество по осям, которых <strong>в вашем бенче нет</strong>.</p></div>
     <div class="card blue"><div class="ctitle">Иллюзия улучшения</div><p>Без eval легко перепутать "стала чаще молчать или соглашаться" со "стала умнее".</p></div>
@@ -520,11 +552,30 @@
   <p class="lead mt2">Из них электричество ~10 &#8381;, остальное - амортизация, а без постоянной загрузки ещё дороже.</p>
 </section>
 
+<!-- 24b · on-prem против облака и подписок -->
+<section>
+  <h2 class="accent-line">On-premise, облако или подписка</h2>
+  <div class="grid-3">
+    <div class="card"><div class="ctitle">On-prem, Kimi K2.7</div><p>При загрузке узла <strong>&asymp; 144 &#8381;</strong> за 1M выходных. Данные не покидают контур, но платите и за простой.</p></div>
+    <div class="card blue"><div class="ctitle">Облачный API, та же Kimi</div><p>Выход <strong>$4.00 (&asymp; 400 &#8381;)</strong>, вход $0.95 (&asymp; 95 &#8381;), кэш-хит $0.19 (&asymp; 19 &#8381;) за 1M. Платите по факту, но данные уходят провайдеру.</p></div>
+    <div class="card warn"><div class="ctitle">Подписка кодового агента</div><p>Фикс в месяц - Codex Plus $20 (&asymp; 2000 &#8381;) или Kodacode Pro 1&#8201;590 &#8381;. Предсказуемо, но лимиты и внешняя модель.</p></div>
+  </div>
+  <p class="lead mt2">On-prem выигрывает не ценой токена, а <em>изоляцией данных и предсказуемостью</em>. По деньгам он обходит облако только при высокой загрузке узла, а агентные циклы input-heavy, где облачный кэш-хит почти обнуляет вход. Так что и "on-prem дешевле" - не универсальный закон.</p>
+  <p class="dim small mt2">Рубли ориентировочно по курсу ~100 &#8381;/$, цены API и подписок на июнь 2026.</p>
+  <div class="srcs mt2">
+    <div class="src">
+      <div class="qr"><img src="assets/qr-habr-subs.png" alt="Habr, обзор подписок QR"></div>
+      <div><a href="https://habr.com/ru/articles/1046810/">habr.com/ru/articles/1046810</a><div class="lbl">мой обзор "У вайбкода два пути"</div></div>
+    </div>
+  </div>
+</section>
+
 <!-- 24 · выводы -->
 <section data-background-gradient="radial-gradient(1400px 800px at 80% 0%, rgba(59,107,255,0.28), transparent 55%), radial-gradient(1200px 700px at 5% 100%, rgba(111,2,206,0.30), transparent 55%), #0a0e27">
   <h2 class="accent-line">Выводы</h2>
-  <ul class="dot" style="font-size:34px;">
-    <li>Маленькая или сильно квантованная модель <strong>не тянет</strong> код.</li>
+  <p class="lead">Это выводы из моей практики, у ваших задач вводные могут отличаться.</p>
+  <ul class="dot" style="font-size:32px;">
+    <li>Маленькая или сильно квантованная модель <strong>не вывозит</strong> длинные агентные циклы.</li>
     <li>Дообучение не спасает: учит форме, а не смыслу, и <strong>роняет бенчмарки</strong>.</li>
     <li>Реальный рычаг - <strong>железо под большую модель</strong>, но on-prem всегда догоняющий.</li>
     <li>Разрыв с SOTA закрывает не веса, а <strong>толстый harness</strong>: правила, скилы, MCP, CLI.</li>
